@@ -27,7 +27,7 @@
                                                     <img src="{{url($row->img_data)}}" class="img-thumbnail2" height="100%" alt="">
                                                 </div>
                                             </a>
-                                            <div class="card_footer row" style="padding: 10px; margin-top:0 !important; ">
+                                            <div class="card_footer row" style="padding: 10px; margin-top:0 !important;position: initial !important; ">
                                                 <div class="col-6 text-grey">
                                                     {!! Helper::formatDate($row->created_at) !!}
                                                 </div>

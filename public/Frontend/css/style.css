@@ -294,7 +294,9 @@ h4 {
     border-radius: 8px 8px;
     /* box-shadow: 12px 14px 0 #ececec; */
     box-shadow: 7px 7px 10px 0 rgba(76, 110, 245, .1);
-    min-height: 340px;
+    min-height: 380px;
+    /* max-height: 380px; */
+    overflow: hidden;
 }
 .card_detail{
   padding: 8px 15px 5px 15px;
@@ -364,17 +366,22 @@ h4 {
 }
 
 .card_text_ellipsis{
-  height: 70px;
-  text-overflow: ellipsis;
-  overflow: hidden;
+
+  font-size: 14px;
+    -webkit-line-clamp: 2;
+    line-height: 20px;
 }
 .card_title_ellipsis{
-  height: 60px;
-    text-overflow: ellipsis;
-    overflow: hidden;
+  font-size: 17px;
+  -webkit-line-clamp: 2;
+  line-height: 24px;
+  font-weight: 600;
 }
 .card_footer{
-  margin-top: 30px !important
+  margin-top: 30px !important;
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
 }
 
 .right_sidebar .sidebar_top{

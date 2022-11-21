@@ -17,7 +17,7 @@
                             </div>
                             <div class="col-md-3"><hr class="bg-dark"></div>
                         </div>
-                        <div class="row m-0">
+                        <div class="row">
                             <div class="row col-md-10">
                                 <!-- 1 -->
                                 @foreach($posts as $post_row)
