@@ -16,7 +16,7 @@
                             <div class="col-md-3"><hr class="bg-dark"></div>
                         </div>
                         <div class="row m-0">
-                            <div class="row col-md-10">
+                            <div class="row col-md-12">
                                 <!-- 1 -->
                                 @foreach($facts as $row)
                                 <div class="item col-md-4">
@@ -46,7 +46,7 @@
                                 <!-- 1 end  -->
                             </div> <!-- owl-carousel end -->
                             
-                            <div class="col-md-2 right_sidebar">
+                            <!-- <div class="col-md-2 right_sidebar"> -->
                                 <!-- <div class="sidebar_top">
                                     <span>Archives</span>
                                 </div>
@@ -56,7 +56,7 @@
                                     <!-- <li>Jan</li> -->
                                     <!-- @endforeach -->
                                 <!-- </ul> --> 
-                            </div>
+                            <!-- </div> -->
                         </div>
                 </div> <!-- col-md-12 end -->
             </div> <!-- row end -->
