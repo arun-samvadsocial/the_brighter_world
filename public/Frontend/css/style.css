@@ -288,7 +288,7 @@ h4 {
 .carousel_se_01 .main_services {
     position: relative;
     margin: 10px 0px 40px 0px;
-    padding: 40px 15px 32px 15px;
+    padding: 40px 15px 0px 15px;
     overflow: hidden;
     text-align: center;
      border: 1px solid transparent; 
@@ -358,6 +358,20 @@ h4 {
   /* border-bottom: 1px solid rgb(211 208 208);
   border-left: 1px solid rgb(211 208 208);
   border-right: 1px solid rgb(211 208 208); */
+}
+
+.card_text_ellipsis{
+  height: 70px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.card_title_ellipsis{
+  height: 60px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.card_footer{
+  margin-top: 30px !important
 }
 
 .right_sidebar .sidebar_top{
