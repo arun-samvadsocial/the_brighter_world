@@ -32,8 +32,11 @@
                                             <div class="img-thumbnail text-center">
                                                 <img src="{{url($post_row->img_path)}}" class="img-thumbnail" height="142px" alt="">
                                             </div>
-                                            <h4 class="mt-3 card_title_ellipsis">{!! substr_replace($post_row->title, ".", 30) !!}</h4>
-                                            <p class="card_text_ellipsis" >{!! substr_replace(strip_tags($post_row->description), ".", 100) !!}</p>
+                                            <div class="card_detail">
+                                                <h4 class="mt-3 card_title_ellipsis">{!! substr_replace($post_row->title, ".", 30) !!}</h4>
+                                                <p class="card_text_ellipsis" >{!! substr_replace(strip_tags($post_row->description), ".", 100) !!}</p>
+
+                                            
                                         </a>
                                         <div class="card_footer row">
                                             <div class="col-6 text-grey">
@@ -45,6 +48,7 @@
                                                 {!! strtok($cat_row->category_name,' ') !!}
                                                 </div>
                                             </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>

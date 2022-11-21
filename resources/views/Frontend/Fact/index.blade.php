@@ -23,11 +23,11 @@
                                     <div class="col-md-12 wow fadeInUp ">
                                         <div class="main_services text-left">
                                             <a href="">
-                                                <div class="img-thumbnail text-center">
-                                                    <img src="{{url($row->img_data)}}" class="img-thumbnail" width="100%" alt="">
+                                                <div class="img-thumbnail2 text-center" >
+                                                    <img src="{{url($row->img_data)}}" class="img-thumbnail2" height="100%" alt="">
                                                 </div>
                                             </a>
-                                            <div class="card_footer row">
+                                            <div class="card_footer row" style="padding: 10px; margin-top:0 !important; ">
                                                 <div class="col-6 text-grey">
                                                     {!! Helper::formatDate($row->created_at) !!}
                                                 </div>

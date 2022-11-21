@@ -288,14 +288,17 @@ h4 {
 .carousel_se_01 .main_services {
     position: relative;
     margin: 10px 0px 40px 0px;
-    padding: 40px 15px 0px 15px;
     overflow: hidden;
     text-align: center;
      border: 1px solid transparent; 
     border-radius: 8px 8px;
     /* box-shadow: 12px 14px 0 #ececec; */
     box-shadow: 7px 7px 10px 0 rgba(76, 110, 245, .1);
-    min-height: 420px;
+    min-height: 340px;
+}
+.card_detail{
+  padding: 8px 15px 5px 15px;
+
 }
 
 .carousel_se_01 .main_services:hover {
@@ -433,7 +436,13 @@ h4 {
   border: 1px solid rgb(211 208 208);
 }
 .img-thumbnail{
+  height: 190px;
   width: 100%;
+  overflow: hidden;
+}
+.img-thumbnail2{
+  width: 100%;
+  overflow: hidden;
 }
 .header_thought{
     text-align: right;
