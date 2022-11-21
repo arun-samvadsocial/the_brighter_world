@@ -8,6 +8,7 @@ use App\Models\Frontend\Post_model;
 use App\Models\Frontend\Category_model;
 use App\Models\Frontend\Comment_model;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Helper;
 class Home extends Controller
 {
@@ -39,6 +40,7 @@ class Home extends Controller
         return view("Frontend.Home.category")->with($data);
     }
 
+    //Author post
     public function author_post($author,$author_id){
         $author_id = Helper::base64url_decode($author_id);
         $data['posts'] = Post_model::where("user_id",$author_id)
@@ -49,6 +51,15 @@ class Home extends Controller
         ->paginate(9);
         return view("Frontend.Home.author")->with($data);
     }
+
+    //Archives Post
+    public function archives_post($year,$month){
+        $posts['posts'] = Post_model::where( DB::raw('YEAR(published_date)'), '=', $year )
+        ->where(DB::raw('MONTHNAME(published_date)'), '=', $month )
+        ->paginate(9);
+        return view("Frontend.Home.archives")->with($posts);
+    }
+
     // Comment_model
     public function comment_add(Request $request){
         $id = $request->id;

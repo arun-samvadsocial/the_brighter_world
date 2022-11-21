@@ -57,16 +57,7 @@
                             </div> <!-- owl-carousel end -->
                             
                             <div class="col-md-2 right_sidebar">
-                                <!-- <div class="sidebar_top">
-                                    <span>Archives</span>
-                                    
-                                </div>
-                                <ul class="col-12">
-                                    @foreach($posts as $p_row)
-                                    <li> <i><strong>- {{$p_row->YEAR}}</strong></i> </li>
-                                    <li>Jan</li>
-                                    @endforeach
-                                </ul>  -->
+                                @include('Frontend.layouts.sidebar')
                             </div>
                         </div>
                 </div> <!-- col-md-12 end -->

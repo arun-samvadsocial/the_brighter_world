@@ -6,6 +6,7 @@ use App\Models\Frontend\Post_model;
 use App\Models\User;
 use App\Models\Frontend\Category_model;
 use App\Models\Frontend\Comment_model;
+use Illuminate\Support\Facades\DB;
 use Mail;
 class Helper
 {
@@ -21,7 +22,6 @@ class Helper
         return date('j M Y', $formatted_date);
     }
 
-
     public static function getPosts($cat_id,$limit=null){
         $post =  Post_model::where("category_id",$cat_id)
         ->limit($limit)
@@ -31,6 +31,23 @@ class Helper
         ->get();
         return $post;
     }
+
+    public static function getArchives($cat_id=null){
+        $results = DB::table('post')
+                    ->select(DB::raw("DATE_FORMAT(`published_date`, '%Y') AS YEAR"),
+                        DB::raw("DATE_FORMAT(`published_date`, '%M') AS MONTHNAME"),
+                        DB::raw("DATE_FORMAT(`published_date`, '%m') AS MONTH"),
+                        DB::raw("Count(*) as TOTAL")
+                    )
+                    ->groupBy('YEAR','MONTHNAME','MONTH')
+                    ->orderBy('YEAR','ASC')
+                    ->orderBy('MONTH','ASC')
+                    ->get();
+
+                    
+        return $results;
+    }
+
     public static function getUser(){
         $user =  User::where("id",session()->get("user_id"))
         ->first();

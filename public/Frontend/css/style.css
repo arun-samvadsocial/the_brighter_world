@@ -362,11 +362,24 @@ h4 {
 .right_sidebar .sidebar_top{
     text-align: center;
     font-size: 1.3em;
-    background: #fcc80d;
-    color: white;
+    background: white;
+    color: #fcc80d;
     margin: auto;
     padding-top: 5px;
     padding-bottom: 0px;
+}
+.archive_sidebar{
+  background: white;
+  border-bottom: 1px solid #fcc80d;
+}
+.archive_sidebar p{
+  font-size: 1.3em;
+  font-weight: 700;
+}
+.archive_sidebar ul{
+  height: 530px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 
