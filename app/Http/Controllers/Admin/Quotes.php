@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Quotes_model;
 use Illuminate\Support\Facades\Validator;
-
+use Helper;
 class Quotes extends Controller
 {
     // Quotes list

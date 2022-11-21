@@ -2,10 +2,10 @@
 @section('main-content')
 @if($post_data)
 @php 
-isset($post_data)?updateViewCount($post_data->post_id):'';
-$link = url('detail/'.$post_data->post_url.'/'.base64url_encode($post_data->post_id));
+isset($post_data)?Helper::updateViewCount($post_data->post_id):'';
+$link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_data->post_id));
 @endphp
-@section('facebook_meta')
+@section('meta_data')
 <meta property="og:title" content="{{$post_data->title}}"/>
 <meta property="og:image" content="{{url($post_data->img_path)}}" />
 <meta property="og:url" content="{{$link}}" />
@@ -25,7 +25,7 @@ $link = url('detail/'.$post_data->post_url.'/'.base64url_encode($post_data->post
                         <p>{{$post_data->hashtags}}</p>
                     </div>
                     <div class="post_header_bottom">
-                        {{formatDate($post_data->published_date)}}
+                        {!! Helper::formatDate($post_data->published_date) !!}
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <i class="fa fa-eye"> {{$post_data->post_view_count}}</i>
                     </div>
@@ -80,15 +80,15 @@ $link = url('detail/'.$post_data->post_url.'/'.base64url_encode($post_data->post
                             </div>
                             <div class="col-6 d-flex flex-row-reverse ">
                                 <div class="button">
-                                    <a href="{{url('/').'/author/'.$post_data->author.'/'.base64url_encode($post_data->user_id)}}" style="color:#fcc80d;">See more</a>
+                                    <a href="{!! url('/').'/author/'.$post_data->author.'/'.Helper::base64url_encode($post_data->user_id) !!}" style="color:#fcc80d;">See more</a>
                                 </div>
                             </div>
                         </div>
-                        @php $fromAuthor = getPostsByAuthor($post_data->user_id,3) @endphp
+                        @php $fromAuthor = Helper::getPostsByAuthor($post_data->user_id,3) @endphp
                         @foreach($fromAuthor as $author_row)
                         @php $arr = json_decode($author_row->category); @endphp
                         <div class="more_from_author_post">
-                            <a href="{{ url('detail/'.$author_row->post_url.'/'.base64url_encode($author_row->post_id)) }}">
+                            <a href="{!! url('detail/'.$author_row->post_url.'/'.Helper::base64url_encode($author_row->post_id)) !!}">
                                 <div class="row" style="margin-bottom: 10px">
                                     <div class="col-2">
                                         <img src="{{url($author_row->img_path)}}" width="100%" style="border-radius: 10%;" alt="">
@@ -124,7 +124,7 @@ $link = url('detail/'.$post_data->post_url.'/'.base64url_encode($post_data->post
                         </form>
 
                         <div class="comment_list">
-                            @php $comment = getComments($post_data->post_id); @endphp
+                            @php $comment = Helper::getComments($post_data->post_id); @endphp
                             
                             @foreach($comment as $c_row)
                             <div class="more_from_author_post">
@@ -134,7 +134,7 @@ $link = url('detail/'.$post_data->post_url.'/'.base64url_encode($post_data->post
                                         </div>
                                         <div class="col-10">
                                             <div class="post_title">
-                                                <strong>{{$c_row->name!=null?$c_row->name:'N/A'}}</strong> &nbsp; {{day_ago($c_row->created_at)}}
+                                                <strong>{{$c_row->name!=null?$c_row->name:'N/A'}}</strong> &nbsp; {!! Helper::day_ago($c_row->created_at) !!}
                                             </div>
                                             <span>{{$c_row->comment}}</span>
                                         </div>
@@ -156,11 +156,11 @@ $link = url('detail/'.$post_data->post_url.'/'.base64url_encode($post_data->post
                                 <h2>Related Post</h2>
                             </div>
                         </div>
-                        @php $relatedPost = getPosts($post_data->category_id,5) @endphp
+                        @php $relatedPost = Helper::getPosts($post_data->category_id,5) @endphp
                         @foreach($relatedPost as $r_row)
                         @php $arr = json_decode($r_row->category); @endphp
                         <div class="more_from_author_post">
-                            <a href="{{ url('detail/'.$r_row->post_url.'/'.base64url_encode($r_row->post_id)) }}">
+                            <a href="{!! url('detail/'.$r_row->post_url.'/'.Helper::base64url_encode($r_row->post_id)) !!}">
                                 <div class="row" style="margin-bottom: 10px">
                                     <div class="col-2">
                                         <img src="{{$r_row->img_path?url($r_row->img_path):url('no_image.png')}}" width="45px" style="border-radius: 10%;" alt="">

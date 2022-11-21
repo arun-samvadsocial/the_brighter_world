@@ -29,7 +29,7 @@
                                             </a>
                                             <div class="card_footer row">
                                                 <div class="col-6 text-grey">
-                                                    {{formatDate($row->created_at)}}
+                                                    {!! Helper::formatDate($row->created_at) !!}
                                                 </div>
                                             </div>
                                         </div>

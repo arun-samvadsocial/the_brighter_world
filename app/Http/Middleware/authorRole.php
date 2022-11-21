@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-
+use Helper;
 class authorRole
 {
     /**
@@ -16,11 +16,11 @@ class authorRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if(getUser()->role == "author" ){
+        if(Helper::getUser()->role == "author" ){
             return $next($request);
-        }else if(getUser()->role == "admin" ){
+        }else if(Helper::getUser()->role == "admin" ){
             return $next($request);
-        }else if(getUser()->role == "moderator" ){
+        }else if(Helper::getUser()->role == "moderator" ){
             return $next($request);
         }
         else{

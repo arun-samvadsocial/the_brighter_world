@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Tags_model;
 use Illuminate\Support\Facades\Validator;
-
+use Helper;
 class Tags extends Controller
 {
     // Tags list

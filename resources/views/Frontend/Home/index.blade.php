@@ -4,7 +4,7 @@
 
 @foreach($category as $cat_row)
 @php
-    $posts = getPosts($cat_row->category_id,10);
+    $posts = Helper::getPosts($cat_row->category_id,10);
 @endphp
 @if(count($posts) > 0)
 <section class="carousel_se_01">
@@ -17,7 +17,7 @@
                             </div>
                             <div class="category_header_right d-flex flex-row-reverse  col-md-6">
                                 <div class="view_all_btn">
-                                    <a href="{{url('/').'/category/'.$cat_row->category_name.'/'.base64url_encode($cat_row->category_id)}}" class="text-dark" >View all</a>
+                                    <a href="{!! url('/').'/category/'.$cat_row->category_name.'/'.Helper::base64url_encode($cat_row->category_id) !!}" class="text-dark" >View all</a>
                                 </div>
                             </div>
                             
@@ -28,7 +28,7 @@
                             <div class="item">
                                 <div class="col-md-12 wow fadeInUp ">
                                     <div class="main_services text-left">
-                                        <a href="{{ url('detail/'.$post_row->post_url.'/'.base64url_encode($post_row->post_id)) }}">
+                                        <a href="{!! url('detail/'.$post_row->post_url.'/'.Helper::base64url_encode($post_row->post_id)) !!}">
                                             <div class="img-thumbnail text-center">
                                                 <img src="{{url($post_row->img_path)}}" class="img-thumbnail" height="142px" alt="">
                                             </div>
@@ -37,7 +37,7 @@
                                         </a>
                                         <div class="card_footer row">
                                             <div class="col-6 text-grey">
-                                                {{formatDate($post_row->published_date)}}
+                                                {!! Helper::formatDate($post_row->published_date) !!}
                                             </div>
                                             <div class="col-6 d-flex flex-row-reverse">
                                                 <div class="post_category">

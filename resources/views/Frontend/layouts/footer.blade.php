@@ -26,15 +26,15 @@
                 <h5 class="text-uppercase">Category</h5>
 
                 <ul class="list-unstyled">
-                    @php $category = getCategory(5);
+                    @php $category = Helper::getCategory(5);
                     
                     
                     @endphp
 
                     @foreach($category as $row)
-                    @if(count(getPosts($row->category_id,'')) > 0 )
+                    @if(count(Helper::getPosts($row->category_id,'')) > 0 )
                     <li>
-                        <a href="{{url('/').'/category/'.$row->category_name.'/'.base64url_encode($row->category_id)}}">{{$row->category_name}}</a>
+                        <a href="{!! url('/').'/category/'.$row->category_name.'/'.Helper::base64url_encode($row->category_id) !!}">{{$row->category_name}}</a>
                     </li>
                     @endif
                     @endforeach

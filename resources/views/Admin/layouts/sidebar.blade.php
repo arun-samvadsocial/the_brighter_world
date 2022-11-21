@@ -15,7 +15,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                @if(getUser()->role == 'admin')
+                @if(Helper::getUser()->role == 'admin')
                 <li class="menu-title">User Panel</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -29,7 +29,7 @@
                 </li>
                 @endif
 
-                @if(getUser()->role == 'admin' || getUser()->role == 'moderator')
+                @if(Helper::getUser()->role == 'admin' || Helper::getUser()->role == 'moderator')
 
                 <li class="menu-title">Main Menu</li>
                 <li>
@@ -45,7 +45,7 @@
 
                 @endif
 <!-- Posts Menu -->
-                @if(getUser()->role == 'admin' || getUser()->role == 'author' || getUser()->role == 'moderator')
+                @if(Helper::getUser()->role == 'admin' || Helper::getUser()->role == 'author' || Helper::getUser()->role == 'moderator')
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ti-layout-list-thumb"></i>
@@ -59,7 +59,7 @@
                 </li>
                 @endif
 
-                @if(getUser()->role == 'admin' || getUser()->role == 'moderator')
+                @if(Helper::getUser()->role == 'admin' || Helper::getUser()->role == 'moderator')
                
 <!-- Facts Menu  -->
 <li>

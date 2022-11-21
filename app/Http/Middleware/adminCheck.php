@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-
+use Helper;
 class adminCheck
 {
     /**
@@ -16,7 +16,7 @@ class adminCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if(getUser()->role == "admin"){
+        if(Helper::getUser()->role == "admin"){
             return $next($request);
         }else{
             return redirect('/no-access');

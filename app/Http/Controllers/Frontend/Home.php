@@ -8,6 +8,7 @@ use App\Models\Frontend\Post_model;
 use App\Models\Frontend\Category_model;
 use App\Models\Frontend\Comment_model;
 use Illuminate\Support\Facades\Validator;
+use Helper;
 class Home extends Controller
 {
     public function index(){
@@ -18,7 +19,7 @@ class Home extends Controller
     }
 
     public function post_detail($post_title,$post_id){
-        $post_id = base64url_decode($post_id);
+        $post_id = Helper::base64url_decode($post_id);
         $data['post_data'] = Post_model::where("post_id",$post_id)
         ->with("category")
         ->where("is_delete",0)
@@ -28,7 +29,7 @@ class Home extends Controller
     }
 
     public function category_post($category_name, $category_id){
-        $category_id = base64url_decode($category_id);
+        $category_id = Helper::base64url_decode($category_id);
         $data['posts'] = Post_model::where("category_id",$category_id)
         ->with('category')
         ->where("is_delete",0)
@@ -39,7 +40,7 @@ class Home extends Controller
     }
 
     public function author_post($author,$author_id){
-        $author_id = base64url_decode($author_id);
+        $author_id = Helper::base64url_decode($author_id);
         $data['posts'] = Post_model::where("user_id",$author_id)
         ->with('category')
         ->where("is_delete",0)
@@ -54,8 +55,8 @@ class Home extends Controller
         $name = "";
         $email = "";
         if(getUser()){
-            $name = getUser()->name;
-            $email = getUser()->email;
+            $name = Helper::getUser()->name;
+            $email = Helper::getUser()->email;
         }
         try{
             $validator =  Validator::make($request->all(),[

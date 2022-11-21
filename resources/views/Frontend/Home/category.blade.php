@@ -24,7 +24,7 @@
                                 <div class="item col-md-4">
                                     <div class="col-md-12 wow fadeInUp ">
                                         <div class="main_services text-left">
-                                            <a href="{{ url('detail/'.$post_row->post_url.'/'.base64url_encode($post_row->post_id)) }}">
+                                            <a href="{!! url('detail/'.$post_row->post_url.'/'.Helper::base64url_encode($post_row->post_id)) !!}">
                                                 <div class="img-thumbnail text-center">
                                                     <img src="{{url($post_row->img_path)}}" class="img-thumbnail" height="142px" alt="">
                                                 </div>
@@ -33,7 +33,7 @@
                                             </a>
                                             <div class="card_footer row">
                                                 <div class="col-6 text-grey">
-                                                    {{formatDate($post_row->published_date)}}
+                                                    {!! Helper::formatDate($post_row->published_date) !!}
                                                 </div>
                                                 <div class="col-6 d-flex flex-row-reverse">
                                                     <div class="post_category">

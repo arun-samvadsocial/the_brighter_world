@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Hash;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Mail;
+use Helper;
 
 class Authentication extends Controller
 {
     public function register(Request $request){
-        // sendMail('arun1601for@gmail.com','Test email','Arun test','');
+        // Helper::sendMail('arun1601for@gmail.com','Test email','Arun test','');
     }
 
     public function login(Request $request){

@@ -48,7 +48,7 @@ Route::get('/facts',[Fact_front::class,'index'])->name("facts");
 
 Route::get('/quotes',[Quote_front::class,'index'])->name("quotes");
 Route::get('/logout',[Authentication::class,'logout']);
-
+Route::get('/register',[Authentication::class,'register']);
 // Route::get('/login', function(){
 //     session()->put("user_id",1);
 //     session()->put("role",'author');

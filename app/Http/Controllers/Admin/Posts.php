@@ -10,13 +10,13 @@ use App\Models\Admin\Cat_post;
 use App\Models\Admin\Sub_category_model;
 use Illuminate\Support\Facades\Validator;
 use DateTime;
-
+use Helper;
 class Posts extends Controller
 {
      // Category list
      public function index(){
         try{
-            $user = getUser();
+            $user = Helper::getUser();
             if($user->role == "admin" || $user->role == "moderator" ){
                 $data['posts'] = Posts_model::where('is_delete', 0)->with('Category')->latest()->paginate(10);
 
@@ -73,7 +73,7 @@ class Posts extends Controller
                     // foreach($request->category_id as $cat_row){
                     //     $category_id .= $cat_row[$i].',';
                     // }
-                    $post_url = slugify($request->post_title); 
+                    $post_url = Helper::slugify($request->post_title); 
                     
                     $img_path = $request->file('post_image');
                     $logo_fileName = time().trim($img_path->getClientOriginalName());
@@ -82,12 +82,12 @@ class Posts extends Controller
 
                     
                     $post_status = 1;
-                    if(getUser()->role == "author"){
+                    if(Helper::getUser()->role == "author"){
                         $post_status = 0;
                     }
                     Posts_model::create([
                         "title"=>$request->post_title,
-                        "author"=>isset(getUser()->name)?getUser()->name:'',
+                        "author"=>isset(Helper::getUser()->name)?Helper::getUser()->name:'',
                         "synopsis"=>$request->synopsis,
                         "hashtags"=>$request->keywords,
                         "description"=>$request->editor1,
@@ -97,7 +97,7 @@ class Posts extends Controller
                         "post_url"=>$post_url!=""?$post_url:"",
                         "category_id"=>$request->category_id,
                         "status"=>$post_status,
-                        "user_id"=>isset(getUser()->id)?getUser()->id:'',
+                        "user_id"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
                         "push_send_flag"=>$request->notify==1?$request->notify:0,
                         "video_link"=>$request->video_link,
                         "published_date"=>$request->published_date
@@ -133,7 +133,7 @@ class Posts extends Controller
                     // foreach($request->category_id as $cat_row){
                     //     $category_id .= $cat_row[$i].',';
                     // }
-                    $post_url = slugify($request->post_title); 
+                    $post_url = Helper::slugify($request->post_title); 
 
                     if($request->post_image != null){
                         $img_path = $request->file('post_image');
@@ -143,7 +143,7 @@ class Posts extends Controller
                         Posts_model::where("post_id",$request->id)
                         ->update([
                                 "title"=>$request->post_title,
-                                "author"=>isset(getUser()->name)?getUser()->name:'',
+                                "author"=>isset(Helper::getUser()->name)?Helper::getUser()->name:'',
                                 "synopsis"=>$request->synopsis,
                                 "hashtags"=>$request->keywords,
                                 "description"=>$request->editor1,
@@ -153,7 +153,7 @@ class Posts extends Controller
                                 "post_url"=>$post_url!=""?$post_url:"",
                                 "category_id"=>$request->category_id,
                                 "push_status"=>1,
-                                "user_id"=>isset(getUser()->id)?getUser()->id:'',
+                                "user_id"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
                                 "video_link"=>$request->video_link
                         ]);
                     }else{
@@ -161,7 +161,7 @@ class Posts extends Controller
                         Posts_model::where("post_id",$request->id)
                         ->update([
                                 "title"=>$request->post_title,
-                                "author"=>isset(getUser()->name)?getUser()->name:'',
+                                "author"=>isset(Helper::getUser()->name)?Helper::getUser()->name:'',
                                 "synopsis"=>$request->synopsis,
                                 "hashtags"=>$request->keywords,
                                 "description"=>$request->editor1,
@@ -169,7 +169,7 @@ class Posts extends Controller
                                 "post_url"=>$post_url!=""?$post_url:"",
                                 "category_id"=>$request->category_id,
                                 "push_status"=>1,
-                                "user_id"=>isset(getUser()->id)?getUser()->id:'',
+                                "user_id"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
                                 "video_link"=>$request->video_link
                         ]);
                     }

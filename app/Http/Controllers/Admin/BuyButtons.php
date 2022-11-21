@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Buy_Buttons_model;
 use Illuminate\Support\Facades\Validator;
-
+use Helper;
 class BuyButtons extends Controller
 {
     // Buy Buttons list

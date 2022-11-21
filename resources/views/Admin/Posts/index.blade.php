@@ -75,10 +75,10 @@
                                             @endphp
                                                 <tr>
                                                     <td>{{$i++}}</td>
-                                                    <td><a href="{{ url('detail/'.$row->post_url.'/'.base64url_encode($row->post_id)) }}" target="_blank" >{{$row->title}}</a></td>
+                                                    <td><a href="{!! url('detail/'.$row->post_url.'/'.Helper::base64url_encode($row->post_id)) !!}" target="_blank" >{{$row->title}}</a></td>
                                                     <td>{{isset($arr[0])?$arr[0]->category_name:'N/A'}}</td>
                                                     <td>
-                                                        @if(getUser()->role == 'admin' || getUser()->role == 'moderator')
+                                                        @if(Helper::getUser()->role == 'admin' || Helper::getUser()->role == 'moderator')
                                                         @if($row->status ==1)
                                                         <a href="{{url('admin/change-post-status/'.$row->post_id)}}" class="badge rounded-pill bg-success">Active</a>
                                                         @else

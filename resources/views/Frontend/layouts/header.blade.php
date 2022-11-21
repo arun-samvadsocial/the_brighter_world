@@ -70,11 +70,11 @@
                     <li class="nav-item {{ Route::is('home') ? 'active' : '' }}">
                         <a class="nav-link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    @php $category = getCategory(4); @endphp
+                    @php $category = Helper::getCategory(4); @endphp
                     @foreach($category as $cat_row)
                   
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('category') && $cat_row->category_id == base64url_decode(request()->route()->parameters['category_id']) ? 'active' : '' }} " href="{{url('/').'/category/'.$cat_row->category_name.'/'.base64url_encode($cat_row->category_id)}}">{{$cat_row->category_name}}</a>
+                        <a class="nav-link {!! Route::is('category') && $cat_row->category_id == Helper::base64url_decode(request()->route()->parameters['category_id']) ? 'active' : '' !!} " href="{!! url('/').'/category/'.$cat_row->category_name.'/'.Helper::base64url_encode($cat_row->category_id) !!}">{{$cat_row->category_name}}</a>
                     </li>
                
                     @endforeach
