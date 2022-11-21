@@ -56,6 +56,9 @@ class Home extends Controller
     public function archives_post($year,$month){
         $posts['posts'] = Post_model::where( DB::raw('YEAR(published_date)'), '=', $year )
         ->where(DB::raw('MONTHNAME(published_date)'), '=', $month )
+        ->with('category')
+        ->leftJoin("category", "category.category_id", "=","post.category_id")
+        ->where("category.category_status", "1")
         ->paginate(9);
         return view("Frontend.Home.archives")->with($posts);
     }

@@ -39,9 +39,12 @@ class Helper
                         DB::raw("DATE_FORMAT(`published_date`, '%m') AS MONTH"),
                         DB::raw("Count(*) as TOTAL")
                     )
+                    ->leftJoin("category", "category.category_id", "=","post.category_id")
+                    ->where("category.category_status", "1")
                     ->groupBy('YEAR','MONTHNAME','MONTH')
                     ->orderBy('YEAR','ASC')
                     ->orderBy('MONTH','ASC')
+
                     ->get();
 
                     

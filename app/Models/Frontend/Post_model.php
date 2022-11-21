@@ -50,4 +50,8 @@ class Post_model extends Model
         public function category(){
             return $this->hasMany('App\Models\Frontend\Category_model','category_id');
         }
+
+        public function active_category() {
+            return $this->category()->where('category_status','=', 1);
+        }
 }
