@@ -1,7 +1,7 @@
 <div class="archive_sidebar" >
-    <div class="card">
-        <div class="header">
-            <p class="text-center font1">Archives</p>
+    <div class="card" style="border: none;">
+        <div class="header pt-2">
+            <p class="text-center">Archives</p>
         </div>
         <!-- <div class="container"> -->
         <ul>

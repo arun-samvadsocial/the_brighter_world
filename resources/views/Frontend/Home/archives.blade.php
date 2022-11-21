@@ -13,7 +13,7 @@
                         <div class="category_header row p-2">
                             <div class="col-md-3"><hr class="bg-dark"></div>
                             <div class="category_header_left col-md-3 text-center">
-                            <h2>{{$posts[0]->author}}</h2>
+                            <h2>{{request()->route()->parameters['month'].' '.request()->route()->parameters['year']}}</h2>
                             </div>
                             <div class="col-md-3"><hr class="bg-dark"></div>
                         </div>
