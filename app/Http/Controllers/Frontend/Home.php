@@ -14,7 +14,7 @@ class Home extends Controller
 {
     public function index(){
         $data['category']= Category_model::where("category_status",1)
-        ->latest("published_date")
+        ->latest()
         ->get();
         return view("Frontend.Home.index")->with($data);
     }
