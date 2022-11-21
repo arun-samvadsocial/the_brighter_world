@@ -39,7 +39,8 @@
                                                 <div class="col-6 d-flex flex-row-reverse">
                                                     <div class="post_category">
                                                 
-                                                    {!! strtok($cat_row[0]->category_name,' ') !!}
+                                                    {{ $cat_row[0]->category_name }}
+                                                    
                                                     </div>
                                                 </div>
                                             </div>
