@@ -14,7 +14,7 @@ class Home extends Controller
 {
     public function index(){
         $data['category']= Category_model::where("category_status",1)
-        ->latest()
+        ->latest("published_date")
         ->get();
         return view("Frontend.Home.index")->with($data);
     }
@@ -36,6 +36,7 @@ class Home extends Controller
         ->where("is_delete",0)
         ->where("status",1)
         ->orderBy('post_id', 'desc')
+        ->latest("published_date")
         ->paginate(9);
         return view("Frontend.Home.category")->with($data);
     }
@@ -48,6 +49,7 @@ class Home extends Controller
         ->where("is_delete",0)
         ->where("status",1)
         ->orderBy('post_id', 'desc')
+        ->latest("published_date")
         ->paginate(9);
         return view("Frontend.Home.author")->with($data);
     }
@@ -59,6 +61,7 @@ class Home extends Controller
         ->with('category')
         ->leftJoin("category", "category.category_id", "=","post.category_id")
         ->where("category.category_status", "1")
+        ->latest("published_date")
         ->paginate(9);
         return view("Frontend.Home.archives")->with($posts);
     }
