@@ -71,7 +71,7 @@ class Home extends Controller
         $id = $request->id;
         $name = "";
         $email = "";
-        if(getUser()){
+        if(Helper::getUser()){
             $name = Helper::getUser()->name;
             $email = Helper::getUser()->email;
         }
