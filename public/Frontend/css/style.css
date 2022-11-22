@@ -446,6 +446,7 @@ h4 {
   height: 190px;
   width: 100%;
   overflow: hidden;
+  object-fit: cover;
 }
 .img-thumbnail2{
   width: 100%;
