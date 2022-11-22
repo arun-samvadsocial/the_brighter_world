@@ -106,10 +106,10 @@
                                            
                                         </table>
                                             <div class="table_footer row">
-                                                <div class="showing col-md-6">
+                                                <div class="showing col-md-3">
                                                     Showing {{$posts->firstItem()}} - {{$posts->lastItem()}} of {{$posts->total()}}
                                                 </div>
-                                                <div class="pagination col-md-6">
+                                                <div class="pagination col-md-9">
                                                     <div class=" col-md-12 pb-2">
                                                     
                                                         <div class="pagination flex-wrap d-felx justify-content-center">

@@ -93,10 +93,10 @@
                                            
                                         </table>
                                                 <div class="table_footer row">
-                                                    <div class="showing col-md-6">
+                                                    <div class="showing col-md-5">
                                                         Showing {{$facts->firstItem()}} - {{$facts->lastItem()}} of {{$facts->total()}}
                                                     </div>
-                                                    <div class="pagination col-md-6">
+                                                    <div class="pagination col-md-7">
                                                         <div class=" col-md-12 pb-2">
                                                             <div class="pagination flex-wrap d-felx justify-content-center">
                                                                 {{ $facts->links('pagination::bootstrap-4') }}
