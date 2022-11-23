@@ -6,11 +6,31 @@ isset($post_data)?Helper::updateViewCount($post_data->post_id):'';
 $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_data->post_id));
 @endphp
 @section('meta_data')
-<meta property="og:title" content="{{$post_data->title}}"/>
-<meta property="og:image" content="{{url($post_data->img_path)}}" />
-<meta property="og:url" content="{{$link}}" />
-<meta property="og:description" content="{{strip_tags($post_data->description)}}" />
-<meta property="og:site_name" content="{{url('/')}}" />
+    <meta property="og:title" content="{{$post_data->title}}"/>
+    <meta property="og:image" content="{{url($post_data->img_path)}}" />
+    <meta property="og:url" content="{{$link}}" />
+    <meta property="og:description" content="{{strip_tags($post_data->description)}}" />
+    <meta property="og:site_name" content="{{url('/')}}" />
+    <meta name="description" content="{{strip_tags($post_data->description)}}"/>
+    <meta name="keywords" content="{{strip_tags($post_data->hashtags)}}"/>
+    <meta name="author" content="The Brighter World"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:site_name" content="The Brighter World"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:image:width" content="750"/>
+    <meta property="og:image:height" content="422"/>
+    <meta property="article:published_time" content="{{$post_data->published_date}}"/>
+    <meta property="article:modified_time" content="{{$post_data->updated_at}}"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="The Brighter World"/>
+    <meta name="twitter:creator" content="The Brighter World"/>
+    <meta name="twitter:title" content="{{$post_data->title}}"/>
+    <meta name="twitter:description" content=""/>
+    <meta name="twitter:image" content="{{url($post_data->img_path)}}"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="{{$post_data->title}}">
+    <meta name="msapplication-TileImage" content="{{url($post_data->img_path)}}">
 @endsection
 
 <section>
@@ -59,7 +79,7 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
 
                                         <a href="https://www.facebook.com/sharer.php?u={{$link}}" target="_blank" ><i class="fa fa-facebook text-primary"></i></a>&nbsp;&nbsp;
                                         <!-- <a href=""><i class="fa fa-linkedin "></i></a>&nbsp;&nbsp; -->
-                                        <a href="http://twitter.com/share?text=text&url={{$link}}/&hashtags={{$post_data->keywords}}" target="_blank"><i class="fa fa-twitter text-info"></i></a>&nbsp;&nbsp;
+                                        <a href="http://twitter.com/share?text={{$post_data->title}}&url={{$link}}/&hashtags={{$post_data->hashtags}}" target="_blank"><i class="fa fa-twitter text-info"></i></a>&nbsp;&nbsp;
                                         <a href="https://api.whatsapp.com/send?phone=&text={{urlencode($link)}}" target="_blank"><i class="fa fa-whatsapp text-success" ></i></a>
                                     </span>
                                 </div>

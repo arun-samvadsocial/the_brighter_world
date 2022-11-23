@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    @yield('facebook_meta')
+    @yield('meta_data')
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{url('favicon.png')}}">
     <!-- Vendor CSS Files -->
