@@ -17,7 +17,7 @@
                             </div>
                             <div class="category_header_right d-flex flex-row-reverse  col-md-6">
                                 <div class="view_all_btn">
-                                    <a href="{!! url('/').'/category/'.$cat_row->category_name.'/'.Helper::base64url_encode($cat_row->category_id) !!}" class="text-dark" >View all</a>
+                                    <a href="{!! url('/').'/category/'.$cat_row->category_name.'/'.Helper::base64url_encode($cat_row->category_id) !!}" >View all</a>
                                 </div>
                             </div>
                             

@@ -346,6 +346,9 @@ h4 {
 .hr{
   border-bottom: 3px solid white;
 }
+.view_all_btn a{
+  color: #fcc80d;
+}
 
 .page-item.active .page-link {
   background-color: #fcc80d !important;
