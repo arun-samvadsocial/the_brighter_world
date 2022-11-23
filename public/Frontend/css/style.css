@@ -478,6 +478,9 @@ h4 {
     text-shadow: 0px 3px 3px rgb(0 0 0 / 30%);
     color: #333;
 }
+.header_logo{
+  width: 50%;
+}
 /* .share_btn i{
   font-size: 1.2vw;
 }
@@ -492,6 +495,7 @@ h4 {
   .header_logo{
     display: flex;
     margin: auto;
+    width: 100% !important;
   }
   .header_thought{
     text-align: center;
@@ -514,6 +518,7 @@ h4 {
   .header_logo{
     display: flex;
     margin: auto;
+    width: 100% !important;
   }
   .header_thought{
     text-align: center;

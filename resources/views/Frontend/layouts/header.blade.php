@@ -29,7 +29,7 @@
             <div class="row" style="margin-left:0px;margin-right:0px;">
                 <div class="col-md-3">
                     <a href="{{url('/')}}">
-                        <img src="{{url('/logo.png')}}" class="header_logo" alt="" height="90px" >
+                        <img src="{{url('/logo.svg')}}" class="header_logo" alt="" >
                     </a>
                     <!-- <h2>The Brighter World</h2> -->
                 </div>

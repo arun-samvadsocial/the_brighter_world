@@ -33,10 +33,14 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                 <div class="post_body">
                     <div class="post_image">
                         <img src="{{url($post_data->img_path)}}" width="100%"; alt="">
-                        <!-- <span class="badge rounded-pill bg-light">image source</span> -->
                         <p style="overflow-wrap: break-word;margin-top: -25px;  margin-left: 10px;font-size: 10px;color: #aaa;">
-						    <a href="{{url($post_data->img_source)}}" target="_blank" class="text-light" >Image Source</a>
+						    <a class="text-light" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Image Source</a>
                         </p>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                <a href="{{url($post_data->img_source)}}" class="text-primary" target="_blank" >{{url($post_data->img_source)}}</a>
+                            </div>
+                        </div>
 
                     </div>
 
