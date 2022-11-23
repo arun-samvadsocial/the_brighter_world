@@ -2,11 +2,6 @@
 @section('main-content')
 
 
-@foreach($category as $cat_row)
-@php
-    $posts = Helper::getPosts($cat_row->category_id,10);
-@endphp
-@if(count($posts) > 0)
 <style>
     .img-container{
         position: absolute;
@@ -55,7 +50,7 @@
                     </div>
                     <div class="category_header_right d-flex flex-row-reverse  col-md-6">
                         <div class="view_all_btn">
-                            <a href="{!! url('/').'/category/'.$cat_row->category_name.'/'.Helper::base64url_encode($cat_row->category_id) !!}" >View all</a>
+                            <a href="" >View all</a>
                         </div>
                     </div>
                 </div> 
@@ -168,6 +163,16 @@
     </div>
 </section>
 <!-- Hero section end here  -->
+
+
+
+
+@foreach($category as $cat_row)
+@php
+    $posts = Helper::getPosts($cat_row->category_id,10);
+@endphp
+@if(count($posts) > 0)
+
 
 <!-- Slider section with category start here  -->
 <section class="carousel_se_01">
