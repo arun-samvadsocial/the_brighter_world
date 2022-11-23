@@ -11,11 +11,11 @@
             <div class="row pt-3">
                 <div class="col-md-12 px-0">
                         <div class="category_header row p-2">
-                            <div class="col-md-3"><hr class="bg-dark"></div>
+                            <div class="col-md-3"><hr class="bg-colorAccent"></div>
                             <div class="category_header_left col-md-3 text-center">
-                            <h2>{{request()->route()->parameters['month'].' '.request()->route()->parameters['year']}}</h2>
+                            <h2 class="colorAccent" >{{request()->route()->parameters['month'].' '.request()->route()->parameters['year']}}</h2>
                             </div>
-                            <div class="col-md-3"><hr class="bg-dark"></div>
+                            <div class="col-md-3"><hr class="bg-colorAccent"></div>
                         </div>
                         <div class="row">
                             <div class="row col-md-10">
@@ -29,8 +29,8 @@
                                                     <img src="{{url($post_row->img_path)}}" class="img-thumbnail" height="142px" alt="">
                                                 </div>
                                                 <div class="card_detail">
-                                                <h4 class="mt-3 card_title_ellipsis">{!! substr_replace($post_row->title, "...", 30) !!}</h4>
-                                                <p class="card_text_ellipsis" >{!! substr_replace(strip_tags($post_row->description), "...", 100) !!}</p>
+                                                <h4 class="mt-3 card_title_ellipsis" title="{{ $post_row->title }}" >{{ $post_row->title }}</h4>
+                                                <p class="card_text_ellipsis" >{!! strip_tags($post_row->description) !!}</p>
                                             </a>
                                             <div class="card_footer row">
                                                 <div class="col-6 text-grey">
