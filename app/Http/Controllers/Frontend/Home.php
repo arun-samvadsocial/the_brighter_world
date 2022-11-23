@@ -40,6 +40,17 @@ class Home extends Controller
         ->paginate(9);
         return view("Frontend.Home.category")->with($data);
     }
+    public function tags_post($tag_name){
+        $tag_name = urldecode($tag_name);
+        $data['posts'] = Post_model::where('hashtags','LIKE',"%{$tag_name}%")
+        ->with('category')
+        ->where("is_delete",0)
+        ->where("status",1)
+        ->orderBy('post_id', 'desc')
+        ->latest("published_date")
+        ->paginate(9);
+        return view("Frontend.Home.tags")->with($data);
+    }
 
     //Author post
     public function author_post($author,$author_id){
