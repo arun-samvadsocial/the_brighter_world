@@ -207,7 +207,12 @@ h4 {
   cursor: pointer;
   border-radius: 50%; 
 }
-
+.colorAccent{
+  color: #fcc80d !important;
+}
+.bg-colorAccent{
+  background-color: #fcc80d !important;
+}
 .carousel_se_01  .owl-theme .owl-dots .owl-dot:hover span {
   color: #fff;
   background: #fcc80d;
@@ -373,14 +378,19 @@ h4 {
 }
 
 .card_text_ellipsis{
-
-  font-size: 14px;
-    -webkit-line-clamp: 2;
-    line-height: 20px;
-}
-.card_title_ellipsis{
+  display: -webkit-box;
+  overflow: hidden;
   font-size: 17px;
   -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 24px;
+}
+.card_title_ellipsis{
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 17px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   line-height: 24px;
   font-weight: 600;
 }

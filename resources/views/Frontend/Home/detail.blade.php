@@ -43,7 +43,11 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                     <div class="author_detail">
                         <div class="row">
                             <div class="col-6 author_info">
+                            @if(session()->get('user_id'))
+                                @if(Helper::getUser()->role == "admin" || Helper::getUser()->role == "moderator")
                                 <i class="fa fa-user" ></i> {{$post_data->author?$post_data->author:"N/A"}}
+                                @endif
+                            @endif
                             </div>
                             <div class="col-6 d-flex flex-row-reverse">
                                 <div class="share_btn">
@@ -66,6 +70,8 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                 </div>
 
                 <div class="post_footer pt-5">
+                @if(session()->get('user_id'))
+                    @if(Helper::getUser()->role == "admin" || Helper::getUser()->role == "moderator")
                     <div class="more_from_author col-md-10 p-0">
                         <div class="more_from_auhor_header row">
                             <div class="col-12">
@@ -84,27 +90,31 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                                 </div>
                             </div>
                         </div>
-                        @php $fromAuthor = Helper::getPostsByAuthor($post_data->user_id,3) @endphp
-                        @foreach($fromAuthor as $author_row)
-                        @php $arr = json_decode($author_row->category); @endphp
-                        <div class="more_from_author_post">
-                            <a href="{!! url('detail/'.$author_row->post_url.'/'.Helper::base64url_encode($author_row->post_id)) !!}">
-                                <div class="row" style="margin-bottom: 10px">
-                                    <div class="col-2">
-                                        <img src="{{url($author_row->img_path)}}" width="100%" style="border-radius: 10%;" alt="">
-                                    </div>
-                                    <div class="col-10">
-                                        <div class="post_title">
-                                            {{$author_row->title}}
+                        
+                            
+                                @php $fromAuthor = Helper::getPostsByAuthor($post_data->user_id,3) @endphp
+                                @foreach($fromAuthor as $author_row)
+                                @php $arr = json_decode($author_row->category); @endphp
+                                <div class="more_from_author_post">
+                                    <a href="{!! url('detail/'.$author_row->post_url.'/'.Helper::base64url_encode($author_row->post_id)) !!}">
+                                        <div class="row" style="margin-bottom: 10px">
+                                            <div class="col-2">
+                                                <img src="{{url($author_row->img_path)}}" width="100%" style="border-radius: 10%;" alt="">
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="post_title">
+                                                    {{$author_row->title}}
+                                                </div>
+                                                <span>{{isset($arr[0])?$arr[0]->category_name:'N/A'}}</span>
+                                            </div>
+                                            <div class="col-12" style="border-bottom:1px solid rgb(211 208 208);" ></div>
                                         </div>
-                                        <span>{{isset($arr[0])?$arr[0]->category_name:'N/A'}}</span>
-                                    </div>
-                                    <div class="col-12" style="border-bottom:1px solid rgb(211 208 208);" ></div>
+                                    </a>    
                                 </div>
-                            </a>    
-                        </div>
-                        @endforeach
-                    </div>
+                                @endforeach
+                            </div>
+                            @endif
+                    @endif
 
                     <div class="comments pt-5">
                         <h3>Comments</h3>
