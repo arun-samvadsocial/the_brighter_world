@@ -42,7 +42,19 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                 <div class="post_header pt-3">
                     <div class="post_header_top">
                         <h2>{{$post_data->title}}</h2>
-                        <p>{{$post_data->hashtags}}</p>
+                        @php 
+                            $tags = explode(',', $post_data->hashtags);
+                            $count = 0;
+                        @endphp
+                        <p>
+                            @foreach($tags as $tagrow)
+                            @if($count > 5)
+                            @break
+                            @endif
+                            <a href="#" class="tags" >{{$tagrow}}</a>
+                            @php $count++ @endphp
+                            @endforeach
+                        </p>
                     </div>
                     <div class="post_header_bottom">
                         {!! Helper::formatDate($post_data->published_date) !!}
@@ -89,7 +101,19 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
 
                     <div class="post_description pt-3">
                         {!! $post_data->description !!}
-                        <p>{{$post_data->hashtags}}</p>
+                        @php 
+                            $tags = explode(',', $post_data->hashtags);
+                            $count = 0;
+                        @endphp
+                        <p>
+                            @foreach($tags as $tagrow)
+                            @if($count > 5)
+                            @break
+                            @endif
+                            <a href="#" class="tags" >{{$tagrow}}</a>
+                            @php $count++ @endphp
+                            @endforeach
+                        </p>
                     </div>
                 </div>
 
