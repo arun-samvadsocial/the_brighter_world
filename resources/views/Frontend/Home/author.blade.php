@@ -29,7 +29,7 @@
                                                     <img src="{{url($post_row->img_path)}}" class="img-thumbnail" height="142px" alt="">
                                                 </div>
                                                 <div class="card_detail">
-                                                <h4 class="mt-3 card_title_ellipsis">{{ $post_row->title }}</h4>
+                                                <h4 class="mt-3 card_title_ellipsis" title="{{ $post_row->title }}">{{ $post_row->title }}</h4>
                                                 <p class="card_text_ellipsis">{!! strip_tags($post_row->description) !!}</p>
                                             </a>
                                             <div class="card_footer row">
