@@ -57,7 +57,7 @@
                            
                             <!-- 1 end  -->
                         </div> <!-- owl-carousel end -->
-                        <div class="hr col-6 mx-auto"></div>
+                        <!-- <div class="hr col-6 mx-auto"></div> -->
                 </div> <!-- col-md-12 end -->
             </div> <!-- row end -->
     </div> <!-- container-fluid end -->

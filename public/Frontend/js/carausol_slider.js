@@ -5,7 +5,7 @@
 
 	 $(document).ready(function(){
 		 $('.carousel_se_01_carousel' ).owlCarousel({
-		    items: 4,
+		    items: 5,
 		    nav: true,
 		    loop :true,
 		   
@@ -25,9 +25,15 @@
 		        992:{
 		          items: 4
 		        },
+				1000:{
+					items:3
+				},
 		        1200:{
 		          items: 4
-		        }
+		        },
+				1600:{
+				  items: 5
+				}
 		    }
 		  });
 
