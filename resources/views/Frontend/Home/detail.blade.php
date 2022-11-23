@@ -79,7 +79,7 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
 
                                         <a href="https://www.facebook.com/sharer.php?u={{$link}}" target="_blank" ><i class="fa fa-facebook text-primary"></i></a>&nbsp;&nbsp;
                                         <!-- <a href=""><i class="fa fa-linkedin "></i></a>&nbsp;&nbsp; -->
-                                        <a href="http://twitter.com/share?text=text&url={{$link}}/&hashtags={{$post_data->keywords}}" target="_blank"><i class="fa fa-twitter text-info"></i></a>&nbsp;&nbsp;
+                                        <a href="http://twitter.com/share?text={{$post_data->title}}&url={{$link}}/&hashtags={{$post_data->hashtags}}" target="_blank"><i class="fa fa-twitter text-info"></i></a>&nbsp;&nbsp;
                                         <a href="https://api.whatsapp.com/send?phone=&text={{urlencode($link)}}" target="_blank"><i class="fa fa-whatsapp text-success" ></i></a>
                                     </span>
                                 </div>
