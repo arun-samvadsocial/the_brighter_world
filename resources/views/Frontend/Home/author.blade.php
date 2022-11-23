@@ -18,10 +18,10 @@
                             <div class="col-md-3"><hr class="bg-colorAccent"></div>
                         </div>
                         <div class="row">
-                            <div class="row col-md-10">
+                            <div class="row col-md-11 col-lg-10">
                                 <!-- 1 -->
                                 @foreach($posts as $post_row)
-                                <div class="item col-md-4">
+                                <div class="item col-md-6 col-lg-4">
                                     <div class="col-md-12 wow fadeInUp ">
                                         <div class="main_services text-left">
                                             <a href="{!! url('detail/'.$post_row->post_url.'/'.Helper::base64url_encode($post_row->post_id)) !!}">
@@ -58,7 +58,7 @@
                                 <!-- 1 end  -->
                             </div> <!-- owl-carousel end -->
                             
-                            <div class="col-md-2 right_sidebar">
+                            <div class="col-md-6 col-lg-2 right_sidebar">
                                 @include('Frontend.layouts.sidebar')
                             </div>
                         </div>
