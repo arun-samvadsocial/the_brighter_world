@@ -7,7 +7,7 @@ $device_ip = Helper::getClientIps();
 $minutes = 60;
 Cookie::queue('device_ip', $device_ip, $minutes);
 Cookie::queue('post_id', $post_data->post_id, $minutes);
-if(Cookie::get('device_ip') != $device_ip $post_data->post_id != Cookie::get('post_id')){
+if(Cookie::get('device_ip') != $device_ip || $post_data->post_id != Cookie::get('post_id')){
 isset($post_data)?Helper::updateViewCount($post_data->post_id):'';
 }
 $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_data->post_id));
