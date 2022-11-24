@@ -513,6 +513,7 @@ h4 {
   .carousel_se_01{
     margin: 0px;
   }
+  
 }
 
 
@@ -536,6 +537,7 @@ h4 {
   .carousel_se_01{
     margin: 0px;
   }
+  
 }
 
 /*less than 767px*/
@@ -548,6 +550,8 @@ h4 {
     display: block !important;
   }
 }
+
+
 /*less then 992px and less than 768*/
 @media only screen and (max-width:993px) and (min-width:768px)
 {
