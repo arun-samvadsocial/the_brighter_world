@@ -464,8 +464,8 @@ h4 {
   width: 100%;
   overflow: hidden;
   object-fit: cover;
-  border-bottom-right-radius: 15px;
-  border-bottom-left-radius: 15px;
+  /* border-bottom-right-radius: 15px; */
+  /* border-bottom-left-radius: 15px; */
 }
 .img-thumbnail2{
   width: 100%;
