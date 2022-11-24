@@ -107,6 +107,7 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                     </div>
 
                     <div class="post_description pt-3">
+                        <strong>{{ $post_data->synopsis?$post_data->synopsis:'' }}</strong>
                         {!! $post_data->description !!}
                         @php 
                             $tags = explode(',', $post_data->hashtags);
