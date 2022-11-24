@@ -41,6 +41,9 @@ Route::get('/detail/{post_title}/{post_id}', [Home::class, 'post_detail']);
 
 Route::get('/category/{category}/{category_id}',[Home::class,'category_post'])->name("category");
 Route::get('/author/{author}/{author_id}',[Home::class,'author_post']);
+
+Route::get('/hashtag/{tags}',[Home::class,'tags_post']);
+
 Route::get('/archives/{year}/{month}',[Home::class,'archives_post']);
 Route::post('/comment',[Home::class,'comment_add']);
 Route::get('/tip',[Tip_front::class,'index']);
