@@ -35,21 +35,38 @@ class Home extends Controller
         ->with('category')
         ->where("is_delete",0)
         ->where("status",1)
-        ->orderBy('post_id', 'desc')
+        ->orderBy('published_date', 'desc')
         ->latest("published_date")
         ->paginate(9);
         return view("Frontend.Home.category")->with($data);
     }
+    // Fetch Post Using Hashtags 
     public function tags_post($tag_name){
         $tag_name = urldecode($tag_name);
         $data['posts'] = Post_model::where('hashtags','LIKE',"%{$tag_name}%")
         ->with('category')
         ->where("is_delete",0)
         ->where("status",1)
-        ->orderBy('post_id', 'desc')
+        ->orderBy('published_date', 'desc')
         ->latest("published_date")
         ->paginate(9);
         return view("Frontend.Home.tags")->with($data);
+    }
+    // Fetch Post Using Search Query 
+    public function search_post(Request $request){
+        $search_data = urldecode($request->input('search'));
+        $data['posts'] = Post_model::where('title','LIKE',"%" . $search_data . "%")
+        ->orWhere("synopsis", 'LIKE',"%" . $search_data . "%")
+        ->orWhere("hashtags", 'LIKE',"%" . $search_data . "%")
+        ->orWhere("author", 'LIKE',"%" . $search_data . "%")
+        ->orWhere("keywords", 'LIKE',"%" . $search_data . "%")
+        ->with('category')
+        ->where("is_delete",0)
+        ->where("status",1)
+        ->orderBy('published_date', 'desc')
+        ->latest("published_date")
+        ->paginate(9);
+        return view("Frontend.Home.search")->with($data);
     }
 
     //Author post
@@ -59,7 +76,7 @@ class Home extends Controller
         ->with('category')
         ->where("is_delete",0)
         ->where("status",1)
-        ->orderBy('post_id', 'desc')
+        ->orderBy('published_date', 'desc')
         ->latest("published_date")
         ->paginate(9);
         return view("Frontend.Home.author")->with($data);

@@ -27,19 +27,30 @@
     <header>
         <div class="header_top">
             <div class="row" style="margin-left:0px;margin-right:0px;">
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-6">
                     <a href="{{url('/')}}">
                         <img src="{{url('/logo.svg')}}" class="header_logo" alt="" >
                     </a>
                     <!-- <h2>The Brighter World</h2> -->
                 </div>
-                <div class="col-md-6">
+                <div class="col-lg-3 col-md-6">
                     <p class="header_thought" >"Dream, Dream, Dream!<br/>
                         Conduct these dreams into thoughts,<br/>
                         and then transform them into action."<br/>
                         - Dr. A. P. J. Abdul Kalam</p>
                 </div>
-                <div class="col-md-3 d-flex flex-row-reverse">
+                <div class="col-lg-3 col-md-6">
+                    <div class="search_form">
+                        <form action="{{ route('search') }}" method="GET" class="input-group"> 
+                            <input type="text" class="form-control" placeholder="Search post..." name="search" required/>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-warning" >Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 d-flex flex-row-reverse">
                     <div class="login_btn">
                         @if(session()->get("user_id"))
                         <a href="{{url('/logout')}}" class="btn btn-danger" >Logout</a>
@@ -93,6 +104,7 @@
                         <a class="nav-link" href="{{url('/admin')}}">Dashboard</a>
                     </li>
                     @endif
+                   
                     
                     </ul>
                     

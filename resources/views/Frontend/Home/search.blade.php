@@ -59,7 +59,7 @@
                             </div> <!-- owl-carousel end -->
                             
                             <div class="col-md-6 col-lg-2 right_sidebar">
-                                @include('Frontend.layouts.sidebar')
+                                @include('Frontend.layouts.sidebar') 
                             </div>
                         </div>
                 </div> <!-- col-md-12 end -->
