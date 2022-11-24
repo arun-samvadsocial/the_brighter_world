@@ -60,7 +60,7 @@ class Home extends Controller
         ->orWhere("hashtags", 'LIKE',"%" . $search_data . "%")
         ->orWhere("author", 'LIKE',"%" . $search_data . "%")
         ->orWhere("keywords", 'LIKE',"%" . $search_data . "%")
-        ->with('category')
+        ->with('active_category')
         ->where("is_delete",0)
         ->where("status",1)
         ->orderBy('published_date', 'desc')
