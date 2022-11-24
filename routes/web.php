@@ -39,6 +39,8 @@ Route::get('/contact',[Home::class,'contact']);
 
 Route::get('/detail/{post_title}/{post_id}', [Home::class, 'post_detail']);
 
+Route::get("/search/", [Home::class,"search_post"])->name("search");
+
 Route::get('/category/{category}/{category_id}',[Home::class,'category_post'])->name("category");
 Route::get('/author/{author}/{author_id}',[Home::class,'author_post']);
 

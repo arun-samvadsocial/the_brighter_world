@@ -9,7 +9,7 @@
 <section class="carousel_se_01">
     <div class="container-fluid ">
             <div class="row pt-3">
-                <div class="col-md-12 px-0">
+                <div class="col-md-12">
                         <div class="category_header row p-2">
                             <div class="col-md-3"><hr class="bg-colorAccent"></div>
                             <div class="category_header_left col-md-3  text-center">

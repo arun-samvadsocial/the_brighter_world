@@ -8,6 +8,8 @@ use App\Models\Frontend\Category_model;
 use App\Models\Frontend\Comment_model;
 use Illuminate\Support\Facades\DB;
 use Mail;
+use Illuminate\Support\Facades\Http;
+
 class Helper
 {
     
@@ -172,4 +174,12 @@ class Helper
            $ipaddress = 'UNKNOWN';    
        return $ipaddress;
     } 
+
+
+// ==============================================================================================
+// Start CopyScape Plagiarism Checker Steps Funtions
+// ==============================================================================================
+
+    
+
 }

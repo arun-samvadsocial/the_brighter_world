@@ -33,6 +33,8 @@
           <!-- Responsive Table css -->
           <link href="{{url('/Admin/assets/libs/admin-resources/rwd-table/rwd-table.min.css')}}" rel="stylesheet" type="text/css">
           <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+
+          
         </head>
 
     <body data-sidebar="dark">
