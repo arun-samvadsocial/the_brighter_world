@@ -42,7 +42,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="search_form">
                         <form action="{{ route('search') }}" method="GET" class="input-group"> 
-                            <input type="text" class="form-control" placeholder="Search post..." name="search" required/>
+                            <input type="text" class="form-control" placeholder="Search here..." name="search" required/>
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-warning" >Search</button>
                             </div>
