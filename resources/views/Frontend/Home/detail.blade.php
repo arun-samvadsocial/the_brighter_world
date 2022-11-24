@@ -2,7 +2,13 @@
 @section('main-content')
 @if($post_data)
 @php 
+$device_ip = Helper::getClientIps();
+
+$minutes = 60;
+Cookie::queue('device_ip', $device_ip, $minutes);
+if(Cookie::get('device_ip') != $device_ip){
 isset($post_data)?Helper::updateViewCount($post_data->post_id):'';
+}
 $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_data->post_id));
 @endphp
 @section('meta_data')
@@ -37,7 +43,7 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
     <div class="container">
         <div class="row">
 
-        
+       
             <div class="col-md-8">
                 <div class="post_header pt-3">
                     <div class="post_header_top">
