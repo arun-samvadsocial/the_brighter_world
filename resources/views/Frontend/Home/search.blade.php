@@ -22,6 +22,7 @@
                             <div class="row col-md-11 col-lg-10">
                                 <!-- 1 -->
                                 @foreach($posts as $post_row)
+                                @if($post_row->status == 1)
                                 <div class="item col-md-6 col-lg-4">
                                     <div class="col-md-12 wow fadeInUp ">
                                         <div class="main_services text-left">
@@ -48,6 +49,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                @else
+                                <p>No record found</p>
+                                @endif
                                 @endforeach
                                 <div class=" col-md-12 pb-2">
                                     <div class="pagination d-felx justify-content-center">
