@@ -9,11 +9,11 @@
             <div class="row pt-3">
                 <div class="col-md-12 px-0">
                         <div class="category_header row p-2">
-                        <div class="col-md-3"><hr class="bg-dark"></div>
-                            <div class="category_header_left col-md-3 text-center">
+                        <div class="col-md-4"><hr class="bg-dark"></div>
+                            <div class="category_header_left col-md-4 text-center">
                             <h2>All Facts</h2>
                             </div>
-                            <div class="col-md-3"><hr class="bg-dark"></div>
+                            <div class="col-md-4"><hr class="bg-dark"></div>
                         </div>
                         <div class="row m-0">
                             <div class="row col-md-12">
@@ -21,11 +21,7 @@
                                 @foreach($facts as $row)
                                 <div class="item col-md-6 col-lg-4">
                                     <div class="col-md-12 wow fadeInUp ">
-<<<<<<< HEAD
-                                        <div class="main_services text-left" style="min-height:300px;" >
-=======
-                                        <div class="main_services text-left" style="min-height:300px;">
->>>>>>> main
+                                        <div class="main_services text-left" style="min-height:300px;"> 
                                             <a href="">
                                                 <div class="img-thumbnail2 text-center" >
                                                     <img src="{{url($row->img_data)}}" class="img-thumbnail2" height="100%" alt="">
