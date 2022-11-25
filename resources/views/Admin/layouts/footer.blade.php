@@ -58,7 +58,7 @@
 <script src="{{url('/Admin/assets/js/app.js')}}"></script>
 
 <!-- Grammerly API Script  -->
-<script src="https://unpkg.com/@grammarly/editor-sdk?clientId=client_EnhmSP8eCSJpQuYybtvfMK"></script>
+<script src="https://unpkg.com/@grammarly/editor-sdk?clientId=client_NjQUuu1vcdsJ1mdeaZy3y7"></script>
 
 </body>
 
