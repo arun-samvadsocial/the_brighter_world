@@ -44,7 +44,7 @@
   background-color:black;
 }
 .share_btn a{
-    padding:5px;
+    padding:3px;
 }
 .submit{
     border:1px solid grey;
@@ -268,7 +268,7 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                                     @if(session()->get('user_id'))
                                         <input type="submit" class="btn btn-default" />
                                     @else
-                                        <a href="{{url('/login')}}" class="btn btn-warning" >Login</a>
+                                        <a href="{{url('/login')}}" class="btn btn-warning rounded-pill"  >Login</a>
                                     @endif
                                 </div>
                             </div>
