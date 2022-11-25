@@ -55,12 +55,15 @@ class Home extends Controller
     // Fetch Post Using Search Query 
     public function search_post(Request $request){
         $search_data = urldecode($request->input('search'));
-        $data['posts'] = Post_model::where('title','LIKE',"%" . $search_data . "%")
+        $data['posts'] = Post_model::select("post.*","category.category_keywords")
+        ->where('title','LIKE',"%" . $search_data . "%")
         ->orWhere("synopsis", 'LIKE',"%" . $search_data . "%")
         ->orWhere("hashtags", 'LIKE',"%" . $search_data . "%")
         ->orWhere("author", 'LIKE',"%" . $search_data . "%")
         ->orWhere("keywords", 'LIKE',"%" . $search_data . "%")
         ->with('category')
+        ->leftJoin("category","post.category_id","=","category.category_id")
+        ->orWhere("category.category_name", 'LIKE',"%" . $search_data . "%")
         ->where("is_delete",0)
         ->where("status",1)
         ->orderBy('published_date', 'desc')
