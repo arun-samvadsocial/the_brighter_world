@@ -20,15 +20,39 @@
     background-repeat:no-repeat;
     background-size: cover;
     background-position: center;
-    background-image: url('public/upload/_Magnificent_Mary__the_First_Indian_Athlete_to_Represent_Boxing_1506194648.jpg');
     }
     #copyright {
             position: absolute;
             color: #000;
-            bottom: 3px;
+            bottom: -28px;
             padding: 15px;
             /* left: 46%; */
+            background-color: rgba(0,0,0,0.5);
             }
+    .caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 15px 20px 15px 20px;
+        pointer-events: none;
+        background-color: rgba(0,0,0,0.5);
+        width: 100%;
+    }
+    .caption .title{
+        color: #fff;
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 28px;
+        margin-top: 10px;
+        position: relative;
+        
+    }
+    .caption .post-meta{
+        margin-bottom: 0;
+        color: #fff;
+        position: relative;
+        z-index: 14;
+    }
     #copyright1 {
             position: absolute;
             color: #000;
@@ -36,7 +60,8 @@
             padding: 10px;
             font-size:10px;
             /* left: 46%; */
-            }
+            background-color: rgba(0,0,0,0.5);
+    }
 
 </style>
 
