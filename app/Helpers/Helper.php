@@ -8,6 +8,8 @@ use App\Models\Frontend\Category_model;
 use App\Models\Frontend\Comment_model;
 use Illuminate\Support\Facades\DB;
 use Mail;
+use Illuminate\Support\Facades\Http;
+
 class Helper
 {
     
@@ -151,4 +153,33 @@ class Helper
                 return true;
             }
     }
+
+
+
+    public static function getClientIps(){
+        $ipaddress = '';
+       if (isset($_SERVER['HTTP_CLIENT_IP']))
+           $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+       else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+           $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+       else if(isset($_SERVER['HTTP_X_FORWARDED']))
+           $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+       else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+           $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+       else if(isset($_SERVER['HTTP_FORWARDED']))
+           $ipaddress = $_SERVER['HTTP_FORWARDED'];
+       else if(isset($_SERVER['REMOTE_ADDR']))
+           $ipaddress = $_SERVER['REMOTE_ADDR'];
+       else
+           $ipaddress = 'UNKNOWN';    
+       return $ipaddress;
+    } 
+
+
+// ==============================================================================================
+// Start CopyScape Plagiarism Checker Steps Funtions
+// ==============================================================================================
+
+    
+
 }

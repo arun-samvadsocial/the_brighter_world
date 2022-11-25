@@ -1,5 +1,6 @@
 @extends('Admin.layouts.main')
 @section('main-content')
+
 <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
@@ -120,7 +121,10 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formname">Post Description <span class="text-danger" >*</span>:</label>
-                                                    <textarea name="editor1" onkeyup="SuperDuperFunction();" id="editor1" required >{{old('editor1')}}</textarea>
+                                                    <grammarly-editor-plugin>
+                                                        <textarea name="editor1" onkeyup="SuperDuperFunction();" id="editor1" required >{{old('editor1')}}</textarea>
+                                                    </grammarly-editor-plugin>
+                                                    
                                                     <script>
                                                             CKEDITOR.replace( 'editor1' );
                                                     </script>

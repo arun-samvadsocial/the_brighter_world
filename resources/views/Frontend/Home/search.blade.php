@@ -2,7 +2,7 @@
 @section('main-content')
 
 
-@if(count($posts) > 0)
+@if(count($posts) > 0 )
 @php
     $cat_row = json_decode($posts[0]->category);
 @endphp
@@ -13,8 +13,8 @@
                 <div class="col-md-12">
                         <div class="category_header row p-2">
                             <div class="col-md-3"><hr class="bg-colorAccent"></div>
-                            <div class="category_header_left col-md-3 text-center">
-                            <h2 class="colorAccent" >{{$posts[0]->author}}</h2>
+                            <div class="category_header_left col-md-3  text-center">
+                            <h2 class="colorAccent" >{{$cat_row[0]->category_name}}</h2>
                             </div>
                             <div class="col-md-3"><hr class="bg-colorAccent"></div>
                         </div>
@@ -22,6 +22,7 @@
                             <div class="row col-md-11 col-lg-10">
                                 <!-- 1 -->
                                 @foreach($posts as $post_row)
+                                @if($post_row->status == 1)
                                 <div class="item col-md-6 col-lg-4">
                                     <div class="col-md-12 wow fadeInUp ">
                                         <div class="main_services text-left">
@@ -30,7 +31,7 @@
                                                     <img src="{{url($post_row->img_path)}}" class="img-thumbnail" height="142px" alt="">
                                                 </div>
                                                 <div class="card_detail">
-                                                <h4 class="mt-3 card_title_ellipsis" title="{{ $post_row->title }}">{{ $post_row->title }}</h4>
+                                                <h4 class="mt-3 card_title_ellipsis" title="{{ $post_row->title }}"t>{{ $post_row->title }}</h4>
                                                 <p class="card_text_ellipsis">{!! strip_tags($post_row->description) !!}</p>
                                             </a>
                                             <div class="card_footer row">
@@ -48,6 +49,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                @else
+                                <p>No record found</p>
+                                @endif
                                 @endforeach
                                 <div class=" col-md-12 pb-2">
                                     <div class="pagination d-felx justify-content-center">
@@ -60,7 +64,7 @@
                             </div> <!-- owl-carousel end -->
                             
                             <div class="col-md-6 col-lg-2 right_sidebar">
-                                @include('Frontend.layouts.sidebar')
+                                @include('Frontend.layouts.sidebar') 
                             </div>
                         </div>
                 </div> <!-- col-md-12 end -->
@@ -68,10 +72,11 @@
     </div> <!-- container-fluid end -->
 </section> <!-- Section end -->
 @else
-<h2 class="te   xt-danger" >No Record Found</h2>
+<h2 class="text-danger" >No Record Found</h2>
 @endif
 @else
 <h2 class="text-danger" >No Record Found</h2>
 @endif
+
 
 @endsection

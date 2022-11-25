@@ -116,7 +116,9 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formname">Post Description <span class="text-danger" >*</span>:</label>
-                                                    <textarea name="editor1" required >{{$post_data->description}}</textarea>
+                                                    <grammarly-editor-plugin>
+                                                        <textarea name="editor1" required >{{$post_data->description}}</textarea>
+                                                    </grammarly-editor-plugin>
                                                     <script>
                                                             CKEDITOR.replace( 'editor1' );
                                                     </script>
@@ -135,7 +137,9 @@
                                                     <label>tags,</label>
                                                     <br/>
                                                     <label for="">Enter Hashtags :</label>
+                                                    
                                                     <textarea class="form-control" name="keywords" rows="2" placeholder="add some #tags"   style="width:100%" id="keywords">{{$post_data->hashtags}}</textarea></p>
+                                                    
                                                     @error('keywords')
                                                     <div class="text text-danger" >
                                                     {{$message}}

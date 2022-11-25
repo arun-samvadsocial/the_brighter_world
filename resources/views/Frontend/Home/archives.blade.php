@@ -6,10 +6,11 @@
 @php
     $cat_row = json_decode($posts[0]->category);
 @endphp
+@if($cat_row && $cat_row[0]->category_status == 1)
 <section class="carousel_se_01">
     <div class="container-fluid ">
             <div class="row pt-3">
-                <div class="col-md-12 px-0">
+                <div class="col-md-12">
                         <div class="category_header row p-2">
                             <div class="col-md-3"><hr class="bg-colorAccent"></div>
                             <div class="category_header_left col-md-3 text-center">
@@ -18,10 +19,10 @@
                             <div class="col-md-3"><hr class="bg-colorAccent"></div>
                         </div>
                         <div class="row">
-                            <div class="row col-md-10">
+                            <div class="row col-md-11 col-lg-10">
                                 <!-- 1 -->
                                 @foreach($posts as $post_row)
-                                <div class="item col-md-4">
+                                <div class="item col-md-6 col-lg-4">
                                     <div class="col-md-12 wow fadeInUp ">
                                         <div class="main_services text-left">
                                             <a href="{!! url('detail/'.$post_row->post_url.'/'.Helper::base64url_encode($post_row->post_id)) !!}">
@@ -59,7 +60,7 @@
                                 <!-- 1 end  -->
                             </div> <!-- owl-carousel end -->
                             
-                            <div class="col-md-2 right_sidebar">
+                            <div class="col-md-6 col-lg-2 right_sidebar">
                                 @include('Frontend.layouts.sidebar')
                             </div>
                         </div>
@@ -68,7 +69,10 @@
     </div> <!-- container-fluid end -->
 </section> <!-- Section end -->
 @else
-<h2 class="text-danger" >No Post Found</h2>
+<h2 class="te   xt-danger" >No Record Found</h2>
+@endif
+@else
+<h2 class="text-danger" >No Record Found</h2>
 @endif
 
 @endsection

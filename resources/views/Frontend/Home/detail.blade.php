@@ -2,27 +2,66 @@
 @section('main-content')
 @if($post_data)
 @php 
+$device_ip = Helper::getClientIps();
+
+$minutes = 60;
+Cookie::queue('device_ip', $device_ip, $minutes);
+Cookie::queue('post_id', $post_data->post_id, $minutes);
+if(Cookie::get('device_ip') != $device_ip || $post_data->post_id != Cookie::get('post_id')){
 isset($post_data)?Helper::updateViewCount($post_data->post_id):'';
+}
 $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_data->post_id));
 @endphp
 @section('meta_data')
-<meta property="og:title" content="{{$post_data->title}}"/>
-<meta property="og:image" content="{{url($post_data->img_path)}}" />
-<meta property="og:url" content="{{$link}}" />
-<meta property="og:description" content="{{strip_tags($post_data->description)}}" />
-<meta property="og:site_name" content="{{url('/')}}" />
+    <meta property="og:title" content="{{$post_data->title}}"/>
+    <meta property="og:image" content="{{url($post_data->img_path)}}" />
+    <meta property="og:url" content="{{$link}}" />
+    <meta property="og:description" content="{{strip_tags($post_data->description)}}" />
+    <meta property="og:site_name" content="{{url('/')}}" />
+    <meta name="description" content="{{strip_tags($post_data->description)}}"/>
+    <meta name="keywords" content="{{strip_tags($post_data->hashtags)}}"/>
+    <meta name="author" content="The Brighter World"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:site_name" content="The Brighter World"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:image:width" content="750"/>
+    <meta property="og:image:height" content="422"/>
+    <meta property="article:published_time" content="{{$post_data->published_date}}"/>
+    <meta property="article:modified_time" content="{{$post_data->updated_at}}"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="The Brighter World"/>
+    <meta name="twitter:creator" content="The Brighter World"/>
+    <meta name="twitter:title" content="{{$post_data->title}}"/>
+    <meta name="twitter:description" content=""/>
+    <meta name="twitter:image" content="{{url($post_data->img_path)}}"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="{{$post_data->title}}">
+    <meta name="msapplication-TileImage" content="{{url($post_data->img_path)}}">
 @endsection
 
 <section>
     <div class="container">
         <div class="row">
 
-        
+       
             <div class="col-md-8">
                 <div class="post_header pt-3">
                     <div class="post_header_top">
                         <h2>{{$post_data->title}}</h2>
-                        <p>{{$post_data->hashtags}}</p>
+                        @php 
+                            $tags = explode(',', $post_data->hashtags);
+                            $count = 0;
+                        @endphp
+                        <p>
+                            @foreach($tags as $tagrow)
+                            @if($count >= 5)
+                            @break
+                            @endif
+                            <a href="{{url('/hashtag/'.urlencode($tagrow))}}" class="tags" >{{$tagrow}}</a>
+                            @php $count++ @endphp
+                            @endforeach
+                        </p>
                     </div>
                     <div class="post_header_bottom">
                         {!! Helper::formatDate($post_data->published_date) !!}
@@ -33,10 +72,14 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                 <div class="post_body">
                     <div class="post_image">
                         <img src="{{url($post_data->img_path)}}" width="100%"; alt="">
-                        <!-- <span class="badge rounded-pill bg-light">image source</span> -->
                         <p style="overflow-wrap: break-word;margin-top: -25px;  margin-left: 10px;font-size: 10px;color: #aaa;">
-						    <a href="{{url($post_data->img_source)}}" target="_blank" class="text-light" >Image Source</a>
+						    <a class="text-light" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Image Source</a>
                         </p>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                <a href="{{url($post_data->img_source)}}" class="text-primary" target="_blank" >{{url($post_data->img_source)}}</a>
+                            </div>
+                        </div>
 
                     </div>
 
@@ -55,7 +98,7 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
 
                                         <a href="https://www.facebook.com/sharer.php?u={{$link}}" target="_blank" ><i class="fa fa-facebook text-primary"></i></a>&nbsp;&nbsp;
                                         <!-- <a href=""><i class="fa fa-linkedin "></i></a>&nbsp;&nbsp; -->
-                                        <a href="http://twitter.com/share?text=text&url={{$link}}/&hashtags={{$post_data->keywords}}" target="_blank"><i class="fa fa-twitter text-info"></i></a>&nbsp;&nbsp;
+                                        <a href="http://twitter.com/share?text={{$post_data->title}}&url={{$link}}/&hashtags={{$post_data->hashtags}}" target="_blank"><i class="fa fa-twitter text-info"></i></a>&nbsp;&nbsp;
                                         <a href="https://api.whatsapp.com/send?phone=&text={{urlencode($link)}}" target="_blank"><i class="fa fa-whatsapp text-success" ></i></a>
                                     </span>
                                 </div>
@@ -64,8 +107,21 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                     </div>
 
                     <div class="post_description pt-3">
+                        <strong>{{ $post_data->synopsis?$post_data->synopsis:'' }}</strong>
                         {!! $post_data->description !!}
-                        <p>{{$post_data->hashtags}}</p>
+                        @php 
+                            $tags = explode(',', $post_data->hashtags);
+                            $count = 0;
+                        @endphp
+                        <p>
+                            @foreach($tags as $tagrow)
+                            @if($count >= 5)
+                            @break
+                            @endif
+                            <a href="{{url('/hashtag/'.urlencode($tagrow))}}" class="tags" >{{$tagrow}}</a>
+                            @php $count++ @endphp
+                            @endforeach
+                        </p>
                     </div>
                 </div>
 
