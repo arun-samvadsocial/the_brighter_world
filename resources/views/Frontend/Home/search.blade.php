@@ -2,10 +2,11 @@
 @section('main-content')
 
 
-@if(count($posts) > 0)
+@if(count($posts) > 0 )
 @php
     $cat_row = json_decode($posts[0]->category);
 @endphp
+@if($cat_row && $cat_row[0]->category_status == 1)
 <section class="carousel_se_01">
     <div class="container-fluid ">
             <div class="row pt-3">
@@ -67,7 +68,11 @@
     </div> <!-- container-fluid end -->
 </section> <!-- Section end -->
 @else
-<h2 class="text-danger" >No Post Found</h2>
+<h2 class="text-danger" >No Record Found</h2>
 @endif
+@else
+<h2 class="text-danger" >No Record Found</h2>
+@endif
+
 
 @endsection
