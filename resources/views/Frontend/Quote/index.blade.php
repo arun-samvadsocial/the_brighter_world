@@ -9,12 +9,12 @@
             <div class="row pt-3">
                 <div class="col-md-12 px-0">
                         <div class="category_header row p-2">
-                            <div class="col-md-3"><hr class="bg-dark"></div>
-                            <div class="category_header_left col-md-3 text-center">
+                            <div class="col-md-4"><hr class="bg-dark"></div>
+                            <div class="category_header_left col-md-4 text-center">
                                 <h2>All quotes</h2>
                                 <!-- <span>Total {{count($quotes)}} found</span> -->
                             </div>
-                            <div class="col-md-3"><hr class="bg-dark"></div>
+                            <div class="col-md-4"><hr class="bg-dark"></div>
                         </div>
                         <div class="row m-0">
                             <div class="row col-md-12">

@@ -34,6 +34,19 @@ class Helper
         return $post;
     }
 
+    public static function getTrendingPosts($limit = null){
+        $post =  Post_model::select("post.*", "category.category_name")
+        ->where("is_delete",0)
+        ->limit($limit)
+        ->with('category')
+        ->where("status",1)
+        ->leftJoin("category","post.category_id","=","category.category_id")
+        ->where("category.category_status",1)
+        ->orderBy('post_view_count', 'desc')
+        ->get();
+        return $post; 
+    }
+
     public static function getArchives($cat_id=null){
         $results = DB::table('post')
                     ->select(DB::raw("DATE_FORMAT(`published_date`, '%Y') AS YEAR"),

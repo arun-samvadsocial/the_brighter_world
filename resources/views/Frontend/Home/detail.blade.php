@@ -52,16 +52,21 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                         @php 
                             $tags = explode(',', $post_data->hashtags);
                             $count = 0;
+
                         @endphp
+                        @if($tags[0] != "")
                         <p>
                             @foreach($tags as $tagrow)
                             @if($count >= 5)
                             @break
                             @endif
+                           
                             <a href="{{url('/hashtag/'.urlencode($tagrow))}}" class="tags" >{{$tagrow}}</a>
                             @php $count++ @endphp
+                            
                             @endforeach
                         </p>
+                        @endif
                     </div>
                     <div class="post_header_bottom">
                         {!! Helper::formatDate($post_data->published_date) !!}
