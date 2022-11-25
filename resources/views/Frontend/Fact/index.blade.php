@@ -21,11 +21,7 @@
                                 @foreach($facts as $row)
                                 <div class="item col-md-6 col-lg-4">
                                     <div class="col-md-12 wow fadeInUp ">
-<<<<<<< HEAD
-                                        <div class="main_services text-left" style="min-height:300px;" >
-=======
                                         <div class="main_services text-left" style="min-height:300px;">
->>>>>>> main
                                             <a href="">
                                                 <div class="img-thumbnail2 text-center" >
                                                     <img src="{{url($row->img_data)}}" class="img-thumbnail2" height="100%" alt="">
