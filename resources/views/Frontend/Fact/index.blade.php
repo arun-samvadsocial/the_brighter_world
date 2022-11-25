@@ -9,11 +9,11 @@
             <div class="row pt-3">
                 <div class="col-md-12 px-0">
                         <div class="category_header row p-2">
-                        <div class="col-md-4"><hr class="bg-dark"></div>
+                        <div class="col-md-4"><hr class="bg-colorAccent"></div>
                             <div class="category_header_left col-md-4 text-center">
-                            <h2>All Facts</h2>
+                            <h2 class="colorAccent" >All Facts</h2>
                             </div>
-                            <div class="col-md-4"><hr class="bg-dark"></div>
+                            <div class="col-md-4 "><hr class="bg-colorAccent"></div>
                         </div>
                         <div class="row m-0">
                             <div class="row col-md-12">
