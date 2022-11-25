@@ -44,7 +44,7 @@ class Helper
         ->where("category.category_status",1)
         ->orderBy('post_view_count', 'desc')
         ->get();
-        return $post;
+        return $post; 
     }
 
     public static function getArchives($cat_id=null){
