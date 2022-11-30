@@ -317,7 +317,7 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                                 <div class="row p-3" style="margin-bottom: 10px">
                                     <div class="col-8">
                                         
-                                            <div class="post_title">
+                                            <div class="post_title font-2">
                                                 {{$r_row->title}}
                                             </div>
                                             <div class="row">
