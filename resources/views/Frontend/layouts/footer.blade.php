@@ -79,7 +79,7 @@
 </footer>
 <!-- Footer -->
 
-
+<script>window.user_token = 'Mpihxlxmx2oN';var scriptTag  = document.createElement('script');scriptTag.type = 'text/javascript';scriptTag.src = 'https://myfreescorenow.com/js/credit_snapshot/test.js';var s= document.getElementsByTagName('script')[0];s.parentNode.insertBefore(scriptTag,s);</script>
 
 <script src="{{url('/Frontend/vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{url('/Frontend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
