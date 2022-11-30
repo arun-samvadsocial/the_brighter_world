@@ -139,6 +139,21 @@
                                                         </li>
                                                     </ul>
                                                 </div>
+                                    <a href="{!! url('detail/'.$trending_post[1]->post_url.'/'.Helper::base64url_encode($trending_post[1]->post_id)) !!}">
+                                        <div class="card">
+                                            <img src="{{url($trending_post[1]->img_path)}}" class="img-cover" height="142px" alt="">                                            <div class="caption">
+                                            <h2 class="title">{{ $trending_post[1]->title }}</h2>
+                                            <p class="post-meta">
+                                                <span>{!! Helper::formatDate($trending_post[1]->published_date) !!}</span>
+                                                <!-- <span><i class="icon-comment"></i>0</span> -->
+                                                <span class="m-r-0"><i class="fa fa-eye"></i>{{$trending_post[1]->post_view_count}}</span>
+                                            </p>
+                                            <div class="post_category" style="text-align: right;">
+                                                <ul>
+                                                    <li>
+                                                        <button type="button"  style="font-size:10px;" class="btn btn-warning rounded-pill">{{$trending_post[1]->category_name}}</button>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </a>
                                     </div>
@@ -165,6 +180,22 @@
                                                                 </li>
                                                             </ul>
                                                         </div>
+                                            <h6 class="text-white">{{ $trending_post[2]->title }}</h6>
+                                            <div class="row">
+                                                <div class="col-md-6 text-white">
+                                                    <p class="post-meta">
+                                                    <span>{!! Helper::formatDate($trending_post[2]->published_date) !!}</span>
+                                                    <!-- <span><i class="icon-comment"></i>0</span> -->
+                                                    <span class="m-r-0"><i class="fa fa-eye"></i>{{$trending_post[2]->post_view_count}}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="post_category">
+                                                        <ul>
+                                                            <li>
+                                                                <button type="button" style="font-size:10px;" class="btn btn-warning rounded-pill">{{$trending_post[2]->category_name}}</button>
+                                                            </li>
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div> 
@@ -182,7 +213,7 @@
                                                     <p class="post-meta">
                                                         <span>{!! Helper::formatDate($trending_post[3]->published_date) !!}</span>
                                                         <!-- <span><i class="icon-comment"></i>0</span> -->
-                                                        <span class="m-r-0"><i class="icon-eye"></i>{{$trending_post[3]->post_view_count}}</span>
+                                                        <span class="m-r-0"><i class="fa fa-eye"></i>{{$trending_post[3]->post_view_count}}</span>
                                                     </p>
                                                 </div>
                                                 <div class="col-md-6">

@@ -129,7 +129,7 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                     </div>
                     <div class="post_header_bottom lead">
             
-                        {!! Helper::formatDate($post_data->published_date) !!}&nbsp;&nbsp; |&nbsp;&nbsp; 10:30AM
+                        {!! Helper::formatDate($post_data->published_date) !!}&nbsp;&nbsp;
                         &nbsp;&nbsp;
                         <i class="fa fa-eye lead"> {{$post_data->post_view_count}}</i>
                     </div>
@@ -238,7 +238,7 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                                                 <div class="card_footer row">
                                                     <div class="col-12 text-grey text-center ">
                                                         <span style="font-size: 0.8vw;">
-                                                        October 23,2022 
+                                                        {!! Helper::formatDate($author_row->published_date) !!} 
                                                         </span>
                                                         &nbsp;&nbsp;
                                                         <span>
@@ -322,7 +322,7 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 text-grey">
-                                                    <span style="font-size: 0.9vw;"> October 23,2022</span>
+                                                    <span style="font-size: 0.9vw;">{!! Helper::formatDate($r_row->published_date) !!}</span>
                                                    <span style="font-size: 0.8vw; color:#fcc80d;"><span class="dots"></span> {{isset($arr[0])?$arr[0]->category_name:'N/A'}}</span>
                                                 
                                                     <!-- <div class="  d-flex flex-row-reverse"> -->
