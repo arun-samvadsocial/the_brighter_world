@@ -80,6 +80,7 @@
 <!-- Footer -->
 
 
+
 <script src="{{url('/Frontend/vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{url('/Frontend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{url('/Frontend/vendor/owl.carousel/owl.carousel.min.js')}}"></script>
