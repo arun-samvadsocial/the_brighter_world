@@ -125,7 +125,7 @@
                                             <p class="post-meta">
                                                 <span>{!! Helper::formatDate($trending_post[1]->published_date) !!}</span>
                                                 <!-- <span><i class="icon-comment"></i>0</span> -->
-                                                <span class="m-r-0"><i class="icon-eye"></i>{{$trending_post[1]->post_view_count}}</span>
+                                                <span class="m-r-0"><i class="fa fa-eye"></i>{{$trending_post[1]->post_view_count}}</span>
                                             </p>
                                             <div class="post_category" style="text-align: right;">
                                                 <ul>
@@ -151,7 +151,7 @@
                                                     <p class="post-meta">
                                                     <span>{!! Helper::formatDate($trending_post[2]->published_date) !!}</span>
                                                     <!-- <span><i class="icon-comment"></i>0</span> -->
-                                                    <span class="m-r-0"><i class="icon-eye"></i>{{$trending_post[2]->post_view_count}}</span>
+                                                    <span class="m-r-0"><i class="fa fa-eye"></i>{{$trending_post[2]->post_view_count}}</span>
                                                     </p>
                                                 </div>
                                                 <div class="col-md-6">
@@ -180,7 +180,7 @@
                                                     <p class="post-meta">
                                                         <span>{!! Helper::formatDate($trending_post[3]->published_date) !!}</span>
                                                         <!-- <span><i class="icon-comment"></i>0</span> -->
-                                                        <span class="m-r-0"><i class="icon-eye"></i>{{$trending_post[3]->post_view_count}}</span>
+                                                        <span class="m-r-0"><i class="fa fa-eye"></i>{{$trending_post[3]->post_view_count}}</span>
                                                     </p>
                                                 </div>
                                                 <div class="col-md-6">
