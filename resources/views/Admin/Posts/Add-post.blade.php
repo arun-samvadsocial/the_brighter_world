@@ -44,7 +44,7 @@
                                             <div data-repeater-item class="outer">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formname">Post Title <span class="text-danger" >*</span> :</label>
-                                                    <input type="text" class="form-control" value="{{old('post_title')}}" name="post_title" id="post_title" oninput="setPostData()" required placeholder="Enter post title...">
+                                                    <input type="text" class="form-control" value="{{old('post_title')}}" name="post_title" id="post_title" required placeholder="Enter post title...">
                                                     @error('post_title')
                                                     <div class="text text-danger" >
                                                     {{$message}}
@@ -54,7 +54,7 @@
                                                    
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formemail">Category <span class="text-danger" >*</span> :</label>
-                                                    <select class=" form-control " name="category_id" style="width:100%" required onchange="setPostData()"  id="category_id"  data-placeholder="Choose category ...">
+                                                    <select class=" form-control " name="category_id" style="width:100%" required   data-placeholder="Choose category ...">
                                                     <option value="" selected disabled>Select Category</option>
                                                     @foreach($category as $row)
                                                         @if(old('category_id')  == $row->category_id)
@@ -72,7 +72,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formname">Published Date <span class="text-danger" >*</span> :</label>
-                                                    <input type="datetime-local" class="form-control" value="{{old('published_date')}}" name="published_date" oninput="setPostData()" id="published_date" required placeholder="Enter published date...">
+                                                    <input type="datetime-local" class="form-control" value="{{old('published_date')}}" name="published_date" id="published_date" required placeholder="Enter published date...">
                                                     @error('published_date')
                                                     <div class="text text-danger" >
                                                     {{$message}}
@@ -85,7 +85,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label " for="formname">Post Image <span class="text-danger" >*</span> :</label>
-                                                    <input type="file" accept="image/*" value="{{old('post_image')}}"  id="post_image" name="post_image" oninput="setPostData()" required onchange="loadFile(event)">
+                                                    <input type="file" accept="image/*" value="{{old('post_image')}}"  name="post_image" required onchange="loadFile(event)">
                                                     @error('post_image')
                                                     <div class="text text-danger" >
                                                     {{$message}}
@@ -94,7 +94,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label " for="formname">Source of Image <span class="text-danger" >*</span> :</label>
-                                                    <input type="text" class="form-control" value="{{old('img_source')}}" id="img_source"  name="img_source" oninput="setPostData()" placeholder="Enter source of image before upload" required >
+                                                    <input type="text" class="form-control" value="{{old('img_source')}}"  name="img_source" placeholder="Enter source of image before upload" required >
                                                     @error('img_source')
                                                     <div class="text text-danger" >
                                                     {{$message}}
@@ -103,7 +103,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formname">Video Link (Optional):</label>
-                                                    <input type="text" class="form-control"  name="video_link" value="{{old('video_link')}}"   id="video_link" oninput="setPostData()" placeholder="Paste your video link...">
+                                                    <input type="text" class="form-control"  name="video_link" value="{{old('video_link')}}"   id="video_link" placeholder="Paste your video link...">
                                                     @error('video_link')
                                                     <div class="text text-danger" >
                                                     {{$message}}
@@ -112,7 +112,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formname">Synopsis (Optional):</label>
-                                                    <input type="text" class="form-control" name="synopsis" value="{{old('synopsis')}}"    id="synopsis" oninput="setPostData()" placeholder="Enter synopsis...">
+                                                    <input type="text" class="form-control" name="synopsis" value="{{old('synopsis')}}"    id="synopsis" placeholder="Enter synopsis...">
                                                     @error('synopsis')
                                                     <div class="text text-danger" >
                                                     {{$message}}
@@ -122,24 +122,11 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formname">Post Description <span class="text-danger" >*</span>:</label>
                                                     <grammarly-editor-plugin>
-                                                        <textarea name="editor1"  id="editor1"  required >{{old('editor1')}}</textarea>
-                                                        <textarea name="content_hidden"   id="content_hidden" class="d-none" ></textarea>
+                                                        <textarea name="editor1" onkeyup="SuperDuperFunction();" id="editor1" required >{{old('editor1')}}</textarea>
                                                     </grammarly-editor-plugin>
                                                     
                                                     <script>
-                                                            // CKEDITOR.replace( 'editor1' );
-                                                            CKEDITOR.replace( 'editor1' ,
-                                                            {   
-                                                                allowedContent: true,
-                                                                enterMode: CKEDITOR.ENTER_BR,
-                                                            }).on('key',
-                                                                function(e){
-                                                                    setTimeout(function(){
-                                                                        document.getElementById('content_hidden').value = e.editor.getData();
-                                                                        setPostData()
-                                                                    },10);
-                                                                }
-                                                            );
+                                                            CKEDITOR.replace( 'editor1' );
                                                     </script>
                                                     </div>
                                                     @error('editor1')
@@ -158,7 +145,7 @@
                                                     <label>tags,</label>
                                                     <br/>
                                                     <label for="">Enter Hashtags :</label>
-                                                    <textarea class="form-control" rows="2" placeholder="add some #tags" oninput="setPostData()"  name="keywords"  style="width:100%" id="keywords"></textarea></p>
+                                                    <textarea class="form-control" rows="2" placeholder="add some #tags"  name="keywords" rows="5"  style="width:100%" id="keywords"></textarea></p>
                                                     @error('keywords')
                                                     <div class="text text-danger" >
                                                     {{$message}}
@@ -213,11 +200,10 @@
 
 
 <script>
-     document.addEventListener("DOMContentLoaded", function(){
-        data = localStorage.getItem("previous_post_data");
-        user_id = "{{Helper::getUser()->id}}";
-        alert(data)
-    });
+    // $(document).ready(function(){
+        
+    // });
+    
     /* START - preview image before upload*/
     var loadFile = function(event) {
     var reader = new FileReader();
@@ -228,42 +214,4 @@
     };
     reader.readAsDataURL(event.target.files[0]);
     };
-
-
-    //Start auto save process for add post
-    function setPostData(){
-        
-        var post_title = document.getElementById("post_title").value;
-        var category_id = document.getElementById("category_id").value;
-        var published_date = document.getElementById("published_date").value;
-        var post_image = document.getElementById("post_image").value;
-        var img_source = document.getElementById("img_source").value;
-        var video_link = document.getElementById("video_link").value;
-        var synopsis = document.getElementById("synopsis").value;
-        var editor1 = document.getElementById("content_hidden").value;
-        
-
-        var keywords = document.getElementById("keywords").value;
-        
-        var post_data = {};
-        post_data['logged_id']= "{{Helper::getUser()->id}}";
-        post_data["post_title"]= post_title;
-        post_data["category_id"]= category_id;
-        post_data["published_date"]= published_date;
-        post_data["post_image"]= post_image;
-        post_data["img_source"]= img_source;
-        post_data["video_link"]= video_link;
-        post_data["synopsis"]= synopsis;
-        post_data["description"]= editor1;
-        post_data["keywords"]= keywords;
-
-
-        localStorage.setItem("previous_post_data", JSON.stringify(post_data));
-        
-
-        
-    }
-
-
-
 </script>
