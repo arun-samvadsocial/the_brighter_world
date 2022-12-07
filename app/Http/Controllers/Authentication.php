@@ -45,7 +45,7 @@ class Authentication extends Controller
                     $data['title']='Email verification';
                     $status = Helper::sendMail($request->email,$data['title'],$data,'Mails.verificationMail');
                     
-                    return redirect('/register')->with("success","We have sent an verification mail to your email address please verfiy your email");
+                    return redirect('/register')->with("success","We have sent an verification mail to your email address please verify your email");
                 }
             }catch(\Exception $exception){
                 // dd($exception);
