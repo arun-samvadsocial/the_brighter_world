@@ -86,6 +86,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label " for="formname">Post Image <span class="text-danger" >*</span> :</label>
                                                     <input type="file" accept="image/*" value="{{old('post_image')}}"  id="post_image" name="post_image" oninput="setPostData()" required onchange="loadFile(event)">
+                                                    <div class="text text-danger" id="local_image_error"  ></div>
                                                     @error('post_image')
                                                     <div class="text text-danger" >
                                                     {{$message}}
@@ -215,9 +216,38 @@
 <script>
      document.addEventListener("DOMContentLoaded", function(){
         data = localStorage.getItem("previous_post_data");
+        var temp;
+        temp = JSON.parse(data);
         user_id = "{{Helper::getUser()->id}}";
-        alert(data)
+        data?
+        temp.logged_id === user_id?
+        previousPostDataPopup():'':''
+        
     });
+
+    function previousPostDataPopup() {
+        var data = [];
+        data = JSON.parse(localStorage.getItem("previous_post_data"));
+        let text = "Are you resotre your previous post data ?";
+        
+        if (confirm(text) == true) {
+
+        document.getElementById("post_title").value = data.post_title;
+        document.getElementById("category_id").value = data.category_id;
+        document.getElementById("published_date").value = data.published_date;
+        document.getElementById("img_source").value = data.img_source; 
+        document.getElementById("video_link").value = data.video_link; 
+        document.getElementById("synopsis").value = data.synopsis; 
+        CKEDITOR.instances['editor1'].setData(data.description);
+        document.getElementById("content_hidden").value = data.description;
+        document.getElementById("keywords").value = data.keywords; 
+        document.getElementById("local_image_error").innerHTML = "Please reupload your image.";
+        } else {
+            // alert("You canceled!");
+        }
+    }
+
+
     /* START - preview image before upload*/
     var loadFile = function(event) {
     var reader = new FileReader();
