@@ -24,7 +24,7 @@
                     <tr>
                         <td style="text-align:center;">
                           <a href="{{$data['url']}}" title="thebrighterworld" target="_blank">
-                            <img height="90" src="http://thebrighterworld.com/logo.svg" title="Thebrigherworld" alt="Thebrigherworld">
+                            <img height="90" src="http://thebrighterworld.com/logo.png" title="Thebrigherworld" alt="Thebrigherworld">
                           </a>
                         </td>
                     </tr>

@@ -36,7 +36,7 @@
                                 <input type="submit" name="submit" class="form-control" id="">
                             </div>
                             <div class="mt-4">
-                                <!-- <p class="text-center">New User?<a href="" class="text-primary1">Sign up now</a></p> -->
+                            <p class="text-center">New User?<a href="{{url('/register')}}" class="text-primary1">Sign up now</a></p>
                             </div>
                         </form>
                     </div>
