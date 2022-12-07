@@ -15,7 +15,67 @@ use Helper;
 class Authentication extends Controller
 {
     public function register(Request $request){
-        // Helper::sendMail('arun1601for@gmail.com','Test email','Arun test','');
+        if ($request->isMethod('post')) {
+            try{
+                $validator =  Validator::make($request->all(),[
+                    "name"=>"required",
+                    'email'=>'required|email|unique:users',
+                    'mobile'=>'required|unique:users',
+                    'password'=>'required',
+                ]);
+                if($validator->fails()){
+                    return redirect()->back()->withErrors($validator->errors())->withInput(); ; 
+                }else{
+                    $token = Str::random(150);
+                    User::create([
+                        "name"=>$request->name,
+                        "email"=>$request->email,
+                        "mobile"=>$request->mobile,
+                        "password"=>Hash::make($request->password),
+                        "role"=>"user",
+                        "email_verification_code"=>$token,
+                        "status"=>0
+                    ]);
+                    $url = url('/');
+                    $link = $url."/verify/".$token;
+                    $data['link']=$link;
+                    $data['url']=$url;
+                    $data['email']=$request->email;
+                    $data['name']=$request->name;
+                    $data['title']='Email verification';
+                    $status = Helper::sendMail($request->email,$data['title'],$data,'Mails.verificationMail');
+                    
+                    return redirect('/register')->with("success","We have sent an verification mail to your email address please verfiy your email");
+                }
+            }catch(\Exception $exception){
+                // dd($exception);
+                return redirect('/register')->withErrors('Something went wrong.');
+                // echo "Error";
+            }
+        }else{
+            return view('Register');
+        }
+    }
+
+    public function verify($token=''){
+        try{
+            $check = User::where("email_verification_code", $token)->first();
+            $token = Str::random(100);
+            if($check){
+                User::where("email", $check->email)
+                ->update([
+                    "status"=>1,
+                    "email_verification_code"=>$token
+                ]);
+                return redirect('/register')->with("success","Your account successfully activated");
+            }else{
+                return redirect('/register')->withErrors('Verification link expired.');
+            }
+        }catch(\Exception $exception){
+            // dd($exception);
+            return redirect('/register')->withErrors('Something went wrong.');
+            // echo "Error";
+        }
     }
 
     public function login(Request $request){
