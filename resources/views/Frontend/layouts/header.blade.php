@@ -99,7 +99,7 @@
                     <li class="nav-item {{ Route::currentRouteNamed('about') ? 'active' : '' }}">
                         <a class="nav-link" href="{{url('/').'/about-us'}}">About us</a>
                     </li>
-                    @if(session()->get("user_id"))
+                    @if(session()->get("user_id") && Helper::getUser()->role != "user" )
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('/admin')}}">Dashboard</a>
                     </li>
