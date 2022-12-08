@@ -5,14 +5,43 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Comments_m;
+use Helper;
 class Comments_ extends Controller
 {
     // Comment list
-    public function index(){
+    public function index(Request $request){
+        $search = urldecode($request->input('search'));
         try{
-            $data['comment'] = Comments_m::select("comment.*","post.title")
-            ->leftJoin("post", "post.post_id", "=","comment.post_id")
-            ->latest()->paginate(10);
+          
+            $user = Helper::getUser();
+            if($user->role == "admin" || $user->role == "moderator" ){
+                $data['comment'] = Comments_m::select("comment.*","post.title")
+                ->leftJoin("post", "post.post_id", "=","comment.post_id")
+                ->orWhere("comment.name", 'LIKE',"%" . $search . "%")
+                ->orWhere("comment.email", 'LIKE',"%" . $search . "%")
+                ->orWhere("comment.comment", 'LIKE',"%" . $search . "%")
+                ->orWhere("post.title", 'LIKE',"%" . $search . "%")
+                ->where("is_delete",0)
+                ->orderBy('created_at', 'desc')
+                ->latest("created_at")
+                ->paginate(10);
+
+            }else{  
+                
+                $data['comment'] = Comments_m::select("comment.*","post.title")
+                ->leftJoin("post", "post.post_id", "=","comment.post_id")
+                ->orWhere("comment.name", 'LIKE',"%" . $search . "%")
+                ->orWhere("comment.email", 'LIKE',"%" . $search . "%")
+                ->orWhere("comment.comment", 'LIKE',"%" . $search . "%")
+                ->orWhere("post.title", 'LIKE',"%" . $search . "%")
+                ->where("is_delete",0)
+                ->orderBy('created_at', 'desc')
+                ->latest("created_at")
+                ->where("post.user_id",session()->get("user_id"))
+                ->paginate(10);
+
+            }
+
             return view('Admin.Comment.index')->with($data);
         }catch(\Exception $exception){
             // dd($exception);

@@ -13,32 +13,42 @@ use DateTime;
 use Helper;
 class Posts extends Controller
 {
-     // Category list
-     public function index(){
+     // Post list
+     public function index(Request $request){
+        $search = urldecode($request->input('search'));
         try{
             $user = Helper::getUser();
             if($user->role == "admin" || $user->role == "moderator" ){
-                $data['posts'] = Posts_model::where('is_delete', 0)->with('Category')->latest()->paginate(10);
+                $data['posts'] = Posts_model::select("post.*","category.category_keywords")
+                ->where('post.title','LIKE',"%" . $search . "%")
+                ->orWhere("post.synopsis", 'LIKE',"%" . $search . "%")
+                ->orWhere("post.hashtags", 'LIKE',"%" . $search . "%")
+                ->orWhere("post.author", 'LIKE',"%" . $search . "%")
+                ->orWhere("post.keywords", 'LIKE',"%" . $search . "%")
+                ->with('category')
+                ->leftJoin("category","post.category_id","=","category.category_id")
+                ->orWhere("category.category_name", 'LIKE',"%" . $search . "%")
+                ->where("post.is_delete",0)
+                ->orderBy('post.published_date', 'desc')
+                ->latest("post.published_date")
+                ->paginate(10);
 
-                // $data = Posts_model::where('is_delete', 0)->latest()->get();
-                // foreach($data as $row){
-                //     $post = Posts_model::where('post_id', $row->post_id)->first();
-                //     if(isset($post)){
-                //         $dt = new DateTime("@$post->publish_date");  // convert UNIX timestamp to PHP DateTime
-                //         $date = $dt->format('Y-m-d H:i:s');
-                //         Posts_model::where('post_id', $post->post_id)
-                //         ->update([
-                //             "published_date"=>$date
-                //         ]);
-                //     }
-                    
-                // }
-
-            }else{
+            }else{ 
                 
-                $data['posts'] = Posts_model::where('is_delete', 0)
+                $data['posts'] = Posts_model::select("post.*","category.category_keywords")
+                ->where('post.title','LIKE',"%" . $search . "%")
+                ->orWhere("post.synopsis", 'LIKE',"%" . $search . "%")
+                ->orWhere("post.hashtags", 'LIKE',"%" . $search . "%")
+                ->orWhere("post.author", 'LIKE',"%" . $search . "%")
+                ->orWhere("post.keywords", 'LIKE',"%" . $search . "%")
+                ->with('Category')
+                ->leftJoin("category","post.category_id","=","category.category_id")
+                ->orWhere("category.category_name", 'LIKE',"%" . $search . "%")
+                ->where("post.is_delete",0)
                 ->where("user_id",session()->get("user_id"))
-                ->with('Category')->latest()->paginate(10);
+                ->orderBy('post.published_date', 'desc')
+                ->latest("post.published_date")
+                ->paginate(10);
 
             }
 
