@@ -79,8 +79,8 @@ class Posts extends Controller
                     return redirect()->back()->withErrors($validator->errors())->withInput(); 
                 }else{
                     // dd($request->published_date);
-                    $published_date = date('Y-m-d h:i:s', strtotime($request->published_date));
-                    $today_date = date('Y-m-d h:i:s');
+                    $published_date = date('Y-m-d', strtotime($request->published_date));
+                    $today_date = date('Y-m-d');
                     $today_date = strtotime($today_date);
                     $published_date = strtotime($published_date);
                     if ($today_date < $published_date){
