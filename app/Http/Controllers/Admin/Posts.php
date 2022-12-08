@@ -78,11 +78,18 @@ class Posts extends Controller
                     
                     return redirect()->back()->withErrors($validator->errors())->withInput(); 
                 }else{
-                    // $category_id = "";
-                    // $i =0;
-                    // foreach($request->category_id as $cat_row){
-                    //     $category_id .= $cat_row[$i].',';
-                    // }
+                    // dd($request->published_date);
+                    $published_date = date('Y-m-d h:i:s', strtotime($request->published_date));
+                    $today_date = date('Y-m-d h:i:s');
+                    $today_date = strtotime($today_date);
+                    $published_date = strtotime($published_date);
+                    if ($today_date < $published_date){
+                        $post_schedule = 3;
+                        
+                    }else{
+                        $post_schedule = 0;
+                    }
+                    
                     $post_url = Helper::slugify($request->post_title); 
                     
                     $img_path = $request->file('post_image');
@@ -92,7 +99,7 @@ class Posts extends Controller
 
                     
                     $post_status = 1;
-                    if(Helper::getUser()->role == "author"){
+                    if(Helper::getUser()->role == "author" || $today_date < $published_date){
                         $post_status = 0;
                     }
                     Posts_model::create([
@@ -110,9 +117,10 @@ class Posts extends Controller
                         "user_id"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
                         "push_send_flag"=>$request->notify==1?$request->notify:0,
                         "video_link"=>$request->video_link,
-                        "published_date"=>$request->published_date
+                        "published_date"=>$request->published_date,
+                        "scheduled_status"=>$post_schedule
                     ]);
-                    return redirect('admin/all-posts')->with("success","Post Successfully Created");
+                    return redirect('admin/all-posts')->with("success",$post_schedule==3?"Post Successfully Scheduled":"Post Successfully Created");
                 }
             }catch(\Exception $exception){
                 // dd($exception);
