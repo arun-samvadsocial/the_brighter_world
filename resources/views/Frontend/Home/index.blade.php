@@ -2,76 +2,76 @@
 @section('main-content')
 
 <style>
-.thumb {
-    width: 100%;
-    max-height: 465px;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-}
+    .thumb {
+        width: 100%;
+        max-height: 465px;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
 
-.main-news {
-    margin-top: 20px;
-    max-width: 1500px;
-}
+    .main-news {
+        margin-top: 20px;
+        max-width: 1500px;
+    }
 
-.main-news h3 {
-    line-height: 0.75;
-}
+    .main-news h3 {
+        line-height: 0.75;
+    }
 
-.main-news h3 a {
-    font-size: 17px;
-    text-decoration: none;
-    font-weight: 600;
-}
+    .main-news h3 a {
+        font-size: 17px;
+        text-decoration: none;
+        font-weight: 600;
+    }
 
-.image {
-    overflow: hidden;
-    border-radius: 10px;
-}
+    .image {
+        overflow: hidden;
+        border-radius: 10px;
+    }
 
-.image-sm {
-    max-height: 280px
-}
+    .image-sm {
+        max-height: 280px
+    }
 
-.image-sm img {
-    height: 180px;
+    .image-sm img {
+        height: 180px;
 
-}
+    }
 
-.image-xs {
-    max-height: 140px;
-}
+    .image-xs {
+        max-height: 140px;
+    }
 
-.image-xxs {
-    max-height: 100px;
-}
+    .image-xxs {
+        max-height: 100px;
+    }
 
-.image img {
-    object-fit: cover;
-}
+    .image img {
+        object-fit: cover;
+    }
 
-.font-large {
-    font-size: 0.8em !important;
-    font-weight: 600 !important;
-}
+    .font-large {
+        font-size: 0.8em !important;
+        font-weight: 600 !important;
+    }
 
-.title-container {
-    position: absolute;
-    bottom: 0px;
-    left: 15px;
-    padding: 15px 20px 15px 20px;
-}
+    .title-container {
+        position: absolute;
+        bottom: 0px;
+        left: 15px;
+        padding: 15px 20px 15px 20px;
+    }
 
-.title-container a {
-    color: white;
-}
+    .title-container a {
+        color: white;
+    }
 
-.custom {
-    margin-left: 0px;
-    margin-right: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-}
+    .custom {
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 </style>
 <!-- Hero section start here  -->
 @php
@@ -126,7 +126,7 @@ $trending_cat_row = json_decode($trending_post[0]->category);
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 row custom ">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 plr-2" style="padding-right:2px">
                         <div class="image image-sm mb-1">
                             <img class="thumb" src="{{url($trending_post[2]->img_path)}}">
                         </div>
@@ -146,7 +146,7 @@ $trending_cat_row = json_decode($trending_post[0]->category);
                             </div>
                         </h3>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 plr-2" style="padding-left:2px">
                         <div class="image image-sm mb-3">
                             <img class="thumb image-sm" src="{{url($trending_post[3]->img_path)}}">
                         </div>
