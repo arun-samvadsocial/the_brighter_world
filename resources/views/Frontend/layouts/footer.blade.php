@@ -1,8 +1,9 @@
 <!-- Footer -->
-<footer class="page-footer font-small footer-color pt-4">
+<footer class="page-footer font-small ">
 
     <!-- Footer Links -->
-    <div class="container-fluid text-center stext-md-left">
+    <div class="container-fluid text-center stext-md-left collapse footer navbar-fixed-bottom  pt-4"
+        aria-expanded="false" id="collapseExample">
 
         <!-- Grid row -->
         <div class="row">
@@ -11,7 +12,7 @@
             <div class="col-md-3 mt-md-0 mt-3">
 
                 <!-- Content -->
-                <img src="{{url('logo.png')}}" alt="">
+                <img src="{{url('logo.svg')}}" alt="" style="width:50%">
                 <p></p>
 
             </div>
@@ -27,14 +28,15 @@
 
                 <ul class="list-unstyled">
                     @php $category = Helper::getCategory(5);
-                    
-                    
+
+
                     @endphp
 
                     @foreach($category as $row)
                     @if(count(Helper::getPosts($row->category_id,'')) > 0 )
                     <li>
-                        <a href="{!! url('/').'/category/'.$row->category_name.'/'.Helper::base64url_encode($row->category_id) !!}">{{$row->category_name}}</a>
+                        <a
+                            href="{!! url('/').'/category/'.$row->category_name.'/'.Helper::base64url_encode($row->category_id) !!}">{{$row->category_name}}</a>
                     </li>
                     @endif
                     @endforeach
@@ -68,10 +70,20 @@
     <!-- Footer Links -->
 
     <!-- Copyright -->
-    <div class="footer-copyright footer-color text-center py-3">
-        © <script>
-        document.write(new Date().getFullYear())
-        </script> The Brighter World <span class="d-none d-sm-inline-block"></span>
+    <div class="footer-copyright text-center" data-toggle="collapse" href="#collapseExample"
+        aria-expanded="false" aria-controls="collapseExample">
+        <div class="row pt-3 footer-color ">
+            <!-- Content -->
+            <!-- <img src="{{url('logo.svg')}}" class="col-lg-1 ml-5" alt=""> -->
+            <h4 class="col-lg-3" >The Brighter World</h4>
+            <div class="cp col-lg-6">
+                © <script>
+                document.write(new Date().getFullYear())
+                </script> The Brighter World <span class="d-none d-sm-inline-block"></span>
+            </div>
+
+        </div>
+
 
     </div>
     <!-- Copyright -->
