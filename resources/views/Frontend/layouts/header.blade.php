@@ -90,12 +90,7 @@
                
                     @endforeach
                     
-                    <li class="nav-item {{ Route::currentRouteNamed('facts') ? 'active' : '' }}">
-                        <a class="nav-link " href="{{url('/').'/facts'}}">Facts</a>
-                    </li>
-                    <li class="nav-item {{ Route::currentRouteNamed('quotes') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{url('/').'/quotes'}}">Quotes</a>
-                    </li>
+                    
                     <li class="nav-item {{ Route::currentRouteNamed('about') ? 'active' : '' }}">
                         <a class="nav-link" href="{{url('/').'/about-us'}}">About us</a>
                     </li>
