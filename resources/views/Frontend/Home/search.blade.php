@@ -39,7 +39,7 @@
                                                     {!! Helper::formatDate($post_row->published_date) !!}
                                                 </div>
                                                 <div class="col-6 d-flex flex-row-reverse">
-                                                    <div class="post_category">
+                                                    <div class="post_category category_name_clamp">
                                                 
                                                     {{ $cat_row[0]->category_name }}
                                                     </div>

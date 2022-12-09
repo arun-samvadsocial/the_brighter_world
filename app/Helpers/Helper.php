@@ -57,8 +57,8 @@ class Helper
                     ->leftJoin("category", "category.category_id", "=","post.category_id")
                     ->where("category.category_status", "1")
                     ->groupBy('YEAR','MONTHNAME','MONTH')
-                    ->orderBy('YEAR','ASC')
-                    ->orderBy('MONTH','ASC')
+                    ->orderBy('YEAR','DESC')
+                    ->orderBy('MONTH','DESC')
 
                     ->get();
 

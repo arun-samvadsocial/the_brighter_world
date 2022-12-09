@@ -23,7 +23,7 @@
             <div class="col-md-3 mb-md-0 mb-3">
 
                 <!-- Links -->
-                <h5 class="text-uppercase">Category</h5>
+                <h5 class="text-uppercase">Categories</h5>
 
                 <ul class="list-unstyled">
                     @php $category = Helper::getCategory(5);

@@ -94,6 +94,7 @@
     margin-top: 10px;
     position: relative;
 }
+
 </style>
 <!-- Hero section start here  -->
 @php
@@ -235,7 +236,7 @@ $posts = Helper::getPosts($cat_row->category_id,10);
                                         {!! Helper::formatDate($post_row->published_date) !!}
                                     </div>
                                     <div class="col-6 d-flex flex-row-reverse">
-                                        <div class="post_category" style="text-align: right;">
+                                        <div class="post_category category_name_clamp" style="text-align: right;">
                                             {{ $cat_row->category_name }}
                                         </div>
                                     </div>
