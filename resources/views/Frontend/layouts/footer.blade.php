@@ -72,14 +72,18 @@
     <!-- Copyright -->
     <div class="footer-copyright text-center" data-toggle="collapse" href="#collapseExample"
         aria-expanded="false" aria-controls="collapseExample">
-        <div class="row pt-3 footer-color ">
+        <div class="row pt-0 ">
             <!-- Content -->
             <!-- <img src="{{url('logo.svg')}}" class="col-lg-1 ml-5" alt=""> -->
-            <h4 class="col-lg-3" >The Brighter World</h4>
-            <div class="cp col-lg-6">
+            <h4 class="col-lg-3 pt-1" ><img src="{{url('favicon.png')}}"  alt="" style="width:30px"></h4>
+            <div class="cp col-lg-6 pt-1">
                 © <script>
                 document.write(new Date().getFullYear())
                 </script> The Brighter World <span class="d-none d-sm-inline-block"></span>
+            </div>
+            <div class="col-lg-3">
+            <lottie-player src="https://lottie.host/07d059c3-38cd-45d2-afa5-a9aedf8e30eb/oMWll5ukdH.json"  background="transparent"  speed="1"  style="width: 300px; height: 50px;"  loop autoplay></lottie-player>
+
             </div>
 
         </div>
@@ -90,8 +94,7 @@
 
 </footer>
 <!-- Footer -->
-
-
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <script src="{{url('/Frontend/vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{url('/Frontend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{url('/Frontend/vendor/owl.carousel/owl.carousel.min.js')}}"></script>
