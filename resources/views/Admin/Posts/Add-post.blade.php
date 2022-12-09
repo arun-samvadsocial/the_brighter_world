@@ -228,7 +228,7 @@
     function previousPostDataPopup() {
         var data = [];
         data = JSON.parse(localStorage.getItem("previous_post_data"));
-        let text = "Are you resotre your previous post data ?";
+        let text = "Do you want to resotre your previous post data ?";
         
         if (confirm(text) == true) {
 
