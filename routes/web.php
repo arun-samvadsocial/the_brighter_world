@@ -50,9 +50,9 @@ Route::get('/archives/{year}/{month}',[Home::class,'archives_post']);
 Route::post('/comment',[Home::class,'comment_add']);
 Route::get('/tip',[Tip_front::class,'index']);
 
-Route::get('/facts',[Fact_front::class,'index'])->name("facts");
+// Route::get('/facts',[Fact_front::class,'index'])->name("facts");
 
-Route::get('/quotes',[Quote_front::class,'index'])->name("quotes");
+// Route::get('/quotes',[Quote_front::class,'index'])->name("quotes");
 Route::get('/logout',[Authentication::class,'logout']);
 Route::get('/register',[Authentication::class,'register']);
 Route::post('/register',[Authentication::class,'register']);
