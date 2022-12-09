@@ -472,11 +472,12 @@ h4 {
   overflow: hidden;
 }
 .header_thought{
-    text-align: right;
+    text-align: left;
     font-size: 16px;
     word-wrap: break-word;
     text-shadow: 0px 3px 3px rgb(0 0 0 / 30%);
     color: #333;
+    margin-top: 5%;
 }
 .header_logo{
   width: 50%;
