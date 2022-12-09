@@ -14,15 +14,25 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Validator;
 use Mail;
 use Session;
-
+use Helper;
 class Users extends Controller
 {
     // User list
-    public function index(){
+    public function index(Request $request){
+        $search = urldecode($request->input('search'));
         try{
-            $data['users'] = Users_model::select("users.*","roles.role_name")
-            ->leftJoin("roles", "users.role", "=", "roles.role")
-            ->paginate(10);
+           
+            $user = Helper::getUser();
+                $data['users'] = Users_model::select("users.*","roles.role_name")
+                ->leftJoin("roles", "users.role", "=", "roles.role")
+                ->orWhere("users.name", 'LIKE',"%" . $search . "%")
+                ->orWhere("users.email", 'LIKE',"%" . $search . "%")
+                ->orWhere("users.mobile", 'LIKE',"%" . $search . "%")
+                ->orWhere("users.role", 'LIKE',"%" . $search . "%")
+                ->orderBy('users.created_at', 'desc')
+                ->latest("users.created_at")
+                ->paginate(10);
+
             return view('Admin.Users.index')->with($data);
         }catch(\Exception $exception){
             // dd($exception);

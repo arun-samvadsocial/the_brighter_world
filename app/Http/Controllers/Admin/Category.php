@@ -8,13 +8,19 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Category_model;
 use App\Models\Admin\Sub_category_model;
 use Illuminate\Support\Facades\Validator;
-
+use Helper;
 class Category extends Controller
 {
     // Category list
-    public function index(){
+    public function index(Request $request){
+        $search = urldecode($request->input('search'));
         try{
-            $data['category'] = Category_model::paginate(10);
+                $data['category'] = Category_model::orWhere("category_name", 'LIKE',"%" . $search . "%")
+                ->orWhere("category_keywords", 'LIKE',"%" . $search . "%")
+                ->orderBy('created_at', 'desc')
+                ->latest("created_at")
+                ->paginate(10);
+
             return view('Admin.Category.index')->with($data);
         }catch(\Exception $exception){
             // dd($exception);

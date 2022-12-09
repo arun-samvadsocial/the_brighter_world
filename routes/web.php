@@ -50,11 +50,13 @@ Route::get('/archives/{year}/{month}',[Home::class,'archives_post']);
 Route::post('/comment',[Home::class,'comment_add']);
 Route::get('/tip',[Tip_front::class,'index']);
 
-Route::get('/facts',[Fact_front::class,'index'])->name("facts");
+// Route::get('/facts',[Fact_front::class,'index'])->name("facts");
 
-Route::get('/quotes',[Quote_front::class,'index'])->name("quotes");
+// Route::get('/quotes',[Quote_front::class,'index'])->name("quotes");
 Route::get('/logout',[Authentication::class,'logout']);
 Route::get('/register',[Authentication::class,'register']);
+Route::post('/register',[Authentication::class,'register']);
+Route::get('/verify/{token}',[Authentication::class,'verify']);
 // Route::get('/login', function(){
 //     session()->put("user_id",1);
 //     session()->put("role",'author');
@@ -78,11 +80,7 @@ Route::get('/no-access', function(){
 
         Route::group(['prefix' => 'admin'], function () {
 
-            //Dashboard Routes
-            //==========================================================================
             
-        
-            Route::get('/', [Dashboard::class, 'index']);
             Route::get('/logout',[Authentication::class,'logout']);
 
             Route::middleware(['adminGuard'])->group(function () {
@@ -98,7 +96,9 @@ Route::get('/no-access', function(){
             
 
             Route::middleware(['moderatorGuard'])->group(function () {
-                
+            //Dashboard Routes
+            //==========================================================================
+            Route::get('/', [Dashboard::class, 'index']);    
                 // Categories Routes
             //==========================================================================
             Route::get('/category-list',[Category::class,'index']);

@@ -10,9 +10,29 @@ use Helper;
 class Quotes extends Controller
 {
     // Quotes list
-    public function index(){
+    public function index(Request $request){
+        $search = urldecode($request->input('search'));
         try{
-            $data['quotes'] = Quotes_model::where('is_delete', 0)->latest()->paginate(10);
+            $user = Helper::getUser();
+            if($user->role == "admin" || $user->role == "moderator" ){
+                $data['quotes'] = Quotes_model::orWhere("quote", 'LIKE',"%" . $search . "%")
+                ->orWhere("quote_author", 'LIKE',"%" . $search . "%")
+                ->where("is_delete",0)
+                ->orderBy('created_at', 'desc')
+                ->latest("created_at")
+                ->paginate(10);
+
+            }else{  
+                
+                $data['quotes'] = Quotes_model::orWhere("quote", 'LIKE',"%" . $search . "%")
+                ->orWhere("quote_author", 'LIKE',"%" . $search . "%")
+                ->where("is_delete",0)
+                ->orderBy('created_at', 'desc')
+                ->latest("created_at")
+                ->where("user_id",session()->get("user_id"))
+                ->paginate(10);
+
+            }
             return view('Admin.Quotes.index')->with($data);
         }catch(\Exception $exception){
             // dd($exception);
@@ -55,7 +75,8 @@ class Quotes extends Controller
                         "quote"=>$request->quote,
                         "img_data"=>$path,
                         "img_data_share"=>$path_share,
-                        "quote_status"=>1
+                        "quote_status"=>1,
+                        "user_id"=>session()->get("user_id")
                     ]);
                     //Success Message
                     return redirect('admin/quotes-list')->with('success','Quote Successfully Created.');
@@ -104,7 +125,8 @@ class Quotes extends Controller
                         "quote"=>$request->quote,
                         "img_data"=>$path,
                         "img_data_share"=>$path_share,
-                        "quote_status"=>1
+                        "quote_status"=>1,
+                        "user_id"=>session()->get("user_id")
                     ]);
                     //Success Message
                     return redirect('admin/quotes-list')->with('success','Quote Successfully Updated.');

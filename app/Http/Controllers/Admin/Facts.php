@@ -6,12 +6,36 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Facts_model;
 use Illuminate\Support\Facades\Validator;
+
+use Helper;
 class Facts extends Controller
 {
     // Tips list
-    public function index(){
+    public function index(Request $request){
+        $search = urldecode($request->input('search'));
         try{
-            $data['facts'] = Facts_model::where('is_delete', 0)->latest()->paginate(10);
+            $user = Helper::getUser();
+            if($user->role == "admin" || $user->role == "moderator" ){
+                $data['facts'] = Facts_model::orWhere('fact_title','LIKE',"%" . $search . "%")
+                ->orWhere("fact", 'LIKE',"%" . $search . "%")
+                ->orWhere("fact_author", 'LIKE',"%" . $search . "%")
+                ->where("is_delete",0)
+                ->orderBy('created_at', 'desc')
+                ->latest("created_at")
+                ->paginate(10);
+
+            }else{  
+                
+                $data['facts'] = Facts_model::orWhere('fact_title','LIKE',"%" . $search . "%")
+                ->orWhere("fact", 'LIKE',"%" . $search . "%")
+                ->orWhere("fact_author", 'LIKE',"%" . $search . "%")
+                ->where("is_delete",0)
+                ->where("user_id",session()->get("user_id"))
+                ->orderBy('created_at', 'desc')
+                ->latest("created_at")
+                ->paginate(10);
+
+            }
             return view('Admin.Facts.index')->with($data);
         }catch(\Exception $exception){
             // dd($exception);
@@ -57,7 +81,8 @@ class Facts extends Controller
                         "fact"=>$request->fact,
                         "img_data"=>$path,
                         "img_data_share"=>$path_share,
-                        "fact_status"=>1
+                        "fact_status"=>1,
+                        "user_id"=>session()->get("user_id")
                     ]);
                     //Success Message
                     return redirect('admin/facts-list')->with('success','Fact Successfully Created.');

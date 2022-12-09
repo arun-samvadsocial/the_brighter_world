@@ -13,32 +13,42 @@ use DateTime;
 use Helper;
 class Posts extends Controller
 {
-     // Category list
-     public function index(){
+     // Post list
+     public function index(Request $request){
+        $search = urldecode($request->input('search'));
         try{
             $user = Helper::getUser();
             if($user->role == "admin" || $user->role == "moderator" ){
-                $data['posts'] = Posts_model::where('is_delete', 0)->with('Category')->latest()->paginate(10);
+                $data['posts'] = Posts_model::select("post.*","category.category_keywords")
+                ->where('post.title','LIKE',"%" . $search . "%")
+                ->orWhere("post.synopsis", 'LIKE',"%" . $search . "%")
+                ->orWhere("post.hashtags", 'LIKE',"%" . $search . "%")
+                ->orWhere("post.author", 'LIKE',"%" . $search . "%")
+                ->orWhere("post.keywords", 'LIKE',"%" . $search . "%")
+                ->with('category')
+                ->leftJoin("category","post.category_id","=","category.category_id")
+                ->orWhere("category.category_name", 'LIKE',"%" . $search . "%")
+                ->where("post.is_delete",0)
+                ->orderBy('post.published_date', 'desc')
+                ->latest("post.published_date")
+                ->paginate(10);
 
-                // $data = Posts_model::where('is_delete', 0)->latest()->get();
-                // foreach($data as $row){
-                //     $post = Posts_model::where('post_id', $row->post_id)->first();
-                //     if(isset($post)){
-                //         $dt = new DateTime("@$post->publish_date");  // convert UNIX timestamp to PHP DateTime
-                //         $date = $dt->format('Y-m-d H:i:s');
-                //         Posts_model::where('post_id', $post->post_id)
-                //         ->update([
-                //             "published_date"=>$date
-                //         ]);
-                //     }
-                    
-                // }
-
-            }else{
+            }else{ 
                 
-                $data['posts'] = Posts_model::where('is_delete', 0)
+                $data['posts'] = Posts_model::select("post.*","category.category_keywords")
+                ->where('post.title','LIKE',"%" . $search . "%")
+                ->orWhere("post.synopsis", 'LIKE',"%" . $search . "%")
+                ->orWhere("post.hashtags", 'LIKE',"%" . $search . "%")
+                ->orWhere("post.author", 'LIKE',"%" . $search . "%")
+                ->orWhere("post.keywords", 'LIKE',"%" . $search . "%")
+                ->with('Category')
+                ->leftJoin("category","post.category_id","=","category.category_id")
+                ->orWhere("category.category_name", 'LIKE',"%" . $search . "%")
+                ->where("post.is_delete",0)
                 ->where("user_id",session()->get("user_id"))
-                ->with('Category')->latest()->paginate(10);
+                ->orderBy('post.published_date', 'desc')
+                ->latest("post.published_date")
+                ->paginate(10);
 
             }
 
@@ -68,11 +78,20 @@ class Posts extends Controller
                     
                     return redirect()->back()->withErrors($validator->errors())->withInput(); 
                 }else{
-                    // $category_id = "";
-                    // $i =0;
-                    // foreach($request->category_id as $cat_row){
-                    //     $category_id .= $cat_row[$i].',';
-                    // }
+                   
+                    $published_date = date('Y-m-d h:i', strtotime($request->published_date));
+                    $today_date = date('Y-m-d h:i');
+                   
+                    $today_date = strtotime($today_date);
+                    $published_date = strtotime($published_date);
+                    
+                    if ($published_date > $today_date){
+                        $post_schedule = 3;
+                        
+                    }else{
+                        $post_schedule = 0;
+                    }
+                    
                     $post_url = Helper::slugify($request->post_title); 
                     
                     $img_path = $request->file('post_image');
@@ -82,7 +101,7 @@ class Posts extends Controller
 
                     
                     $post_status = 1;
-                    if(Helper::getUser()->role == "author"){
+                    if(Helper::getUser()->role == "author" || $today_date < $published_date){
                         $post_status = 0;
                     }
                     Posts_model::create([
@@ -100,9 +119,10 @@ class Posts extends Controller
                         "user_id"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
                         "push_send_flag"=>$request->notify==1?$request->notify:0,
                         "video_link"=>$request->video_link,
-                        "published_date"=>$request->published_date
+                        "published_date"=>$request->published_date,
+                        "scheduled_status"=>$post_schedule
                     ]);
-                    return redirect('admin/all-posts')->with("success","Post Successfully Created");
+                    return redirect('admin/all-posts')->with("success",$post_schedule==3?"Post Successfully Scheduled":"Post Successfully Created");
                 }
             }catch(\Exception $exception){
                 // dd($exception);
