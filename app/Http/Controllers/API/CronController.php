@@ -13,8 +13,8 @@ class CronController extends Controller
         try{
             $posts = Posts_model::where("scheduled_status", 3)->get();
             foreach($posts as $row){
-                $published_date = date('Y-m-d', strtotime($row->published_date));
-                $today_date = date('Y-m-d');
+                $published_date = date('Y-m-d h:i', strtotime($row->published_date));
+                $today_date = date('Y-m-d h:i');
                 $today_date = strtotime($today_date);
                 $published_date = strtotime($published_date);
                 if ($today_date == $published_date){

@@ -78,12 +78,14 @@ class Posts extends Controller
                     
                     return redirect()->back()->withErrors($validator->errors())->withInput(); 
                 }else{
-                    // dd($request->published_date);
-                    $published_date = date('Y-m-d', strtotime($request->published_date));
-                    $today_date = date('Y-m-d');
+                   
+                    $published_date = date('Y-m-d h:i', strtotime($request->published_date));
+                    $today_date = date('Y-m-d h:i');
+                   
                     $today_date = strtotime($today_date);
                     $published_date = strtotime($published_date);
-                    if ($today_date < $published_date){
+                    
+                    if ($published_date > $today_date){
                         $post_schedule = 3;
                         
                     }else{

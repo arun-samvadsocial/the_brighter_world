@@ -146,7 +146,7 @@ $trending_cat_row = json_decode($trending_post[0]->category);
                         </div>
                         <div class="caption ">
                             <a href="{!! url('detail/'.$trending_post[2]->post_url.'/'.Helper::base64url_encode($trending_post[2]->post_id)) !!}"
-                                class="title">
+                                class="title" style="font-size:18px">
                                 {{ $trending_post[2]->title }}</a>
                             <p class="post-meta">
                                 <span>{!! Helper::formatDate($trending_post[2]->published_date) !!}</span>
@@ -163,7 +163,7 @@ $trending_cat_row = json_decode($trending_post[0]->category);
                         </div>
                         <div class="caption ">
                             <a href="{!! url('detail/'.$trending_post[3]->post_url.'/'.Helper::base64url_encode($trending_post[3]->post_id)) !!}"
-                                class="title">
+                                class="title" style="font-size:18px">
                                 {{ $trending_post[3]->title }}</a>
                             <p class="post-meta">
                                 <span>{!! Helper::formatDate($trending_post[3]->published_date) !!}</span>
