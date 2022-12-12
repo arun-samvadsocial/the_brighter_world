@@ -64,7 +64,7 @@ function loadMoreData(page) {
             url: "?page=" + page,
             type: "get",
             beforeSend: function() {
-                $(".loader").show();
+                $(".loading").show();
             }
         })
         .done(function(data) {
