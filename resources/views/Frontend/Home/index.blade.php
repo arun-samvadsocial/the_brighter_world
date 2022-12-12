@@ -99,82 +99,94 @@
 <!-- Hero section start here  -->
 @php
 $trending_post = Helper::getTrendingPosts(4);
-$trending_cat_row = json_decode($trending_post[0]->category);
+$trending_cat_row = json_decode(isset($trending_post[0])?$trending_post[0]->category:'');
 @endphp
 @if($trending_cat_row)
 <div class="container main-news section">
     <div class="row">
-        <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6">
-            <img class="thumb mb-3 main-thumb " src="{{url($trending_post[0]->img_path)}}"
-                style="object-fit: cover; min-height:465px;">
-            <div class="caption ">
-                <a href="{!! url('detail/'.$trending_post[0]->post_url.'/'.Helper::base64url_encode($trending_post[0]->post_id)) !!}"
-                    class="title">
-                    {{ $trending_post[0]->title }}</a>
-                <p class="post-meta">
-                    <span>{!! Helper::formatDate($trending_post[0]->published_date) !!}</span>
-                    <span class="m-r-0"><i class="fa fa-eye"></i>{{$trending_post[0]->post_view_count}}</span>
-                    <a href="{!! url('/').'/category/'.$trending_post[0]->category_name.'/'.Helper::base64url_encode($trending_post[0]->category_id) !!}"
-                        class="btn btn-warning rounded-pill">{{$trending_post[0]->category_name}}</a>
-                </p>
+        @if(isset($trending_post[0]))
+            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6">
+                <img class="thumb mb-3 main-thumb " src="{{url($trending_post[0]->img_path)}}"
+                    style="object-fit: cover; min-height:465px;">
+                <div class="caption ">
+                    <a href="{!! url('detail/'.$trending_post[0]->post_url.'/'.Helper::base64url_encode($trending_post[0]->post_id)) !!}"
+                        class="title">
+                        {{ $trending_post[0]->title }}</a>
+                    <p class="post-meta">
+                        <span>{!! Helper::formatDate($trending_post[0]->published_date) !!}</span>
+                        <span class="m-r-0"><i class="fa fa-eye"></i>{{$trending_post[0]->post_view_count}}</span>
+                        <a href="{!! url('/').'/category/'.$trending_post[0]->category_name.'/'.Helper::base64url_encode($trending_post[0]->category_id) !!}"
+                            class="btn btn-warning rounded-pill">{{$trending_post[0]->category_name}}</a>
+                    </p>
+                </div>
             </div>
+        @endif
 
-
-        </div>
         <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6">
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                    <div class="image image-sm mb-1">
-                        <img class="thumb" src="{{url($trending_post[1]->img_path)}}" style="height:100%;">
+
+                @if(isset($trending_post[1]))
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                        <div class="image image-sm mb-1">
+                            <img class="thumb" src="{{url($trending_post[1]->img_path)}}" style="height:100%;">
+                        </div>
+                        <div class="caption ">
+                            <a href="{!! url('detail/'.$trending_post[1]->post_url.'/'.Helper::base64url_encode($trending_post[1]->post_id)) !!}"
+                                class="title">
+                                {{ $trending_post[1]->title }}</a>
+                            <p class="post-meta">
+                                <span>{!! Helper::formatDate($trending_post[1]->published_date) !!}</span>
+                                <span class="m-r-0"><i class="fa fa-eye"></i>{{$trending_post[1]->post_view_count}}</span>
+                                <a href="{!! url('/').'/category/'.$trending_post[1]->category_name.'/'.Helper::base64url_encode($trending_post[1]->category_id) !!}"
+                                    class="btn btn-warning rounded-pill">{{$trending_post[1]->category_name}}</a>
+                            </p>
+                        </div>
                     </div>
-                    <div class="caption ">
-                        <a href="{!! url('detail/'.$trending_post[1]->post_url.'/'.Helper::base64url_encode($trending_post[1]->post_id)) !!}"
-                            class="title">
-                            {{ $trending_post[1]->title }}</a>
-                        <p class="post-meta">
-                            <span>{!! Helper::formatDate($trending_post[1]->published_date) !!}</span>
-                            <span class="m-r-0"><i class="fa fa-eye"></i>{{$trending_post[1]->post_view_count}}</span>
-                            <a href="{!! url('/').'/category/'.$trending_post[1]->category_name.'/'.Helper::base64url_encode($trending_post[1]->category_id) !!}"
-                                class="btn btn-warning rounded-pill">{{$trending_post[1]->category_name}}</a>
-                        </p>
-                    </div>
-                </div>
+                @endif
+
 
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 row custom ">
-                    <div class="col-lg-6 plr-2" style="padding-right:2px">
-                        <div class="image image-sm mb-1">
-                            <img class="thumb" src="{{url($trending_post[2]->img_path)}}">
+                    
+                    @if(isset($trending_post[2]))
+                        <div class="col-lg-6 plr-2" style="padding-right:2px">
+                            <div class="image image-sm mb-1">
+                                <img class="thumb" src="{{url($trending_post[2]->img_path)}}">
+                            </div>
+                            <div class="caption ">
+                                <a href="{!! url('detail/'.$trending_post[2]->post_url.'/'.Helper::base64url_encode($trending_post[2]->post_id)) !!}"
+                                    class="title" style="font-size:18px">
+                                    {{ $trending_post[2]->title }}</a>
+                                <p class="post-meta">
+                                    <span>{!! Helper::formatDate($trending_post[2]->published_date) !!}</span>
+                                    <span class="m-r-0"><i
+                                            class="fa fa-eye"></i>{{$trending_post[2]->post_view_count}}</span>
+                                    <a href="{!! url('/').'/category/'.$trending_post[2]->category_name.'/'.Helper::base64url_encode($trending_post[2]->category_id) !!}"
+                                        class="btn btn-warning rounded-pill">{{$trending_post[2]->category_name}}</a>
+                                </p>
+                            </div>
                         </div>
-                        <div class="caption ">
-                            <a href="{!! url('detail/'.$trending_post[2]->post_url.'/'.Helper::base64url_encode($trending_post[2]->post_id)) !!}"
-                                class="title" style="font-size:18px">
-                                {{ $trending_post[2]->title }}</a>
-                            <p class="post-meta">
-                                <span>{!! Helper::formatDate($trending_post[2]->published_date) !!}</span>
-                                <span class="m-r-0"><i
-                                        class="fa fa-eye"></i>{{$trending_post[2]->post_view_count}}</span>
-                                <a href="{!! url('/').'/category/'.$trending_post[2]->category_name.'/'.Helper::base64url_encode($trending_post[2]->category_id) !!}"
-                                    class="btn btn-warning rounded-pill">{{$trending_post[2]->category_name}}</a>
-                            </p>
+                    @endif
+                    @if(isset($trending_post[3]))
+                        <div class="col-lg-6 plr-2" style="padding-left:2px">
+                            <div class="image image-sm mb-3">
+                                <img class="thumb image-sm" src="{{url($trending_post[3]->img_path)}}">
+                            </div>
+                            <div class="caption ">
+                                <a href="{!! url('detail/'.$trending_post[3]->post_url.'/'.Helper::base64url_encode($trending_post[3]->post_id)) !!}"
+                                    class="title" style="font-size:18px">
+                                    {{ $trending_post[3]->title }}</a>
+                                <p class="post-meta">
+                                    <span>{!! Helper::formatDate($trending_post[3]->published_date) !!}</span>
+                                    <span class="m-r-0"><i
+                                            class="fa fa-eye"></i>{{$trending_post[3]->post_view_count}}</span>
+                                    <a href="{!! url('/').'/category/'.$trending_post[3]->category_name.'/'.Helper::base64url_encode($trending_post[3]->category_id) !!}"
+                                        class="btn btn-warning rounded-pill">{{$trending_post[3]->category_name}}</a>
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 plr-2" style="padding-left:2px">
-                        <div class="image image-sm mb-3">
-                            <img class="thumb image-sm" src="{{url($trending_post[3]->img_path)}}">
-                        </div>
-                        <div class="caption ">
-                            <a href="{!! url('detail/'.$trending_post[3]->post_url.'/'.Helper::base64url_encode($trending_post[3]->post_id)) !!}"
-                                class="title" style="font-size:18px">
-                                {{ $trending_post[3]->title }}</a>
-                            <p class="post-meta">
-                                <span>{!! Helper::formatDate($trending_post[3]->published_date) !!}</span>
-                                <span class="m-r-0"><i
-                                        class="fa fa-eye"></i>{{$trending_post[3]->post_view_count}}</span>
-                                <a href="{!! url('/').'/category/'.$trending_post[3]->category_name.'/'.Helper::base64url_encode($trending_post[3]->category_id) !!}"
-                                    class="btn btn-warning rounded-pill">{{$trending_post[3]->category_name}}</a>
-                            </p>
-                        </div>
-                    </div>
+                    @endif
+
+
                 </div>
             </div>
         </div>
@@ -253,6 +265,7 @@ $posts = Helper::getPosts($cat_row->category_id,10);
     </div> <!-- row end -->
     </div> <!-- container-fluid end -->
 </section> <!-- Section end -->
+<br><br>
 @endif
 @endforeach
 

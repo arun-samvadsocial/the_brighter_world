@@ -3,13 +3,13 @@
 
     <!-- Footer Links -->
     <div class="container-fluid text-center stext-md-left collapse footer navbar-fixed-bottom  pt-4"
-        aria-expanded="false" id="collapseExample2">
+        aria-expanded="false" id="collapseExample2" style="border-top:1px solid #ffc107" >
 
         <!-- Grid row -->
         <div class="row">
 
             <!-- Grid column -->
-            <div class="col mt-md-0 mt-3">
+            <div class="col-lg-4 mt-md-0 mt-3">
 
                 <!-- Content -->
                 <img src="{{url('logo.svg')}}" alt="" style="width:50%">
@@ -21,7 +21,7 @@
             <!-- <hr class="clearfix w-100 d-md-none pb-3"> -->
 
             <!-- Grid column -->
-            <div class="col mb-md-0 mb-3">
+            <div class="col-lg-4 mb-md-0 mb-3">
 
                 <!-- Links -->
                 <h5 class="text-uppercase">Categories</h5>
@@ -46,7 +46,7 @@
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col mb-md-0 mb-3">
+            <div class="col-lg-4 mb-md-0 mb-3">
 
                 <!-- Links -->
                 <h5 class="text-uppercase">Links</h5>
@@ -73,9 +73,9 @@
     <div class="footer-copyright text-center bg-warning">
         <div class="row pt-0 ">
             <!-- Content -->
-            <!-- <img src="{{url('logo-white.svg')}}" class="col-lg-3 col-sm-12 ml-5 footer-logo" height=60 alt=""> -->
+            <!-- <img src="{{url('logo-white.svg')}}" class="col-lg-3 col-sm-12 ml-5 footer-logo" width="10px" alt=""> -->
             <div class="col-lg-3 col-sm-12 pt-2 footer-logo">
-            <p><strong>The Brighter Wrold</strong></p>
+            <!-- <p><strong>The Brighter Wrold</strong></p> -->
             </div>
             <div class="cp col-lg-6 col-sm-12 pt-2">
                 © <script>

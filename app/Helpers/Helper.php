@@ -9,7 +9,7 @@ use App\Models\Frontend\Comment_model;
 use Illuminate\Support\Facades\DB;
 use Mail;
 use Illuminate\Support\Facades\Http;
-
+use Carbon\Carbon;
 class Helper
 {
     
@@ -35,6 +35,7 @@ class Helper
     }
 
     public static function getTrendingPosts($limit = null){
+        $date = \Carbon\Carbon::today()->subDays(30);
         $post =  Post_model::select("post.*", "category.category_name")
         ->where("is_delete",0)
         ->limit($limit)
@@ -42,6 +43,7 @@ class Helper
         ->where("status",1)
         ->leftJoin("category","post.category_id","=","category.category_id")
         ->where("category.category_status",1)
+        ->where('post.published_date','>=',$date)
         ->orderBy('post_view_count', 'desc')
         ->get();
         return $post; 
