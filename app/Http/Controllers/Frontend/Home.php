@@ -29,33 +29,44 @@ class Home extends Controller
         return view("Frontend.Home.detail")->with($data);
     }
 
-    public function category_post($category_name, $category_id){
+    public function category_post(Request $request, $category_name, $category_id){
         $category_id = Helper::base64url_decode($category_id);
-        $data['posts'] = Post_model::where("category_id",$category_id)
-        ->with('category')
-        ->where("is_delete",0)
-        ->where("status",1)
-        ->orderBy('published_date', 'desc')
-        ->latest("published_date")
+        $posts = Post_model::select("post.*","category.category_name")
+        ->leftJoin("category", "category.category_id", "=","post.category_id")
+        ->where("post.category_id",$category_id)
+        ->where("post.is_delete",0)
+        ->where("post.status",1)
+        ->orderBy('post.published_date', 'desc')
+        ->latest("post.published_date")
         ->paginate(9);
-        return view("Frontend.Home.category")->with($data);
+
+        if($request->ajax()){
+            $view = view("Frontend.Home.post-data", compact("posts"))->render();
+            return response()->json(['html'=>$view]);
+        }
+        return view("Frontend.Home.category",compact("posts"));
     }
     // Fetch Post Using Hashtags 
-    public function tags_post($tag_name){
+    public function tags_post(Request $request, $tag_name){
         $tag_name = urldecode($tag_name);
-        $data['posts'] = Post_model::where('hashtags','LIKE',"%{$tag_name}%")
-        ->with('category')
-        ->where("is_delete",0)
-        ->where("status",1)
-        ->orderBy('published_date', 'desc')
-        ->latest("published_date")
+        $posts = Post_model::select("post.*","category.category_name")
+        ->where('post.hashtags','LIKE',"%{$tag_name}%")
+        ->leftJoin("category", "category.category_id", "=","post.category_id")
+        ->where("post.is_delete",0)
+        ->where("post.status",1)
+        ->orderBy('post.published_date', 'desc')
+        ->latest("post.published_date")
         ->paginate(9);
-        return view("Frontend.Home.tags")->with($data);
+        if($request->ajax()){
+            $view = view("Frontend.Home.post-data", compact("posts"))->render();
+            return response()->json(['html'=>$view]);
+        }
+        return view("Frontend.Home.tags",compact("posts"));
     }
     // Fetch Post Using Search Query 
     public function search_post(Request $request){
         $search_data = urldecode($request->input('search'));
-        $data['posts'] = Post_model::select("post.*","category.category_keywords")
+        $posts = Post_model::select("post.*","category.category_name")
         ->where('post.title','LIKE',"%" . $search_data . "%")
         ->orWhere("post.synopsis", 'LIKE',"%" . $search_data . "%")
         ->orWhere("post.hashtags", 'LIKE',"%" . $search_data . "%")
@@ -69,32 +80,49 @@ class Home extends Controller
         ->orderBy('post.published_date', 'desc')
         ->latest("post.published_date")
         ->paginate(9);
-        return view("Frontend.Home.search")->with($data);
+
+        if($request->ajax()){
+            $view = view("Frontend.Home.post-data", compact("posts"))->render();
+            return response()->json(['html'=>$view]);
+        }
+        return view("Frontend.Home.search",compact("posts"));
     }
 
     //Author post
-    public function author_post($author,$author_id){
+    public function author_post(Request $request, $author,$author_id){
         $author_id = Helper::base64url_decode($author_id);
-        $data['posts'] = Post_model::where("user_id",$author_id)
+        $posts = Post_model::select("post.*","category.category_name")
+        ->leftJoin("category", "category.category_id", "=","post.category_id")
+        ->where("post.user_id",$author_id)
         ->with('category')
-        ->where("is_delete",0)
-        ->where("status",1)
-        ->orderBy('published_date', 'desc')
-        ->latest("published_date")
+        ->where("post.is_delete",0)
+        ->where("post.status",1)
+        ->orderBy('post.published_date', 'desc')
+        ->latest("post.published_date")
         ->paginate(9);
-        return view("Frontend.Home.author")->with($data);
+
+        if($request->ajax()){
+            $view = view("Frontend.Home.post-data", compact("posts"))->render();
+            return response()->json(['html'=>$view]);
+        }
+        return view("Frontend.Home.author",compact("posts"));
     }
 
     //Archives Post
-    public function archives_post($year,$month){
-        $posts['posts'] = Post_model::where( DB::raw('YEAR(published_date)'), '=', $year )
+    public function archives_post(Request $request, $year,$month){
+        $posts = Post_model::where( DB::raw('YEAR(published_date)'), '=', $year )
         ->where(DB::raw('MONTHNAME(published_date)'), '=', $month )
         ->with('category')
         ->leftJoin("category", "category.category_id", "=","post.category_id")
         ->where("category.category_status", "1")
         ->latest("published_date")
         ->paginate(9);
-        return view("Frontend.Home.archives")->with($posts);
+
+        if($request->ajax()){
+            $view = view("Frontend.Home.post-data", compact("posts"))->render();
+            return response()->json(['html'=>$view]);
+        }
+        return view("Frontend.Home.archives",compact("posts"));
     }
 
     // Comment_model

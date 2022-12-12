@@ -96,10 +96,12 @@
 </footer>
 <!-- Footer -->
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
 <script src="{{url('/Frontend/vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{url('/Frontend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{url('/Frontend/vendor/owl.carousel/owl.carousel.min.js')}}"></script>
 <script src="{{url('/Frontend/js/carausol_slider.js')}}"></script>
+
 </body>
 
 </html>

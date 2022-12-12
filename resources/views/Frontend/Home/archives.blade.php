@@ -4,75 +4,90 @@
 
 @if(count($posts) > 0)
 @php
-    $cat_row = json_decode($posts[0]->category);
+$cat_row = json_decode($posts[0]->category);
 @endphp
 @if($cat_row && $cat_row[0]->category_status == 1)
 <section class="carousel_se_01">
     <div class="container-fluid ">
-            <div class="row pt-3">
-                <div class="col-md-12">
-                        <div class="category_header row p-2">
-                            <div class="col-md-3"><hr class="bg-colorAccent"></div>
-                            <div class="category_header_left col-md-3 text-center">
-                            <h2 class="colorAccent" >{{request()->route()->parameters['month'].' '.request()->route()->parameters['year']}}</h2>
-                            </div>
-                            <div class="col-md-3"><hr class="bg-colorAccent"></div>
+        <div class="row pt-3">
+            <div class="col-md-12">
+                <div class="category_header row p-2">
+                    <div class="col-md-3">
+                        <hr class="bg-colorAccent">
+                    </div>
+                    <div class="category_header_left col-md-3 text-center">
+                        <h2 class="colorAccent">
+                            {{request()->route()->parameters['month'].' '.request()->route()->parameters['year']}}</h2>
+                    </div>
+                    <div class="col-md-3">
+                        <hr class="bg-colorAccent">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row col-md-11 col-lg-10" id="post-box">
+                        <!-- 1 -->
+                        <div class="row" id="post-data">
+                            <!-- 1 -->
+                            @include('Frontend.Home.post-data')
                         </div>
-                        <div class="row">
-                            <div class="row col-md-11 col-lg-10">
-                                <!-- 1 -->
-                                @foreach($posts as $post_row)
-                                <div class="item col-md-6 col-lg-4">
-                                    <div class="col-md-12 wow fadeInUp ">
-                                        <div class="main_services text-left">
-                                            <a href="{!! url('detail/'.$post_row->post_url.'/'.Helper::base64url_encode($post_row->post_id)) !!}">
-                                                <div class="img-thumbnail text-center">
-                                                    <img src="{{url($post_row->img_path)}}" class="img-thumbnail" height="142px" alt="">
-                                                </div>
-                                                <div class="card_detail">
-                                                <h4 class="mt-3 card_title_ellipsis" title="{{ $post_row->title }}" >{{ $post_row->title }}</h4>
-                                                <p class="card_text_ellipsis" >{!! strip_tags($post_row->description) !!}</p>
-                                            </a>
-                                            <div class="card_footer row">
-                                                <div class="col-6 text-grey">
-                                                    {!! Helper::formatDate($post_row->published_date) !!}
-                                                </div>
-                                                <div class="col-6 d-flex flex-row-reverse">
-                                                    <div class="post_category category_name_clamp">
-                                                
-                                                    {{ $cat_row[0]->category_name }}
-                                                    
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
-                                <div class=" col-md-12 pb-2">
-                                    <div class="pagination d-felx justify-content-center">
-                                        <a class="btn btn-light" href="{{$posts->previousPageUrl('pagination::bootstrap-4')}}">Previous</a>
-                                        &nbsp;
-                                        <a class="btn btn-light" href="{{$posts->nextPageUrl('pagination::bootstrap-4')}}">Next</a>
-                                    </div>
-                                </div>
-                                <!-- 1 end  -->
-                            </div> <!-- owl-carousel end -->
-                            
-                            <div class="col-md-6 col-lg-2 right_sidebar">
-                                @include('Frontend.layouts.sidebar')
+                        <div class=" col-md-12 pb-2 text-center">
+                            <div class="loader" id="loader">
+                                <lottie-player src="{{url('/loaderjson.json')}}" background="transparent" speed="1"
+                                    style="height: 100px; display:none;" loop autoplay class="loading"></lottie-player>
                             </div>
                         </div>
-                </div> <!-- col-md-12 end -->
-            </div> <!-- row end -->
+                        <!-- 1 end  -->
+                    </div> <!--post box end -->
+
+                    <div class="col-md-6 col-lg-2 right_sidebar">
+                        @include('Frontend.layouts.sidebar')
+                    </div>
+                </div>
+            </div> <!-- col-md-12 end -->
+        </div> <!-- row end -->
     </div> <!-- container-fluid end -->
 </section> <!-- Section end -->
 @else
-<h2 class="te   xt-danger" >No Record Found</h2>
+<h2 class="te   xt-danger">No Record Found</h2>
 @endif
 @else
-<h2 class="text-danger" >No Record Found</h2>
+<h2 class="text-danger">No Record Found</h2>
 @endif
-
+<br><br>
 @endsection
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+function loadMoreData(page) {
+    $.ajax({
+            url: "?page=" + page,
+            type: "get",
+            beforeSend: function() {
+                $(".lodermsg").show();
+            }
+        })
+        .done(function(data) {
+            if (data.html === " ") {
+                $('.loading').hide();
+                return;
+            }
+            console.log(data)
+            $(".loading").hide();
+            $("#post-data").append(data.html);
+
+        })
+        .fail(function(jqXHR, ajaxOptions, thrownError) {
+            console.log("Server not responding....")
+        });
+}
+
+var page = 1;
+
+$(window).on('scroll', function() {
+    if ($(window).scrollTop() >= $(
+            '#post-box').offset().top + $('#post-box').outerHeight() - window.innerHeight) {
+        page++;
+        loadMoreData(page);
+    }
+});
+</script>
