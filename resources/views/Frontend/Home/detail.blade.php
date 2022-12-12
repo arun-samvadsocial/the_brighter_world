@@ -59,7 +59,7 @@
     font-size: 16px;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    line-height: 30px;
+    line-height: 1.2em;
 }
 </style>
 
@@ -340,7 +340,7 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                                             </div>
                                     </div>
                                     <div class="col-4">
-                                        <img src="{{$r_row->img_path?url($r_row->img_path):url('no_image.png')}}" width="100%" height="80%" style="border-radius: 10%;" alt="">
+                                        <img src="{{$r_row->img_path?url($r_row->img_path):url('no_image.png')}}" width="100%" height="60" style="border-radius: 10%;" alt="">
                                     </div>
                                     <div class="col-10" style="border-bottom:1px solid rgb(211 208 208); margin:auto" ></div>
                                 </div>
