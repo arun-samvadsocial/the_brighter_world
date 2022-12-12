@@ -29,7 +29,7 @@
                             @csrf
                             <div class="border-bottom ">
                                 <label for="email"><b>Name:</b></label>
-                                <input type="name" class="border-0" placeholder="Enter your name" value="{{old('name')}}" name="name" id="name"
+                                <input type="name" class="border-0" placeholder="Enter name" value="{{old('name')}}" name="name" id="name"
                                     required>
                                 
                             </div>
@@ -58,7 +58,7 @@
                                 <input type="submit" name="submit" class="form-control" id="">
                             </div>
                             <div class="mt-4">
-                                <!-- <p class="text-center">New User?<a href="" class="text-primary1">Sign up now</a></p> -->
+                                <p class="text-center">Already registered?<a href="{{url('/login')}}" class="text-primary1">Login</a></p>
                             </div>
                         </form>
                     </div>
