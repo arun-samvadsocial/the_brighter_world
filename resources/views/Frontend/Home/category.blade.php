@@ -56,7 +56,8 @@ $cat_row = json_decode($posts[0]->category);
 @endif
 <br><br>
 @endsection
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+{{Helper::loadajax()}}
 <script>
 function loadMoreData(page) {
     $.ajax({

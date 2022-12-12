@@ -190,6 +190,9 @@ class Helper
        return $ipaddress;
     } 
 
+    public static function loadajax(){
+        echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>';
+    }
 
 // ==============================================================================================
 // Start CopyScape Plagiarism Checker Steps Funtions
