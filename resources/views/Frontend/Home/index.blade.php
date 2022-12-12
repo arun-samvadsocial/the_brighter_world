@@ -106,6 +106,7 @@ $trending_cat_row = json_decode(isset($trending_post[0])?$trending_post[0]->cate
     <div class="row">
         @if(isset($trending_post[0]))
             <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6">
+                <div class="image-overlay"></div>
                 <img class="thumb mb-3 main-thumb " src="{{url($trending_post[0]->img_path)}}"
                     style="object-fit: cover; min-height:465px;">
                 <div class="caption ">

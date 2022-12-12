@@ -4,13 +4,17 @@
     <!-- Footer Links -->
     <div class="container-fluid text-center stext-md-left collapse footer navbar-fixed-bottom  pt-4"
         aria-expanded="false" id="collapseExample2" style="border-top:1px solid #ffc107" >
-
+        <div class="text-right">
+            <i class="fa fa-times text-danger " style="font-size: 2em; cursor: pointer;" data-toggle="collapse" href="#collapseExample2"
+            aria-expanded="false" aria-controls="collapseExample2" ></i>
+        </div>
         <!-- Grid row -->
         <div class="row">
 
+        
             <!-- Grid column -->
             <div class="col-lg-4 mt-md-0 mt-3">
-
+            
                 <!-- Content -->
                 <img src="{{url('logo.svg')}}" alt="" style="width:50%">
                 <p></p>
@@ -83,7 +87,7 @@
                 </script> The Brighter World <span class="d-none d-sm-inline-block"></span>
             </div>
             <div class="col-lg-3" style="text-align: end;">
-                <i class="fa fa-arrow-circle-o-up" style="margin-top: 3%;font-size: 2em; cursor: pointer;padding-right: 5px;" data-toggle="collapse" href="#collapseExample2"
+                <i class="fa fa-arrow-circle-o-up" style="margin-top: 3%;font-size: 2em; margin-top: 5px; cursor: pointer;padding-right: 5px;" data-toggle="collapse" href="#collapseExample2"
         aria-expanded="false" aria-controls="collapseExample2" ></i>
             </div>
 
