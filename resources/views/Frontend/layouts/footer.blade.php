@@ -3,13 +3,13 @@
 
     <!-- Footer Links -->
     <div class="container-fluid text-center stext-md-left collapse footer navbar-fixed-bottom  pt-4"
-        aria-expanded="false" id="collapseExample">
+        aria-expanded="false" id="collapseExample2">
 
         <!-- Grid row -->
         <div class="row">
 
             <!-- Grid column -->
-            <div class="col-md-3 mt-md-0 mt-3">
+            <div class="col mt-md-0 mt-3">
 
                 <!-- Content -->
                 <img src="{{url('logo.svg')}}" alt="" style="width:50%">
@@ -18,10 +18,10 @@
             </div>
             <!-- Grid column -->
 
-            <hr class="clearfix w-100 d-md-none pb-3">
+            <!-- <hr class="clearfix w-100 d-md-none pb-3"> -->
 
             <!-- Grid column -->
-            <div class="col-md-3 mb-md-0 mb-3">
+            <div class="col mb-md-0 mb-3">
 
                 <!-- Links -->
                 <h5 class="text-uppercase">Categories</h5>
@@ -46,7 +46,7 @@
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-md-3 mb-md-0 mb-3">
+            <div class="col mb-md-0 mb-3">
 
                 <!-- Links -->
                 <h5 class="text-uppercase">Links</h5>
@@ -70,20 +70,21 @@
     <!-- Footer Links -->
 
     <!-- Copyright -->
-    <div class="footer-copyright text-center" data-toggle="collapse" href="#collapseExample"
-        aria-expanded="false" aria-controls="collapseExample">
+    <div class="footer-copyright text-center bg-warning">
         <div class="row pt-0 ">
             <!-- Content -->
-            <!-- <img src="{{url('logo.svg')}}" class="col-lg-1 ml-5" alt=""> -->
-            <h4 class="col-lg-3 pt-1" ><img src="{{url('favicon.png')}}"  alt="" style="width:30px"></h4>
-            <div class="cp col-lg-6 pt-1">
+            <!-- <img src="{{url('logo-white.svg')}}" class="col-lg-3 col-sm-12 ml-5 footer-logo" height=60 alt=""> -->
+            <div class="col-lg-3 col-sm-12 pt-2 footer-logo">
+            <p><strong>The Brighter Wrold</strong></p>
+            </div>
+            <div class="cp col-lg-6 col-sm-12 pt-2">
                 © <script>
                 document.write(new Date().getFullYear())
                 </script> The Brighter World <span class="d-none d-sm-inline-block"></span>
             </div>
-            <div class="col-lg-3">
-            <lottie-player src="https://lottie.host/07d059c3-38cd-45d2-afa5-a9aedf8e30eb/oMWll5ukdH.json"  background="transparent"  speed="1"  style="width: 300px; height: 50px;"  loop autoplay></lottie-player>
-
+            <div class="col-lg-3" style="text-align: end;">
+                <i class="fa fa-arrow-circle-o-up" style="margin-top: 3%;font-size: 2em; cursor: pointer;padding-right: 5px;" data-toggle="collapse" href="#collapseExample2"
+        aria-expanded="false" aria-controls="collapseExample2" ></i>
             </div>
 
         </div>
