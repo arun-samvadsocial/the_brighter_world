@@ -73,8 +73,8 @@
     <div class="footer-copyright text-center bg-warning">
         <div class="row pt-0 ">
             <!-- Content -->
-            <!-- <img src="{{url('logo-white.svg')}}" class="col-lg-3 col-sm-12 ml-5 footer-logo" width="10px" alt=""> -->
             <div class="col-lg-3 col-sm-12 pt-2 footer-logo">
+                <!-- <img src="{{url('logo-white.svg')}}" class="col-lg-3 col-sm-12 ml-5 footer-logo" width="10px" alt=""> -->
             <!-- <p><strong>The Brighter Wrold</strong></p> -->
             </div>
             <div class="cp col-lg-6 col-sm-12 pt-2">
