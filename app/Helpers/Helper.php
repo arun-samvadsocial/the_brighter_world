@@ -35,7 +35,7 @@ class Helper
     }
 
     public static function getTrendingPosts($limit = null){
-        $date = \Carbon\Carbon::today()->subDays(30);
+        $date = \Carbon\Carbon::today()->subDays(7);
         $post =  Post_model::select("post.*", "category.category_name")
         ->where("is_delete",0)
         ->limit($limit)
@@ -98,11 +98,11 @@ class Helper
 
     public static function getCategory($limit){
         $post =  Category_model::where("category_status",1)
-        ->orderBy("short_order_status", "desc")
+        ->orderBy("short_order_status", "asc")
         ->limit($limit)
         ->get();
         return $post;
-    }
+    } 
 
     public static function getComments($post_id){
         $comment =  Comment_model::where("post_id",$post_id)
