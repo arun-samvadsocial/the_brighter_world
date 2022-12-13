@@ -96,9 +96,7 @@ Route::get('/no-access', function(){
             
 
             Route::middleware(['moderatorGuard'])->group(function () {
-            //Dashboard Routes
-            //==========================================================================
-            Route::get('/', [Dashboard::class, 'index']);    
+           
                 // Categories Routes
             //==========================================================================
             Route::get('/category-list',[Category::class,'index']);
@@ -206,6 +204,9 @@ Route::get('/no-access', function(){
             
             
             Route::middleware(['authorGuard'])->group(function () {
+                 //Dashboard Routes
+            //==========================================================================
+            Route::get('/', [Dashboard::class, 'index']);    
             /*==============================================================================================
             | Post Manager Routes
             ================================================================================================*/
