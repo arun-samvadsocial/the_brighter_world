@@ -151,7 +151,7 @@
                         </li>
                         @endif
 
-                        <li class="nav-item">
+                        <li class="nav-item nav_search">
                             <span class="nav-link searchBtn2" onclick="on()"><i class="fa fa-search"></i></span>
                         </li>
 

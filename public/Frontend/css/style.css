@@ -578,6 +578,9 @@ h4 {
   .footer-logo{
     display: none;
   }
+  .nav_search{
+    display: none;
+  }
 }
 
 
@@ -621,6 +624,9 @@ h4 {
     width: 90% !important;
   }
   .footer-logo{
+    display: none;
+  }
+  .nav_search{
     display: none;
   }
 }
