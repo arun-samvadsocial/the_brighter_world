@@ -36,11 +36,13 @@
         z-index: 2;
         cursor: pointer;
     }
-    #overlay .search-box{
-        margin:15% auto;
+
+    #overlay .search-box {
+        margin: 15% auto;
     }
-    .placeholder{
-        padding:20px;
+
+    .placeholder {
+        padding: 20px;
     }
     </style>
     <script>
@@ -57,15 +59,17 @@
 <body>
 
     <div id="overlay">
-        
+
         <div class="col-lg-6 col-md-6 search-box ">
             <div class="search_form">
-                
+
                 <form action="{{ route('search') }}" method="GET" class="input-group">
-                    <input type="text" class="form-control placeholder" placeholder="Search here..." name="search" required />
+                    <input type="text" class="form-control placeholder" placeholder="Search here..." name="search"
+                        required />
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-light "><i class="fa fa-search" ></i></button>
-                        <button class="btn btn-light" onclick="off()" style="border-left: 1px solid #a9a7a7;" ><i class="fa fa-close text-danger" ></i></button>
+                        <button type="submit" class="btn btn-light "><i class="fa fa-search"></i></button>
+                        <button class="btn btn-light" onclick="off()" style="border-left: 1px solid #a9a7a7;"><i
+                                class="fa fa-close text-danger"></i></button>
                     </div>
                 </form>
             </div>
@@ -81,16 +85,15 @@
                     </a>
                     <!-- <h2>The Brighter World</h2> -->
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <p class="header_thought">"Dream, Dream, Dream!<br />
-                        Conduct these dreams into thoughts,<br />
-                        and then transform them into action."<br />
+                <div class="col-lg-7 col-md-6">
+                    <p class="header_thought">"Dream, Dream, Dream! Conduct these dreams into thoughts, and then transform them into action."<br />
                         - Dr. A. P. J. Abdul Kalam</p>
                 </div>
 
 
-                <div class="col-lg-3 col-md-6 d-flex flex-row-reverse">
+                <div class="col-lg-2 col-md-6 d-flex flex-row-reverse">
                     <div class="login_btn">
+
                         @if(session()->get("user_id"))
                         <a href="{{url('/logout')}}" class="btn btn-danger">Logout</a>
                         @else
@@ -100,7 +103,7 @@
                 </div>
             </div>
         </div>
-        <div class="header_bottom">
+        <div class="header_bottom" id="header_bottom">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="menu-btn d-flex flex-row-reverse">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -109,11 +112,15 @@
                     </button>
                 </div>
                 <div class="login_btn_sm d-none">
-                    @if(session()->get("user_id"))
-                    <a href="{{url('/logout')}}" class="btn btn-danger">Logout</a>
-                    @else
-                    <a href="{{url('/login')}}" class="btn btn-warning ">Login</a>
-                    @endif
+                    <div class="row" style="margin-right: 0px !important;margin-left: 0px !important;" >
+                        <span class="nav-link" onclick="on()"><i class="fa fa-search"></i></span>
+                        @if(session()->get("user_id"))
+                        <a href="{{url('/logout')}}" class="btn btn-danger">Logout</a>
+                        @else
+                        <a href="{{url('/login')}}" class="btn btn-warning ">Login</a>
+                        @endif
+                    </div>
+
                 </div>
 
                 <div class="collapse navbar-collapse" id="navbarText">
@@ -122,7 +129,10 @@
                             <a class="nav-link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         @php $category = Helper::getCategory(4); @endphp
-                        @foreach($category as $cat_row)
+                        @foreach($category as $key =>$cat_row)
+                        @if($cat_row->short_order_status == 0)
+                        @continue
+                        @endif
 
                         <li class="nav-item">
                             <a class="nav-link {!! Route::is('category') && $cat_row->category_id == Helper::base64url_decode(request()->route()->parameters['category_id']) ? 'active' : '' !!} "
@@ -141,8 +151,8 @@
                         </li>
                         @endif
 
-                        <li class="nav-item" >
-                            <span class="nav-link " onclick="on()"><i class="fa fa-search" ></i></span>
+                        <li class="nav-item nav_search">
+                            <span class="nav-link searchBtn2" onclick="on()"><i class="fa fa-search"></i></span>
                         </li>
 
 
@@ -152,3 +162,18 @@
             </nav>
         </div>
     </header>
+
+    <script>
+window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("header_bottom");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>

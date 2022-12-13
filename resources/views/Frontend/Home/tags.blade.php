@@ -19,45 +19,20 @@
                             <div class="col-md-3"><hr class="bg-colorAccent"></div>
                         </div>
                         <div class="row">
-                            <div class="row col-md-11 col-lg-10">
-                                <!-- 1 -->
-                                @foreach($posts as $post_row)
-                                <div class="item col-md-6 col-lg-4">
-                                    <div class="col-md-12 wow fadeInUp ">
-                                        <div class="main_services text-left">
-                                            <a href="{!! url('detail/'.$post_row->post_url.'/'.Helper::base64url_encode($post_row->post_id)) !!}">
-                                                <div class="img-thumbnail text-center">
-                                                    <img src="{{url($post_row->img_path)}}" class="img-thumbnail" height="142px" alt="">
-                                                </div>
-                                                <div class="card_detail">
-                                                <h4 class="mt-3 card_title_ellipsis" title="{{ $post_row->title }}"t>{{ $post_row->title }}</h4>
-                                                <p class="card_text_ellipsis">{!! strip_tags($post_row->description) !!}</p>
-                                            </a>
-                                            <div class="card_footer row">
-                                                <div class="col-6 text-grey">
-                                                    {!! Helper::formatDate($post_row->published_date) !!}
-                                                </div>
-                                                <div class="col-6 d-flex flex-row-reverse">
-                                                    <div class="post_category">
-                                                
-                                                    {{ $cat_row[0]->category_name }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
-                                <div class=" col-md-12 pb-2">
-                                    <div class="pagination d-felx justify-content-center">
-                                        <a class="btn btn-light" href="{{$posts->previousPageUrl('pagination::bootstrap-4')}}">Previous</a>
-                                        &nbsp;
-                                        <a class="btn btn-light" href="{{$posts->nextPageUrl('pagination::bootstrap-4')}}">Next</a>
-                                    </div>
-                                </div>
-                                <!-- 1 end  -->
-                            </div> <!-- owl-carousel end -->
+                        <div class="row col-md-11 col-lg-10" id="post-box">
+                        <!-- 1 -->
+                        <div class="row" id="post-data">
+                            <!-- 1 -->
+                            @include('Frontend.Home.post-data')
+                        </div>
+                        <div class=" col-md-12 pb-2 text-center">
+                            <div class="loader" id="loader">
+                                <lottie-player src="{{url('/loaderjson.json')}}" background="transparent" speed="1"
+                                    style="height: 100px; display:none;" loop autoplay class="loading"></lottie-player>
+                            </div>
+                        </div>
+                        <!-- 1 end  -->
+                    </div> <!--post box end -->
                             
                             <div class="col-md-6 col-lg-2 right_sidebar">
                                 @include('Frontend.layouts.sidebar')
@@ -73,5 +48,42 @@
 @else
 <h2 class="text-danger" >No Record Found</h2>
 @endif
-
+<br><br>
 @endsection
+
+
+{{Helper::loadajax()}}
+<script>
+function loadMoreData(page) {
+    $.ajax({
+            url: "?page=" + page,
+            type: "get",
+            beforeSend: function() {
+                $(".loading").show();
+            }
+        })
+        .done(function(data) {
+            if (data.html === " ") {
+                $('.loading').hide();
+                return;
+            }
+            console.log(data)
+            $(".loading").hide();
+            $("#post-data").append(data.html);
+
+        })
+        .fail(function(jqXHR, ajaxOptions, thrownError) {
+            console.log("Server not responding....")
+        });
+}
+
+var page = 1;
+
+$(window).on('scroll', function() {
+    if ($(window).scrollTop() >= $(
+            '#post-box').offset().top + $('#post-box').outerHeight() - window.innerHeight) {
+        page++;
+        loadMoreData(page);
+    }
+});
+</script>

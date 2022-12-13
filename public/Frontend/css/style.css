@@ -38,6 +38,16 @@ a:hover{
   color: var(--dark);
 }
 
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #f9f9f9;
+  z-index: 2;
+}
+.sticky + .content {
+  padding-top: 60px;
+}
 
 h1,
 h2,
@@ -98,6 +108,14 @@ h4 {
 .footer-color{
   border-top: 1px solid #ffc107;
   color:black;
+}
+.page-footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f9f9f9;
+  z-index: 1;
 }
 
 
@@ -328,7 +346,7 @@ h4 {
 .navbar{
   /* border-top: 1px solid rgb(211 208 208);; */
   border-bottom: 3px solid #fcc80d;
-  padding: 0px;
+  padding: 5px;
 }
 .header_top{
   padding: 20px 35px;
@@ -472,11 +490,12 @@ h4 {
   overflow: hidden;
 }
 .header_thought{
-    text-align: right;
+    text-align: left;
     font-size: 16px;
     word-wrap: break-word;
     text-shadow: 0px 3px 3px rgb(0 0 0 / 30%);
     color: #333;
+    margin-top: 5%;
 }
 .header_logo{
   width: 50%;
@@ -484,6 +503,14 @@ h4 {
 .tags{
   background: #ffc107;
   padding: 5px 10px;
+}
+.category_name_clamp{
+  text-align: right;
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 16px;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .caption1 {
   position: absolute;
@@ -548,6 +575,12 @@ h4 {
   .title-container{
     width: 90% !important;
   }
+  .footer-logo{
+    display: none;
+  }
+  .nav_search{
+    display: none;
+  }
 }
 
 
@@ -589,6 +622,12 @@ h4 {
   }
   .title-container{
     width: 90% !important;
+  }
+  .footer-logo{
+    display: none;
+  }
+  .nav_search{
+    display: none;
   }
 }
 

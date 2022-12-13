@@ -13,41 +13,48 @@ use DateTime;
 use Helper;
 class Posts extends Controller
 {
+    public $search;
      // Post list
      public function index(Request $request){
-        $search = urldecode($request->input('search'));
+        $this->search = urldecode($request->input('search'));
         try{
             $user = Helper::getUser();
-            if($user->role == "admin" || $user->role == "moderator" ){
+            if($user->role == "admin" || $user->role == "moderator" ){ 
                 $data['posts'] = Posts_model::select("post.*","category.category_keywords")
-                ->where('post.title','LIKE',"%" . $search . "%")
-                ->orWhere("post.synopsis", 'LIKE',"%" . $search . "%")
-                ->orWhere("post.hashtags", 'LIKE',"%" . $search . "%")
-                ->orWhere("post.author", 'LIKE',"%" . $search . "%")
-                ->orWhere("post.keywords", 'LIKE',"%" . $search . "%")
-                ->with('category')
                 ->leftJoin("category","post.category_id","=","category.category_id")
-                ->orWhere("category.category_name", 'LIKE',"%" . $search . "%")
-                ->where("post.is_delete",0)
+                ->where(function($query){
+                    $query
+                    ->orWhere('post.title','LIKE',"%" . $this->search . "%")
+                    ->orWhere("post.synopsis", 'LIKE',"%" . $this->search . "%")
+                    ->orWhere("post.hashtags", 'LIKE',"%" . $this->search . "%")
+                    ->orWhere("post.author", 'LIKE',"%" . $this->search . "%")
+                    ->orWhere("post.keywords", 'LIKE',"%" . $this->search . "%")
+                    ->orWhere("category.category_name", 'LIKE',"%" . $this->search . "%");
+                })
+                ->with('category')
                 ->orderBy('post.published_date', 'desc')
                 ->latest("post.published_date")
+                ->where("post.is_delete",0)
                 ->paginate(10);
 
             }else{ 
-                
+               
                 $data['posts'] = Posts_model::select("post.*","category.category_keywords")
-                ->where('post.title','LIKE',"%" . $search . "%")
-                ->orWhere("post.synopsis", 'LIKE',"%" . $search . "%")
-                ->orWhere("post.hashtags", 'LIKE',"%" . $search . "%")
-                ->orWhere("post.author", 'LIKE',"%" . $search . "%")
-                ->orWhere("post.keywords", 'LIKE',"%" . $search . "%")
-                ->with('Category')
                 ->leftJoin("category","post.category_id","=","category.category_id")
-                ->orWhere("category.category_name", 'LIKE',"%" . $search . "%")
-                ->where("post.is_delete",0)
-                ->where("user_id",session()->get("user_id"))
+                ->where(function($query){
+                    $query
+                    ->orWhere('post.title','LIKE',"%" . $this->search . "%")
+                    ->orWhere("post.synopsis", 'LIKE',"%" . $this->search . "%")
+                    ->orWhere("post.hashtags", 'LIKE',"%" . $this->search . "%")
+                    ->orWhere("post.author", 'LIKE',"%" . $this->search . "%")
+                    ->orWhere("post.keywords", 'LIKE',"%" . $this->search . "%")
+                    ->orWhere("category.category_name", 'LIKE',"%" . $this->search . "%");
+                })
+                ->with('category')
                 ->orderBy('post.published_date', 'desc')
                 ->latest("post.published_date")
+                ->where("post.user_id",session()->get("user_id"))
+                ->where("post.is_delete",0)
                 ->paginate(10);
 
             }
@@ -55,8 +62,8 @@ class Posts extends Controller
             return view('Admin.Posts.index')->with($data);
             
         }catch(\Exception $exception){
-            // dd($exception);
-            return redirect('admin/all-posts')->withErrors('Exception Error');
+            dd($exception);
+            // return redirect('admin/all-posts')->withErrors('Exception Error');
             // echo "Error";
         }
     }
@@ -85,9 +92,8 @@ class Posts extends Controller
                     $today_date = strtotime($today_date);
                     $published_date = strtotime($published_date);
                     
-                    if ($published_date > $today_date){
+                    if ($published_date > $today_date && Helper::getUser()->role != "author"){
                         $post_schedule = 3;
-                        
                     }else{
                         $post_schedule = 0;
                     }
@@ -101,8 +107,10 @@ class Posts extends Controller
 
                     
                     $post_status = 1;
+                    $under = "";
                     if(Helper::getUser()->role == "author" || $today_date < $published_date){
                         $post_status = 0;
+                        $under = "and under review please wait for approval";
                     }
                     Posts_model::create([
                         "title"=>$request->post_title,
@@ -122,7 +130,7 @@ class Posts extends Controller
                         "published_date"=>$request->published_date,
                         "scheduled_status"=>$post_schedule
                     ]);
-                    return redirect('admin/all-posts')->with("success",$post_schedule==3?"Post Successfully Scheduled":"Post Successfully Created");
+                    return redirect('admin/all-posts')->with("success",$post_schedule==3?"Post Successfully scheduled $under":"Post Successfully created $under");
                 }
             }catch(\Exception $exception){
                 // dd($exception);

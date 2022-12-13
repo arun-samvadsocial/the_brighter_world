@@ -9,7 +9,7 @@ use App\Models\Frontend\Comment_model;
 use Illuminate\Support\Facades\DB;
 use Mail;
 use Illuminate\Support\Facades\Http;
-
+use Carbon\Carbon;
 class Helper
 {
     
@@ -35,6 +35,7 @@ class Helper
     }
 
     public static function getTrendingPosts($limit = null){
+        $date = \Carbon\Carbon::today()->subDays(7);
         $post =  Post_model::select("post.*", "category.category_name")
         ->where("is_delete",0)
         ->limit($limit)
@@ -42,6 +43,7 @@ class Helper
         ->where("status",1)
         ->leftJoin("category","post.category_id","=","category.category_id")
         ->where("category.category_status",1)
+        ->where('post.published_date','>=',$date)
         ->orderBy('post_view_count', 'desc')
         ->get();
         return $post; 
@@ -57,8 +59,8 @@ class Helper
                     ->leftJoin("category", "category.category_id", "=","post.category_id")
                     ->where("category.category_status", "1")
                     ->groupBy('YEAR','MONTHNAME','MONTH')
-                    ->orderBy('YEAR','ASC')
-                    ->orderBy('MONTH','ASC')
+                    ->orderBy('YEAR','DESC')
+                    ->orderBy('MONTH','DESC')
 
                     ->get();
 
@@ -96,11 +98,11 @@ class Helper
 
     public static function getCategory($limit){
         $post =  Category_model::where("category_status",1)
-        ->orderBy("short_order_status", "desc")
+        ->orderBy("short_order_status", "asc")
         ->limit($limit)
         ->get();
         return $post;
-    }
+    } 
 
     public static function getComments($post_id){
         $comment =  Comment_model::where("post_id",$post_id)
@@ -188,6 +190,9 @@ class Helper
        return $ipaddress;
     } 
 
+    public static function loadajax(){
+        echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>';
+    }
 
 // ==============================================================================================
 // Start CopyScape Plagiarism Checker Steps Funtions

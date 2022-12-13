@@ -53,6 +53,14 @@
 .detailsbtn{
     border-radius:50px;
 }
+.related_news_title{
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 16px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.2em;
+}
 </style>
 
 @extends('Frontend.layouts.main')
@@ -317,13 +325,13 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                                 <div class="row p-3" style="margin-bottom: 10px">
                                     <div class="col-8">
                                         
-                                            <div class="post_title font-2">
+                                            <div class="post_title font-2 related_news_title" >
                                                 {{$r_row->title}}
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 text-grey">
-                                                    <span style="font-size: 0.9vw;">{!! Helper::formatDate($r_row->published_date) !!}</span>
-                                                   <span style="font-size: 0.8vw; color:#fcc80d;"><span class="dots"></span> {{isset($arr[0])?$arr[0]->category_name:'N/A'}}</span>
+                                                    <span style="font-size: 0.9em;" >{!! Helper::formatDate($r_row->published_date) !!}</span>
+                                                   <span style="font-size: 0.8em; color:#fcc80d;"><span class="dots"></span> {{isset($arr[0])?$arr[0]->category_name:'N/A'}}</span>
                                                 
                                                     <!-- <div class="  d-flex flex-row-reverse"> -->
                                                     
@@ -332,7 +340,7 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                                             </div>
                                     </div>
                                     <div class="col-4">
-                                        <img src="{{$r_row->img_path?url($r_row->img_path):url('no_image.png')}}" width="100%" height="80%" style="border-radius: 10%;" alt="">
+                                        <img src="{{$r_row->img_path?url($r_row->img_path):url('no_image.png')}}" width="100%" height="60" style="border-radius: 10%;" alt="">
                                     </div>
                                     <div class="col-10" style="border-bottom:1px solid rgb(211 208 208); margin:auto" ></div>
                                 </div>

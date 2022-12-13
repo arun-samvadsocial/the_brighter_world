@@ -7,6 +7,14 @@
     max-height: 465px;
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.5);
+    background-size: cover;
+}
+
+.main-thumb {
+    object-fit: cover;
+    min-height: 465px;
+    background-size: cover;
+
 }
 
 .thumb::after {
@@ -16,6 +24,7 @@
 .main-news {
     margin-top: 20px;
     max-width: 1500px;
+
 }
 
 .main-news h3 {
@@ -98,14 +107,18 @@
 <!-- Hero section start here  -->
 @php
 $trending_post = Helper::getTrendingPosts(4);
-$trending_cat_row = json_decode($trending_post[0]->category);
+$trending_cat_row = json_decode(isset($trending_post[0])?$trending_post[0]->category:'');
 @endphp
 @if($trending_cat_row)
 <div class="container main-news section">
     <div class="row">
+        @if(isset($trending_post[0]))
         <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6">
-            <img class="thumb mb-3 main-thumb " src="{{url($trending_post[0]->img_path)}}"
-                style="object-fit: cover; min-height:465px;">
+            <div class="image-overlay"></div>
+
+            <img class="thumb mb-3 main-thumb" style="background-image:
+                                                            linear-gradient(to bottom, rgb(255 255 255 / 0%), rgb(0 0 0 / 64%)),
+                                                            url('{{url($trending_post[0]->img_path)}}');" />
             <div class="caption ">
                 <a href="{!! url('detail/'.$trending_post[0]->post_url.'/'.Helper::base64url_encode($trending_post[0]->post_id)) !!}"
                     class="title">
@@ -117,14 +130,19 @@ $trending_cat_row = json_decode($trending_post[0]->category);
                         class="btn btn-warning rounded-pill">{{$trending_post[0]->category_name}}</a>
                 </p>
             </div>
-
-
         </div>
+        @endif
+
         <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6">
             <div class="row">
+
+                @if(isset($trending_post[1]))
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                     <div class="image image-sm mb-1">
-                        <img class="thumb" src="{{url($trending_post[1]->img_path)}}" style="height:100%;">
+                        <img class="thumb"
+                            style="background-image:
+                                                            linear-gradient(to bottom, rgb(255 255 255 / 0%), rgb(0 0 0 / 64%)),
+                                                            url('{{url($trending_post[1]->img_path)}}');height: 280px;">
                     </div>
                     <div class="caption ">
                         <a href="{!! url('detail/'.$trending_post[1]->post_url.'/'.Helper::base64url_encode($trending_post[1]->post_id)) !!}"
@@ -138,11 +156,17 @@ $trending_cat_row = json_decode($trending_post[0]->category);
                         </p>
                     </div>
                 </div>
+                @endif
+
 
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 row custom ">
+
+                    @if(isset($trending_post[2]))
                     <div class="col-lg-6 plr-2" style="padding-right:2px">
                         <div class="image image-sm mb-1">
-                            <img class="thumb" src="{{url($trending_post[2]->img_path)}}">
+                            <img class="thumb" style="background-image:
+                                                            linear-gradient(to bottom, rgb(255 255 255 / 0%), rgb(0 0 0 / 64%)),
+                                                            url('{{url($trending_post[2]->img_path)}}');">
                         </div>
                         <div class="caption ">
                             <a href="{!! url('detail/'.$trending_post[2]->post_url.'/'.Helper::base64url_encode($trending_post[2]->post_id)) !!}"
@@ -157,9 +181,13 @@ $trending_cat_row = json_decode($trending_post[0]->category);
                             </p>
                         </div>
                     </div>
+                    @endif
+                    @if(isset($trending_post[3]))
                     <div class="col-lg-6 plr-2" style="padding-left:2px">
                         <div class="image image-sm mb-3">
-                            <img class="thumb image-sm" src="{{url($trending_post[3]->img_path)}}">
+                            <img class="thumb image-sm" style="background-image:
+                                                            linear-gradient(to bottom, rgb(255 255 255 / 0%), rgb(0 0 0 / 64%)),
+                                                            url('{{url($trending_post[3]->img_path)}}');">
                         </div>
                         <div class="caption ">
                             <a href="{!! url('detail/'.$trending_post[3]->post_url.'/'.Helper::base64url_encode($trending_post[3]->post_id)) !!}"
@@ -174,6 +202,9 @@ $trending_cat_row = json_decode($trending_post[0]->category);
                             </p>
                         </div>
                     </div>
+                    @endif
+
+
                 </div>
             </div>
         </div>
@@ -235,7 +266,7 @@ $posts = Helper::getPosts($cat_row->category_id,10);
                                         {!! Helper::formatDate($post_row->published_date) !!}
                                     </div>
                                     <div class="col-6 d-flex flex-row-reverse">
-                                        <div class="post_category" style="text-align: right;">
+                                        <div class="post_category category_name_clamp" style="text-align: right;">
                                             {{ $cat_row->category_name }}
                                         </div>
                                     </div>
@@ -252,6 +283,7 @@ $posts = Helper::getPosts($cat_row->category_id,10);
     </div> <!-- row end -->
     </div> <!-- container-fluid end -->
 </section> <!-- Section end -->
+<br><br>
 @endif
 @endforeach
 

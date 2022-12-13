@@ -63,7 +63,7 @@ class Category extends Controller
         if($request->isMethod('post')){
             try{
                 $validator =  Validator::make($request->all(),[
-                    "category_name"=>"required|unique:category",
+                    "category_name"=>"required",
                     'category_keywords'=>'required',
                     'short_order_status'=>'required',
                 ]);
