@@ -1,4 +1,5 @@
 @foreach($posts as $post_row)
+@if($post_row->status == 1 && $post_row->is_delete == 0)
 <div class="item col-md-6 col-lg-4">
     <div class="col-md-12 wow fadeInUp ">
         <div class="main_services text-left">
@@ -25,5 +26,5 @@
     </div>
 </div>
 </div>
-
+@endif
 @endforeach

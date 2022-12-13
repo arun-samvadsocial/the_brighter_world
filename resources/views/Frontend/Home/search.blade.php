@@ -14,7 +14,7 @@
                         <div class="category_header row p-2">
                             <div class="col-md-3"><hr class="bg-colorAccent"></div>
                             <div class="category_header_left col-md-3  text-center">
-                            <h2 class="colorAccent" >{{$cat_row[0]->category_name}}</h2>
+                            <h2 class="colorAccent" >{{ Request::get('search') }}</h2>
                             </div>
                             <div class="col-md-3"><hr class="bg-colorAccent"></div>
                         </div>
