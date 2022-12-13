@@ -38,6 +38,16 @@ a:hover{
   color: var(--dark);
 }
 
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #f9f9f9;
+  z-index: 2;
+}
+.sticky + .content {
+  padding-top: 60px;
+}
 
 h1,
 h2,
@@ -336,7 +346,7 @@ h4 {
 .navbar{
   /* border-top: 1px solid rgb(211 208 208);; */
   border-bottom: 3px solid #fcc80d;
-  padding: 0px;
+  padding: 5px;
 }
 .header_top{
   padding: 20px 35px;

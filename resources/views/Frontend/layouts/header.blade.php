@@ -103,7 +103,7 @@
                 </div>
             </div>
         </div>
-        <div class="header_bottom">
+        <div class="header_bottom" id="header_bottom">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="menu-btn d-flex flex-row-reverse">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -162,3 +162,18 @@
             </nav>
         </div>
     </header>
+
+    <script>
+window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("header_bottom");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
