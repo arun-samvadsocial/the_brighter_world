@@ -92,9 +92,8 @@ class Posts extends Controller
                     $today_date = strtotime($today_date);
                     $published_date = strtotime($published_date);
                     
-                    if ($published_date > $today_date){
+                    if ($published_date > $today_date && Helper::getUser()->role != "author"){
                         $post_schedule = 3;
-                        
                     }else{
                         $post_schedule = 0;
                     }
@@ -108,8 +107,10 @@ class Posts extends Controller
 
                     
                     $post_status = 1;
+                    $under = "";
                     if(Helper::getUser()->role == "author" || $today_date < $published_date){
                         $post_status = 0;
+                        $under = "and under review please wait for approval";
                     }
                     Posts_model::create([
                         "title"=>$request->post_title,
@@ -129,7 +130,7 @@ class Posts extends Controller
                         "published_date"=>$request->published_date,
                         "scheduled_status"=>$post_schedule
                     ]);
-                    return redirect('admin/all-posts')->with("success",$post_schedule==3?"Post Successfully Scheduled":"Post Successfully Created");
+                    return redirect('admin/all-posts')->with("success",$post_schedule==3?"Post Successfully scheduled $under":"Post Successfully created $under");
                 }
             }catch(\Exception $exception){
                 // dd($exception);
