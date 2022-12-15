@@ -265,7 +265,21 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                         
                         
 
-                    <div class="comments pt-5">
+                    <div class="comments pt-5 pb-5">
+                         <!-- Success Message  -->
+                        @if (\Session::has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+                            {!! \Session::get('success') !!}
+                        </div>
+                        @endif
+                        <!-- Error Message  -->
+                        @if($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+                            {{$errors->first()}}
+                        </div>
+                        @endif
                         <h3>Comments</h3>
                         <form action="{{url('/comment')}}" method="post">
                             @csrf 

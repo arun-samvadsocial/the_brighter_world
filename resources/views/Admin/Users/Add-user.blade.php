@@ -55,7 +55,6 @@
                                                     <label class="form-label" for="formemail">Email <spna class="text-danger" >*</span>:</label>
                                                     <input type="email" class="form-control"
                                                     title="Please enter valid email address" 
-                                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                                     value="{{old('email')}}" placeholder="Enter email" onInput="myFunction()" required name="email" id="email"/>
                                                     @error('email')
                                                     <div class="text text-danger" id="email1" >
