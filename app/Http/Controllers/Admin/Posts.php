@@ -171,7 +171,6 @@ class Posts extends Controller
                         Posts_model::where("post_id",$request->id)
                         ->update([
                                 "title"=>$request->post_title,
-                                "author"=>isset(Helper::getUser()->name)?Helper::getUser()->name:'',
                                 "synopsis"=>$request->synopsis,
                                 "hashtags"=>$request->keywords,
                                 "description"=>$request->editor1,
@@ -181,7 +180,7 @@ class Posts extends Controller
                                 "post_url"=>$post_url!=""?$post_url:"",
                                 "category_id"=>$request->category_id,
                                 "push_status"=>1,
-                                "user_id"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
+                                "last_updated_by"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
                                 "video_link"=>$request->video_link
                         ]);
                     }else{
@@ -189,7 +188,6 @@ class Posts extends Controller
                         Posts_model::where("post_id",$request->id)
                         ->update([
                                 "title"=>$request->post_title,
-                                "author"=>isset(Helper::getUser()->name)?Helper::getUser()->name:'',
                                 "synopsis"=>$request->synopsis,
                                 "hashtags"=>$request->keywords,
                                 "description"=>$request->editor1,
@@ -197,7 +195,7 @@ class Posts extends Controller
                                 "post_url"=>$post_url!=""?$post_url:"",
                                 "category_id"=>$request->category_id,
                                 "push_status"=>1,
-                                "user_id"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
+                                "last_updated_by"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
                                 "video_link"=>$request->video_link
                         ]);
                     }
