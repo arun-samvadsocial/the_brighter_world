@@ -90,8 +90,13 @@ class Users extends Controller
             try{
                 $validator =  Validator::make($request->all(),[
                     "name"=>"required",
-                    'user_role'=>'required',
                 ]);
+                if(isset($request->user_role) && $request->user_role != null){
+                    $role = $request->user_role;
+                }else{
+                    $role = Helper::getUser()->role;
+                }
+                dd($role);
 
                 if($validator->fails()){
                     return redirect()->back()->withErrors($validator->errors())->withInput(); 

@@ -58,7 +58,7 @@
     
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formemail">Email <spna class="text-danger" >*</span>:</label>
-                                                    <input type="email"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" onInput="myFunction()" required
+                                                    <input type="email"  onInput="myFunction()" required
                                                     value={{$user_data->email?$user_data->email:""}} 
                                                      class="form-control" name="email" disabled id="email"/>
                                                      @error('email')
