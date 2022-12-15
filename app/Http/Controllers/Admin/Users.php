@@ -96,7 +96,7 @@ class Users extends Controller
                 }else{
                     $role = Helper::getUser()->role;
                 }
-                dd($role);
+                // dd($role);
 
                 if($validator->fails()){
                     return redirect()->back()->withErrors($validator->errors())->withInput(); 
@@ -104,7 +104,7 @@ class Users extends Controller
                 Users_model::where("id",$request->id)
                 ->update([
                     "name"=>$request->name,
-                    "role"=>$request->user_role
+                    "role"=>$role
                 ]);
                 return redirect('admin/user-list/')->with("success", "User updated");
             }
