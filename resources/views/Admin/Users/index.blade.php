@@ -93,12 +93,22 @@
                                             <td>{{$row->mobile}}</td>
                                             <td>{{$row->role_name}}</td>
                                             <td>
+                                                @if($row->id == session()->get("user_id"))
                                                 @if($row->status ==1)
-                                                <a href="{{url('admin/change-user-status/'.$row->id)}}"
-                                                    class="badge rounded-pill bg-success">Active</a>
+                                                    <a href="#"
+                                                        class="badge rounded-pill bg-success">Active</a>
+                                                    @else
+                                                    <a href="#"
+                                                        class="badge rounded-pill bg-danger">Deactivated</a>
+                                                    @endif
                                                 @else
-                                                <a href="{{url('admin/change-user-status/'.$row->id)}}"
-                                                    class="badge rounded-pill bg-danger">Deactivated</a>
+                                                @if($row->status ==1)
+                                                    <a href="{{url('admin/change-user-status/'.$row->id)}}"
+                                                        class="badge rounded-pill bg-success">Active</a>
+                                                    @else
+                                                    <a href="{{url('admin/change-user-status/'.$row->id)}}"
+                                                        class="badge rounded-pill bg-danger">Deactivated</a>
+                                                    @endif
                                                 @endif
                                             </td>
                                             <td>
