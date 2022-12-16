@@ -4,10 +4,8 @@
             <!-- Start right Content here -->
             <!-- ============================================================== -->
             <div class="main-content">
-
                 <div class="page-content">
                     <div class="container-fluid">
-
 <!-- start page title -->
 <div class="page-title-box">
     <div class="row align-items-center">
@@ -24,14 +22,10 @@
     </div>
 </div>
 <!-- end page title -->
-
-
-
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
@@ -50,7 +44,6 @@
                                                     </div>
                                                     @enderror
                                                 </div>
-                                                   
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formemail">Category <span class="text-danger" >*</span> :</label>
                                                     <select class=" form-control " name="category_id" style="width:100%" required   data-placeholder="Choose category ...">
