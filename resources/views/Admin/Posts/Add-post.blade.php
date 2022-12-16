@@ -125,9 +125,7 @@
                                                     <grammarly-editor-plugin>
                                                         <textarea name="editor1"  id="editor1"  required >{{old('editor1')}}</textarea>
                                                         <textarea name="content_hidden"   id="content_hidden" class="d-none" ></textarea>
-                                                    </grammarly-editor-plugin>
-                                                    
-                                                    <script>
+                                                        <script>
                                                             // CKEDITOR.replace( 'editor1' );
                                                             CKEDITOR.replace( 'editor1' ,
                                                             {   
@@ -142,6 +140,9 @@
                                                                 }
                                                             );
                                                     </script>
+                                                    </grammarly-editor-plugin>
+                                                    
+                                                    
                                                     </div>
                                                     @error('editor1')
                                                     <div class="text text-danger" id="editor2">                  
