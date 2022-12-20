@@ -101,11 +101,24 @@ class Users extends Controller
                 if($validator->fails()){
                     return redirect()->back()->withErrors($validator->errors())->withInput(); 
                 }else{
-                Users_model::where("id",$request->id)
-                ->update([
-                    "name"=>$request->name,
-                    "role"=>$role
-                ]);
+                   
+                    if($request->password == null){
+                        
+                        Users_model::where("id",$request->id)
+                        ->update([
+                            "name"=>$request->name,
+                            "role"=>$role
+                        ]);
+                    }else{
+                        
+                        Users_model::where("id",$request->id)
+                        ->update([
+                            "name"=>$request->name,
+                            "role"=>$role,
+                            "password"=>Hash::make($request->password)
+                        ]);
+                    }
+                
                 return redirect('admin/user-list/')->with("success", "User updated");
             }
             }catch(\Exception $exception){
