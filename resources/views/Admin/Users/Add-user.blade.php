@@ -81,7 +81,7 @@
                                         <div data-repeater-list="outer-group" class="outer">
                                             <div data-repeater-item class="outer">
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="formname">Name <span class="text-danger" >*</span> :</label>
+                                                    <label class="form-label" for="formname">Name <span class="text-danger" >* </span> (Only alphabet letters accepted):</label>
                                                     <input type="text" id="username" pattern="[A-Za-z]+{1,32}" title="Only alphabet letters" class="form-control" value="{{old('name')}}" name="name"  placeholder="Enter Name...">
                                                     @error('name')
                                                     <div class="text text-danger" >
@@ -94,7 +94,7 @@
                                                     <label class="form-label" for="formemail">Email <span class="text-danger" >*</span>:</label>
                                                     <input type="email" class="form-control"
                                                     title="Please enter valid email address" 
-                                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                                
                                                     value="{{old('email')}}" placeholder="Enter email" onInput="myFunction()" name="email" id="email"/>
                                                     @error('email')
                                                     <div class="text text-danger" id="email1" >
@@ -106,6 +106,7 @@
                                                     }
                                                     </script>
                                                     @enderror
+
                                                 </div>
 
                                                 <div class="mb-3">
