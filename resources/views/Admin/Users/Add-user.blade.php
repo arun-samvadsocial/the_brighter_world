@@ -48,10 +48,9 @@
     border-color: var(--succes-color);
 }
 
-.form-control.error select {
+.form-control.error input {
     border-color: var(--error-color);    
 }
-
 
 
 </style>
@@ -198,17 +197,12 @@ const user_role = document.getElementById('user_role');
 function showError(input, message) {
     const formControl = input.parentElement;
     formControl.className = 'form-control error';
-    const label = formControl.querySelector('label');
-    label.style.color = "red";
 }
 
 //show success colour
 function showSucces(input) {
     const formControl = input.parentElement;
     formControl.className = 'form-control success';
-    const label = formControl.querySelector('label');
-    label.style.color = "green";
-
 }
 
 //check email is valid
@@ -262,7 +256,7 @@ form.addEventListener('submit',function(e) {
     e.preventDefault();
     checkRequired([username, email, password, mobile, user_role]);
     checkLength(username,3,15);
-    // checkLength(password,6,25);
+    checkLength(password,6,25);
     checkEmail(email);
     checkMobile(mobile,10,10);
 });
