@@ -8,7 +8,6 @@
 
                 <div class="page-content">
                     <div class="container-fluid">
-
 <!-- start page title -->
 <div class="page-title-box">
     <div class="row align-items-center">
@@ -25,14 +24,10 @@
     </div>
 </div>
 <!-- end page title -->
-
-
-
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
@@ -44,14 +39,14 @@
                                             <div data-repeater-item class="outer">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formname">Post Title <span class="text-danger" >*</span> :</label>
-                                                    <input type="text" class="form-control" value="{{old('post_title')}}" name="post_title" id="post_title" oninput="setPostData()" required placeholder="Enter post title...">
+                                                    <input type="text"
+                                                     class="form-control" value="{{old('post_title')}}" name="post_title" id="post_title" oninput="setPostData()" required placeholder="Enter post title...">
                                                     @error('post_title')
-                                                    <div class="text text-danger" >
+                                                    <div class="text text-danger">
                                                     {{$message}}
                                                     </div>
                                                     @enderror
                                                 </div>
-                                                   
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formemail">Category <span class="text-danger" >*</span> :</label>
                                                     <select class=" form-control " name="category_id" style="width:100%" required onchange="setPostData()"  id="category_id"  data-placeholder="Choose category ...">
@@ -65,7 +60,7 @@
                                                     @endforeach
                                                     </select>
                                                     @error('category_id')
-                                                    <div class="text text-danger" >
+                                                    <div class="text text-danger">
                                                     {{$message}}
                                                     </div>
                                                     @enderror

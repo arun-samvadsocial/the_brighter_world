@@ -42,7 +42,7 @@
                                         <div data-repeater-list="outer-group" class="outer">
                                             <div data-repeater-item class="outer">
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="formname">Name <spna class="text-danger" >*</span> :</label>
+                                                    <label class="form-label" for="formname">Name <span class="text-danger" >*</span> :</label>
                                                     <input type="text" pattern="[A-Za-z]{1,32}" title="Only alphabet letters" class="form-control" value="{{old('name')}}" name="name" id="formname" required placeholder="Enter Name...">
                                                     @error('name')
                                                     <div class="text text-danger" >
@@ -52,7 +52,7 @@
                                                 </div>
     
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="formemail">Email <spna class="text-danger" >*</span>:</label>
+                                                    <label class="form-label" for="formemail">Email <span class="text-danger" >*</span>:</label>
                                                     <input type="email" class="form-control"
                                                     title="Please enter valid email address" 
                                                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
@@ -65,7 +65,7 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="formemail">Phone  <spna class="text-danger" >*</span>:</label>
+                                                    <label class="form-label" for="formemail">Phone  <span class="text-danger" >*</span>:</label>
                                                     <input type="text" class="form-control" value="{{old('mobile')}}" 
                                                     placeholder="Enter phone number"
                                                     pattern="[6789][0-9]{9}" title="Please enter valid phone number."
@@ -78,7 +78,7 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="forrole">User Role <spna class="text-danger" >*</span>:</label>
+                                                    <label class="form-label" for="forrole">User Role <span class="text-danger" >*</span>:</label>
                                                     <select name="user_role" id="" class="form-control" required>
                                                         <option value="" selected disabled>Select user role</option>
                                                         @foreach($roles as $row)
@@ -93,7 +93,7 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="formemail">Password <spna class="text-danger" >*</span>:</label>
+                                                    <label class="form-label" for="formemail">Password <span class="text-danger" >*</span>:</label>
                                                     <input type="password" class="form-control" name="password" id="password" required/>
                                                     @error('password')
                                                     <div class="text text-danger" >
