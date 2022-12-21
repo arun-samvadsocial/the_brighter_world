@@ -94,8 +94,8 @@
                                                     <label class="form-label" for="formemail">Email <span class="text-danger" >*</span>:</label>
                                                     <input type="email" class="form-control"
                                                     title="Please enter valid email address" 
-                                                
-                                                    value="{{old('email')}}" placeholder="Enter email" onInput="myFunction()" name="email" id="email"/>
+                                                    onkeyup="myFunction()"
+                                                    value="{{old('email')}}" placeholder="Enter email" name="email" id="email"/>
                                                     @error('email')
                                                     <div class="text text-danger" id="email1" >
                                                     {{$message}}
@@ -113,7 +113,7 @@
                                                     <label class="form-label" for="formemail">Phone  <span class="text-danger" >*</span>:</label>
                                                     <input type="text" class="form-control" value="{{old('mobile')}}" 
                                                     placeholder="Enter phone number"
-                                                    maxlength="10" pattern="[1-9]{1}[0-9]{9}" onInput="myFunction()"  title="Please enter valid phone number."
+                                                    maxlength="10" pattern="[1-9]{1}[0-9]{9}"  title="Please enter valid phone number."
                                                      name="mobile" id="mobile"/>
                                                     @error('mobile')
                                                     <div class="text text-danger" id="phone1" >
@@ -273,9 +273,10 @@ form.addEventListener('submit',function(e) {
     e.preventDefault();
     checkRequired([username, email, password, mobile, user_role]);
     checkLength(username,3,15);
-    // checkLength(password,6,25);
     checkEmail(email);
-    checkMobile(mobile,10,10);
+    if(username.value != ""  && email.value != "" && mobile.value != ""  && password.value!= ""  && user_role.value != ""){
+        form.submit()
+    }
 });
 
 </script>
