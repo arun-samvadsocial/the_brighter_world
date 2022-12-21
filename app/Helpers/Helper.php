@@ -73,6 +73,16 @@ class Helper
         ->first();
         return $user;
     }
+    public static function getAuthor(){
+        $user =  User::where("status",1)
+        ->get();
+        return $user;
+    }
+    public static function getAuthorDetails($id=''){
+        $user =  User::where("id",$id)
+        ->first();
+        return $user;
+    }
 
     public static function getPostsByAuthor($author_id,$limit){
         $post =  Post_model::where("user_id",$author_id)
@@ -82,6 +92,13 @@ class Helper
         ->where("status",1)
         ->latest()
         ->get();
+        return $post;
+    }
+    public static function getPostsById($post_id){
+        $post =  Post_model::where("post_id",$post_id)
+        ->with('category')
+        ->where("is_delete",0)
+        ->first();
         return $post;
     }
 

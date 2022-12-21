@@ -90,17 +90,35 @@ class Users extends Controller
             try{
                 $validator =  Validator::make($request->all(),[
                     "name"=>"required",
-                    'user_role'=>'required',
                 ]);
+                if(isset($request->user_role) && $request->user_role != null){
+                    $role = $request->user_role;
+                }else{
+                    $role = Helper::getUser()->role;
+                }
+                // dd($role);
 
                 if($validator->fails()){
                     return redirect()->back()->withErrors($validator->errors())->withInput(); 
                 }else{
-                Users_model::where("id",$request->id)
-                ->update([
-                    "name"=>$request->name,
-                    "role"=>$request->user_role
-                ]);
+                   
+                    if($request->password == null){
+                        
+                        Users_model::where("id",$request->id)
+                        ->update([
+                            "name"=>$request->name,
+                            "role"=>$role
+                        ]);
+                    }else{
+                        
+                        Users_model::where("id",$request->id)
+                        ->update([
+                            "name"=>$request->name,
+                            "role"=>$role,
+                            "password"=>Hash::make($request->password)
+                        ]);
+                    }
+                
                 return redirect('admin/user-list/')->with("success", "User updated");
             }
             }catch(\Exception $exception){

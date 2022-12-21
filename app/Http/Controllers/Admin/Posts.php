@@ -151,7 +151,7 @@ class Posts extends Controller
                     "post_title"=>"required",
                     'category_id'=>'required',
                     'editor1'=>'required',
-                    'img_source'=>'required'
+                    'img_source'=>'required',
                 ]);
                 if($validator->fails()){
                     return redirect()->back()->withErrors($validator->errors())->withInput(); 
@@ -161,7 +161,14 @@ class Posts extends Controller
                     // foreach($request->category_id as $cat_row){
                     //     $category_id .= $cat_row[$i].',';
                     // }
-                    $post_url = Helper::slugify($request->post_title); 
+                   $post_data =  Helper::getPostsById($request->id);
+                    if(Helper::getUser()->role == 'admin' || Helper::getUser()->role == 'moderator'){
+                        $publisher_id = $request->published_by;
+                    }else{
+                        $publisher_id = session()->get("user_id");
+                    }
+                    $post_url = Helper::slugify($request->post_title);  
+                    $authorData = Helper::getAuthorDetails($publisher_id);
 
                     if($request->post_image != null){
                         $img_path = $request->file('post_image');
@@ -171,8 +178,8 @@ class Posts extends Controller
                         Posts_model::where("post_id",$request->id)
                         ->update([
                                 "title"=>$request->post_title,
-                                "author"=>isset(Helper::getUser()->name)?Helper::getUser()->name:'',
                                 "synopsis"=>$request->synopsis,
+                                "author"=>$authorData->name,
                                 "hashtags"=>$request->keywords,
                                 "description"=>$request->editor1,
                                 "img_path"=>$final_path!=""?$final_path:"",
@@ -180,8 +187,10 @@ class Posts extends Controller
                                 "img_source"=>$request->img_source,
                                 "post_url"=>$post_url!=""?$post_url:"",
                                 "category_id"=>$request->category_id,
+                                "published_date"=>isset($request->published_date)?$request->published_date:$post_data->published_date,
                                 "push_status"=>1,
-                                "user_id"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
+                                "user_id"=>$authorData->id,
+                                "last_updated_by"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
                                 "video_link"=>$request->video_link
                         ]);
                     }else{
@@ -189,15 +198,17 @@ class Posts extends Controller
                         Posts_model::where("post_id",$request->id)
                         ->update([
                                 "title"=>$request->post_title,
-                                "author"=>isset(Helper::getUser()->name)?Helper::getUser()->name:'',
                                 "synopsis"=>$request->synopsis,
+                                "author"=>$authorData->name,
                                 "hashtags"=>$request->keywords,
                                 "description"=>$request->editor1,
                                 "img_source"=>$request->img_source,
                                 "post_url"=>$post_url!=""?$post_url:"",
                                 "category_id"=>$request->category_id,
+                                "published_date"=>isset($request->published_date)?$request->published_date:$post_data->published_date,
                                 "push_status"=>1,
-                                "user_id"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
+                                "user_id"=>$authorData->id,
+                                "last_updated_by"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
                                 "video_link"=>$request->video_link
                         ]);
                     }
