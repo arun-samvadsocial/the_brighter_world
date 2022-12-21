@@ -89,8 +89,10 @@
                                                     @enderror
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="formname">Published Date <span class="text-danger" >*</span> : {{$post_data->created_at}}    </label>
-                                                    
+                                                    <label class="form-label" for="formname">Published Date <span class="text-danger" >*</span> : {{$post_data->published_date}} </label>
+                                                    @if(Helper::getUser()->role == 'admin' || Helper::getUser()->role == 'moderator')
+                                                    <input type="datetime-local" name="published_date"  class="form-control" value="{{$post_data->published_date}}" id="">
+                                                    @endif
                                                 </div>
                                                 <div class="mb-3">
                                                     <img id="output" src="{{ url($post_data->img_path) }}" height="150px"/>

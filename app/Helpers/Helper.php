@@ -94,6 +94,13 @@ class Helper
         ->get();
         return $post;
     }
+    public static function getPostsById($post_id){
+        $post =  Post_model::where("post_id",$post_id)
+        ->with('category')
+        ->where("is_delete",0)
+        ->first();
+        return $post;
+    }
 
     public static function updateViewCount($post_id){
         $post_data = Post_model::where("post_id",$post_id)->first();

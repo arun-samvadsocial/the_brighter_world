@@ -110,6 +110,17 @@
                                                     @enderror
                                                 </div>
                                                 @endif
+
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="forpassword">Change password (Optional) <spna class="text-danger" ></span>:</label>
+                                                    <input type="password"
+                                                    class="form-control"
+                                                    placeholder="Change password"
+                                                    name="password" id="password"/>
+                                                </div>
+                                                
+
+
                                                 
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
