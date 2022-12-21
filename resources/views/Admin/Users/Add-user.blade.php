@@ -48,8 +48,19 @@
     border-color: var(--succes-color);
 }
 
-.form-control.error input {
+.form-control.error select {
     border-color: var(--error-color);    
+}
+.form-control small{
+    color: var(--error-color);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+}
+
+.form-control.error small{
+    visibility: visible;
 }
 
 
@@ -197,12 +208,17 @@ const user_role = document.getElementById('user_role');
 function showError(input, message) {
     const formControl = input.parentElement;
     formControl.className = 'form-control error';
+    const label = formControl.querySelector('label');
+    label.style.color = "red";
 }
 
 //show success colour
 function showSucces(input) {
     const formControl = input.parentElement;
     formControl.className = 'form-control success';
+    const label = formControl.querySelector('label');
+    label.style.color = "green";
+
 }
 
 //check email is valid
@@ -256,7 +272,7 @@ form.addEventListener('submit',function(e) {
     e.preventDefault();
     checkRequired([username, email, password, mobile, user_role]);
     checkLength(username,3,15);
-    checkLength(password,6,25);
+    // checkLength(password,6,25);
     checkEmail(email);
     checkMobile(mobile,10,10);
 });
