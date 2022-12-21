@@ -161,12 +161,13 @@ class Posts extends Controller
                     // foreach($request->category_id as $cat_row){
                     //     $category_id .= $cat_row[$i].',';
                     // }
+                   $post_data =  Helper::getPostsById($request->id);
                     if(Helper::getUser()->role == 'admin' || Helper::getUser()->role == 'moderator'){
                         $publisher_id = $request->published_by;
                     }else{
                         $publisher_id = session()->get("user_id");
                     }
-                    $post_url = Helper::slugify($request->post_title); 
+                    $post_url = Helper::slugify($request->post_title);  
                     $authorData = Helper::getAuthorDetails($publisher_id);
 
                     if($request->post_image != null){
@@ -186,6 +187,7 @@ class Posts extends Controller
                                 "img_source"=>$request->img_source,
                                 "post_url"=>$post_url!=""?$post_url:"",
                                 "category_id"=>$request->category_id,
+                                "published_date"=>isset($request->published_date)?$request->published_date:$post_data->published_date,
                                 "push_status"=>1,
                                 "user_id"=>$authorData->id,
                                 "last_updated_by"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
@@ -203,6 +205,7 @@ class Posts extends Controller
                                 "img_source"=>$request->img_source,
                                 "post_url"=>$post_url!=""?$post_url:"",
                                 "category_id"=>$request->category_id,
+                                "published_date"=>isset($request->published_date)?$request->published_date:$post_data->published_date,
                                 "push_status"=>1,
                                 "user_id"=>$authorData->id,
                                 "last_updated_by"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
