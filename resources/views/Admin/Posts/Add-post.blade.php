@@ -39,7 +39,8 @@
                                             <div data-repeater-item class="outer">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formname">Post Title <span class="text-danger" >*</span> :</label>
-                                                    <input type="text" class="form-control" value="{{old('post_title')}}" name="post_title" id="post_title" oninput="setPostData()" required placeholder="Enter post title...">
+                                                    <input type="text"
+                                                     class="form-control" value="{{old('post_title')}}" name="post_title" id="post_title" oninput="setPostData()" required placeholder="Enter post title...">
                                                     @error('post_title')
                                                     <div class="text text-danger">
                                                     {{$message}}

@@ -25,7 +25,37 @@
 </div>
 <!-- end page title -->
 
+<style>
+    :root{
+    --succes-color: #2ecc71;;
+    --error-color: #e74c3c;
+}
+    .form-control input:focus{
+    outline: 0;
+    border-color: #777;
 
+}
+
+.form-control.success input {
+    border-color: var(--succes-color);
+}
+
+.form-control.error input {
+    border-color: var(--error-color);    
+}
+
+.form-control small{
+    color: var(--error-color);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+}
+
+.form-control.error small{
+    visibility: visible;
+}
+</style>
 
 <div class="row">
     <div class="col-12">
@@ -37,13 +67,14 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Enter User Details</h4>
-                                    <form action="{{url('admin/add-user')}}" method="POST" class="outer-repeater">
+                                    <form action="{{url('admin/add-user')}}" method="POST" class="outer-repeater form" id="form" >
                                         @csrf
                                         <div data-repeater-list="outer-group" class="outer">
                                             <div data-repeater-item class="outer">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formname">Name <spna class="text-danger" >*</span> :</label>
-                                                    <input type="text" pattern="[A-Za-z]+{1,32}" title="Only alphabet letters" class="form-control" value="{{old('name')}}" name="name" id="formname" required placeholder="Enter Name...">
+                                                    <input type="text" id="username" pattern="[A-Za-z]+{1,32}" title="Only alphabet letters" class="form-control" value="{{old('name')}}" name="name"  placeholder="Enter Name...">
+                                                    <small>Error Message</small>
                                                     @error('name')
                                                     <div class="text text-danger" >
                                                     {{$message}}
@@ -56,7 +87,7 @@
                                                     <input type="email" class="form-control"
                                                     title="Please enter valid email address" 
                                                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                                                    value="{{old('email')}}" placeholder="Enter email" onInput="myFunction()" required name="email" id="email"/>
+                                                    value="{{old('email')}}" placeholder="Enter email" onInput="myFunction()" name="email" id="email"/>
                                                     @error('email')
                                                     <div class="text text-danger" id="email1" >
                                                     {{$message}}
@@ -67,7 +98,7 @@
                                                     }
                                                     </script>
                                                     @enderror
-                                                    
+                                                    <small>Error Message</small>
                                                 </div>
 
                                                 <div class="mb-3">
@@ -75,22 +106,23 @@
                                                     <input type="text" class="form-control" value="{{old('mobile')}}" 
                                                     placeholder="Enter phone number"
                                                     maxlength="10" pattern="[1-9]{1}[0-9]{9}" onInput="myFunction1()"  title="Please enter valid phone number."
-                                                    required name="mobile" id="mobile"/>
+                                                     name="mobile" id="mobile"/>
                                                     @error('mobile')
                                                     <div class="text text-danger" id="phone1" >
                                                     {{$message}}
                                                     </div>
                                                     <script>
-                                                    function myFunction1() {
+                                                    function myFunction() {
                                                         document.getElementById("phone1").style.display = "none";
                                                     }
                                                     </script>
                                                     @enderror
+                                                    <small>Error Message</small>
                                                 </div>
 
                                                 <div class="mb-3">
                                                     <label class="form-label" for="forrole">User Role <spna class="text-danger" >*</span>:</label>
-                                                    <select name="user_role" id="" class="form-control" required>
+                                                    <select name="user_role" id="" class="form-control">
                                                         <option value="" selected disabled>Select user role</option>
                                                         @foreach($roles as $row)
                                                         <option value="{{$row->role}}">{{$row->role_name}}</option>
@@ -105,7 +137,7 @@
 
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formemail">Password <spna class="text-danger" >*</span>:</label>
-                                                    <input type="password" class="form-control" name="password" id="password" required/>
+                                                    <input type="password" class="form-control" name="password" id="password" />
                                                     @error('password')
                                                     <div class="text text-danger" >
                                                     {{$message}}
@@ -141,8 +173,6 @@
                 <!-- End Page-content -->
             </div>
             <!-- end main content-->
-@endsection
-
 <script>
 
 // document.getElementById("email1").addEventListener("change", myFunction);
@@ -157,4 +187,80 @@
 //   x.value = x.value.toUpperCase();
 // }
 
+const form = document.getElementById('form');
+const username = document.getElementById('username');
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+
+//Show input error messages
+function showError(input, message) {
+    const formControl = input.parentElement;
+    formControl.className = 'form-control error';
+    const small = formControl.querySelector('small');
+    small.innerText = message;
+}
+
+//show success colour
+function showSucces(input) {
+    const formControl = input.parentElement;
+    formControl.className = 'form-control success';
+}
+
+//check email is valid
+function checkEmail(input) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(re.test(input.value.trim())) {
+        showSucces(input)
+    }else {
+        showError(input,'Email is not invalid');
+    }
+}
+
+
+//checkRequired fields
+function checkRequired(inputArr) {
+    inputArr.forEach(function(input){
+        if(input.value.trim() === ''){
+            showError(input,`${getFieldName(input)} is required`)
+        }else {
+            showSucces(input);
+        }
+    });
+}
+
+
+//check input Length
+function checkLength(input, min ,max) {
+    if(input.value.length < min) {
+        showError(input, `${getFieldName(input)} must be at least ${min} characters`);
+    }else if(input.value.length > max) {
+        showError(input, `${getFieldName(input)} must be les than ${max} characters`);
+    }else {
+        showSucces(input);
+    }
+}
+
+//get FieldName
+function getFieldName(input) {
+    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+}
+
+// check passwords match
+function checkPasswordMatch(input1, input2) {
+    if(input1.value !== input2.value) {
+        showError(input2, 'Passwords do not match');
+    }
+}
+
+//Event Listeners
+form.addEventListener('submit',function(e) {
+    e.preventDefault();
+
+    checkRequired([username, email, password]);
+    checkLength(username,3,15);
+    checkLength(password,6,25);
+    checkEmail(email);
+});
+
 </script>
+@endsection
