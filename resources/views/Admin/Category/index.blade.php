@@ -56,10 +56,10 @@
                                     <form action="{{url('/admin/category-list')}}" method="get">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" name="search"
-                                                placeholder="search..." aria-label="">
+                                                placeholder="search..." aria-label=""  style="border-color: #4e58aa;">
                                             <div class="input-group-append">
                                                 <input type="submit" class="input-group-text btn-primary"
-                                                    value="Search" />
+                                                    value="Search"/>
                                             </div>
                                         </div>
                                     </form>
