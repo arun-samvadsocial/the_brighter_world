@@ -55,7 +55,7 @@
                                     <form action="{{url('/admin/all-posts')}}" method="get">
                                         
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="search" placeholder="search..."
+                                            <input type="text" class="form-control" name="search" value="{{Request::get('search')?Request::get('search'):''}}" placeholder="search..."
                                                 aria-label="">
                                             <div class="input-group-append">
                                                 <input type="submit" class="input-group-text btn-primary"
