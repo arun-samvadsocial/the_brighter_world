@@ -2,107 +2,107 @@
 @section('main-content')
 
 <style>
-.thumb {
-    width: 100%;
-    max-height: 465px;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    background-size: cover;
-}
+    .thumb {
+        width: 100%;
+        max-height: 465px;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        background-size: cover;
+    }
 
-.main-thumb {
-    object-fit: cover;
-    min-height: 465px;
-    background-size: cover;
+    .main-thumb {
+        object-fit: cover;
+        min-height: 465px;
+        background-size: cover;
 
-}
+    }
 
-.thumb::after {
-    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.36) 50%, rgba(0, 0, 0, 0.60) 100%) !important;
-}
+    .thumb::after {
+        background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.36) 50%, rgba(0, 0, 0, 0.60) 100%) !important;
+    }
 
-.main-news {
-    margin-top: 20px;
-    max-width: 1500px;
+    .main-news {
+        margin-top: 20px;
+        max-width: 1500px;
 
-}
+    }
 
-.main-news h3 {
-    line-height: 0.75;
-}
+    .main-news h3 {
+        line-height: 0.75;
+    }
 
-.main-news h3 a {
-    font-size: 17px;
-    text-decoration: none;
-    font-weight: 600;
-}
+    .main-news h3 a {
+        font-size: 17px;
+        text-decoration: none;
+        font-weight: 600;
+    }
 
-.image {
-    overflow: hidden;
-    border-radius: 10px;
-}
+    .image {
+        overflow: hidden;
+        border-radius: 10px;
+    }
 
-.image-sm {
-    max-height: 280px
-}
+    .image-sm {
+        max-height: 280px
+    }
 
-.image-sm img {
-    height: 180px;
+    .image-sm img {
+        height: 180px;
 
-}
+    }
 
-.image-xs {
-    max-height: 140px;
-}
+    .image-xs {
+        max-height: 140px;
+    }
 
-.image-xxs {
-    max-height: 100px;
-}
+    .image-xxs {
+        max-height: 100px;
+    }
 
-.image img {
-    object-fit: cover;
-}
+    .image img {
+        object-fit: cover;
+    }
 
-.font-large {
-    font-size: 0.8em !important;
-    font-weight: 600 !important;
-}
+    .font-large {
+        font-size: 0.8em !important;
+        font-weight: 600 !important;
+    }
 
-.title-container {
-    position: absolute;
-    bottom: 0px;
-    left: 15px;
-    padding: 15px 20px 15px 20px;
-    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.36) 50%, rgba(0, 0, 0, 0.60) 100%);
-}
+    .title-container {
+        position: absolute;
+        bottom: 0px;
+        left: 15px;
+        padding: 15px 20px 15px 20px;
+        background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.36) 50%, rgba(0, 0, 0, 0.60) 100%);
+    }
 
-.title-container a {
-    color: white;
-}
+    .title-container a {
+        color: white;
+    }
 
-.custom {
-    margin-left: 0px;
-    margin-right: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-}
+    .custom {
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 
-.caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 15px 20px 20px 25px;
-    color: white;
-}
+    .caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 15px 20px 20px 25px;
+        color: white;
+    }
 
-.caption .title {
-    color: #fff;
-    font-size: 22px;
-    font-weight: 500;
-    line-height: 28px;
-    margin-top: 10px;
-    position: relative;
-}
+    .caption .title {
+        color: #fff;
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 28px;
+        margin-top: 10px;
+        position: relative;
+    }
 </style>
 <!-- Hero section start here  -->
 @php
