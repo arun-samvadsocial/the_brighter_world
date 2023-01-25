@@ -223,3 +223,12 @@ Route::get('/no-access', function(){
         });
 
     });
+
+    //Cache clear control with route
+    Route::get('/all-cache-clear', function() {
+        $exitCode = Artisan::call('cache:clear');
+        $exitCode2 = Artisan::call('route:clear');
+        $exitCode3 = Artisan::call('view:clear');
+        $exitCode4 = Artisan::call('config:cache');
+        return '<h1>All Cache clear</h1>';
+    });
