@@ -53,6 +53,16 @@
     function off() {
         document.getElementById("overlay").style.display = "none";
     }
+
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YW9N6Y1Z7Y"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-YW9N6Y1Z7Y');
     </script>
 </head>
 
