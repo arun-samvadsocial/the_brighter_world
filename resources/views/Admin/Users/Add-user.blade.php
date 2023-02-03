@@ -233,7 +233,7 @@ function checkRequired(inputArr) {
     });
 }
 
-
+ 
 //check input Length
 function checkLength(input, min ,max) {
     if(input.value.length < min) {
@@ -261,10 +261,10 @@ function checkPasswordMatch(input1, input2) {
 form.addEventListener('submit',function(e) {
     e.preventDefault();
     checkRequired([username, email, password, mobile, user_role]);
-    checkLength(username,3,15);
+    checkLength(username,3,80);
     // checkLength(password,6,25);
     checkEmail(email);
-    checkMobile(mobile,10,10);
+    // checkMobile(mobile,10,10);
 });
 
 </script>
