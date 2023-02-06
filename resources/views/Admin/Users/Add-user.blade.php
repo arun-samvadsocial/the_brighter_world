@@ -81,8 +81,13 @@
                                         <div data-repeater-list="outer-group" class="outer">
                                             <div data-repeater-item class="outer">
                                                 <div class="mb-3">
+<<<<<<< HEAD
                                                     <label class="form-label" for="formname">Name <span class="text-danger" >* </span> (Only alphabet letters accepted):</label>
                                                     <input type="text" id="username" class="form-control" value="{{old('name')}}" name="name"  placeholder="Enter Name...">
+=======
+                                                    <label class="form-label" for="formname">Name <span class="text-danger" >* </span> :</label>
+                                                    <input type="text" id="username" pattern="[A-Za-z]+{1,32}" title="Only alphabet letters" class="form-control" value="{{old('name')}}" name="name"  placeholder="Enter Name...">
+>>>>>>> d2f864f5c8189f194125a3c4b6d300b7e7f34e90
                                                     @error('name')
                                                     <div class="text text-danger" >
                                                     {{$message}}
@@ -302,7 +307,11 @@ form.addEventListener('submit',function(e) {
     
     e.preventDefault();
     checkRequired([username, email, password, mobile, user_role]);
+<<<<<<< HEAD
     lengthname =  checkLength(username,3,15);
+=======
+    checkLength(username,3,80);
+>>>>>>> d2f864f5c8189f194125a3c4b6d300b7e7f34e90
     checkEmail(email);
     CheckPassword(password);
     lengthpassword = checkLength(password,6,25);

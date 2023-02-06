@@ -364,7 +364,10 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                         @endforeach
                     </div>
             </div>
+
+           
         </div>
+        <br/><br/><br/><br/>
     </div>
 </section>
 @else

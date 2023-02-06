@@ -55,7 +55,7 @@
                                     <form action="{{url('/admin/all-posts')}}" method="get">
                                         
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="search" placeholder="search..."
+                                            <input type="text" class="form-control" name="search" value="{{Request::get('search')?Request::get('search'):''}}" placeholder="search..."
                                                 aria-label="">
                                             <div class="input-group-append">
                                                 <input type="submit" class="input-group-text btn-primary"
@@ -127,6 +127,7 @@
                                     </tbody>
 
                                 </table>
+                                
                                 <div class="table_footer row">
                                     <div class="showing col-md-3">
                                         Showing {{$posts->firstItem()}} - {{$posts->lastItem()}} of {{$posts->total()}}
@@ -135,7 +136,11 @@
                                         <div class=" col-md-12 pb-2">
 
                                             <div class="pagination flex-wrap d-felx justify-content-center">
+                                                @if(Request::get('search'))
+                                                {{ $posts->appends(['search' => Request::get('search')])->links('pagination::bootstrap-4') }}
+                                                @else 
                                                 {{ $posts->links('pagination::bootstrap-4') }}
+                                                @endif
                                             </div>
                                         </div>
 
