@@ -29,7 +29,7 @@ class Helper
         ->limit($limit)
         ->where("is_delete",0)
         ->where("status",1)
-        ->latest()
+        ->orderBy('published_date', 'desc')
         ->get();
         return $post;
     }
@@ -90,7 +90,7 @@ class Helper
         ->with('category')
         ->where("is_delete",0)
         ->where("status",1)
-        ->latest()
+        ->orderBy('published_date', 'desc')
         ->get();
         return $post;
     }

@@ -81,7 +81,7 @@
                                         <div data-repeater-list="outer-group" class="outer">
                                             <div data-repeater-item class="outer">
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="formname">Name <span class="text-danger" >* </span> (Only alphabet letters accepted):</label>
+                                                    <label class="form-label" for="formname">Name <span class="text-danger" >* </span> :</label>
                                                     <input type="text" id="username" pattern="[A-Za-z]+{1,32}" title="Only alphabet letters" class="form-control" value="{{old('name')}}" name="name"  placeholder="Enter Name...">
                                                     @error('name')
                                                     <div class="text text-danger" >
@@ -94,14 +94,14 @@
                                                     <label class="form-label" for="formemail">Email <span class="text-danger" >*</span>:</label>
                                                     <input type="email" class="form-control"
                                                     title="Please enter valid email address" 
-                                                    onkeyup="myFunction()"
+                                                    onkeyup="myFunction1()"
                                                     value="{{old('email')}}" placeholder="Enter email" name="email" id="email"/>
                                                     @error('email')
                                                     <div class="text text-danger" id="email1" >
                                                     {{$message}}
                                                     </div>
                                                     <script>
-                                                    function myFunction() {
+                                                    function myFunction1() {
                                                         document.getElementById("email1").style.display = "none";
                                                     }
                                                     </script>
@@ -113,6 +113,7 @@
                                                     <label class="form-label" for="formemail">Phone  <span class="text-danger" >*</span>:</label>
                                                     <input type="text" class="form-control" value="{{old('mobile')}}" 
                                                     placeholder="Enter phone number"
+                                                    onkeyup="myFunction2()"
                                                     maxlength="10" pattern="[1-9]{1}[0-9]{9}"  title="Please enter valid phone number."
                                                      name="mobile" id="mobile"/>
                                                     @error('mobile')
@@ -120,7 +121,7 @@
                                                     {{$message}}
                                                     </div>
                                                     <script>
-                                                    function myFunction() {
+                                                    function myFunction2() {
                                                         document.getElementById("phone1").style.display = "none";
                                                     }
                                                     </script>
@@ -272,7 +273,7 @@ function checkPasswordMatch(input1, input2) {
 form.addEventListener('submit',function(e) {
     e.preventDefault();
     checkRequired([username, email, password, mobile, user_role]);
-    checkLength(username,3,15);
+    checkLength(username,3,80);
     checkEmail(email);
     if(username.value != ""  && email.value != "" && mobile.value != ""  && password.value!= ""  && user_role.value != ""){
         form.submit()

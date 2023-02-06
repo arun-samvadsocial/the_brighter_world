@@ -151,8 +151,8 @@
                                                     @enderror
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label text-dark" for="formname">Global Tags ( Don't add these Global Tags in Tags section.) :</label>
-                                                    <label>tags,</label>
+                                                    <!-- <label class="form-label text-dark" for="formname">Global Tags ( Don't add these Global Tags in Tags section.) :</label>
+                                                    <label>tags,</label> -->
                                                     <br/>
                                                     <label for="">Enter Hashtags :</label>
                                                     <textarea class="form-control" rows="2" placeholder="add some #tags" oninput="setPostData()"  name="keywords"  style="width:100%" id="keywords"></textarea></p>

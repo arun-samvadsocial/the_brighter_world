@@ -37,7 +37,6 @@ class Home extends Controller
         ->where("post.is_delete",0)
         ->where("post.status",1)
         ->orderBy('post.published_date', 'desc')
-        ->latest("post.published_date")
         ->paginate(9);
 
         if($request->ajax()){
@@ -55,7 +54,6 @@ class Home extends Controller
         ->where("post.is_delete",0)
         ->where("post.status",1)
         ->orderBy('post.published_date', 'desc')
-        ->latest("post.published_date")
         ->paginate(9);
         if($request->ajax()){
             $view = view("Frontend.Home.post-data", compact("posts"))->render();
@@ -78,7 +76,6 @@ class Home extends Controller
         ->where("post.is_delete",0)
         ->where("post.status",1)
         ->orderBy('post.published_date', 'desc')
-        ->latest("post.published_date")
         ->paginate(9);
 
         if($request->ajax()){
@@ -98,7 +95,6 @@ class Home extends Controller
         ->where("post.is_delete",0)
         ->where("post.status",1)
         ->orderBy('post.published_date', 'desc')
-        ->latest("post.published_date")
         ->paginate(9);
 
         if($request->ajax()){
@@ -115,7 +111,7 @@ class Home extends Controller
         ->with('category')
         ->leftJoin("category", "category.category_id", "=","post.category_id")
         ->where("category.category_status", "1")
-        ->latest("published_date")
+        ->orderBy('published_date', 'desc')
         ->paginate(9);
 
         if($request->ajax()){
