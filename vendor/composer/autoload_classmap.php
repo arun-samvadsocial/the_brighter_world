@@ -64,6 +64,7 @@ return array(
     'App\\Models\\Frontend\\Post_model' => $baseDir . '/app/Models/Frontend/Post_model.php',
     'App\\Models\\Frontend\\Quote_model' => $baseDir . '/app/Models/Frontend/Quote_model.php',
     'App\\Models\\Frontend\\Tip_model' => $baseDir . '/app/Models/Frontend/Tip_model.php',
+    'App\\Models\\PasswordReset' => $baseDir . '/app/Models/PasswordReset.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

@@ -564,6 +564,7 @@ class ComposerStaticInitb715a02cbcfdbd56297bdec3709068e6
         'App\\Models\\Frontend\\Post_model' => __DIR__ . '/../..' . '/app/Models/Frontend/Post_model.php',
         'App\\Models\\Frontend\\Quote_model' => __DIR__ . '/../..' . '/app/Models/Frontend/Quote_model.php',
         'App\\Models\\Frontend\\Tip_model' => __DIR__ . '/../..' . '/app/Models/Frontend/Tip_model.php',
+        'App\\Models\\PasswordReset' => __DIR__ . '/../..' . '/app/Models/PasswordReset.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
