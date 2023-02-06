@@ -105,6 +105,14 @@ class Authentication extends Controller
             return view('Login');
         }
     }
+
+    public function forget(Request $request){
+        return view('Forget'); 
+    }
+    public function confirmpass(Request $request){ 
+        
+        return view('Confirmpass'); 
+    }
     public function logout(){
         session()->forget('user_id');
         session()->forget('role');

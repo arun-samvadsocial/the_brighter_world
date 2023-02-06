@@ -58,13 +58,15 @@ Route::get('/register',[Authentication::class,'register']);
 Route::post('/register',[Authentication::class,'register']);
 Route::get('/verify/{token}',[Authentication::class,'verify']);
 // Route::get('/login', function(){
-//     session()->put("user_id",1);
+//     session()->put("user_id",1);r
 //     session()->put("role",'author');
 //     return redirect('/');
 // });
 
 Route::get('/login', [Authentication::class,'login']);
 Route::post('/login', [Authentication::class,'login']);
+Route::get('/forget', [Authentication::class,'forget']);
+Route::get('/confirmpass', [Authentication::class,'confirmpass']);
 
 Route::get('/no-access', function(){
     echo "No access";

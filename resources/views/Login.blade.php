@@ -29,13 +29,11 @@
                                 <input type="password" class="border-0" placeholder="Enter Password" name="password"
                                     id="password" required>
                             </div>
-                            <div class="mt-2">
-                                <!-- <a href="" class="text-primary1 float-right">Forgot Password</a> -->
-                            </div>
-                            <div class="mt-5">
+                            <div class="mt-3">
                                 <input type="submit" name="submit" class="form-control" id="">
                             </div>
-                            <div class="mt-4">
+                                <a href="" class="text-primary1 float-right">Forgot Password?</a>
+                            <div class="mt-5">
                             <p class="text-center">New User?<a href="{{url('/register')}}" class="text-primary1">Sign up now</a></p>
                             </div>
                         </form>

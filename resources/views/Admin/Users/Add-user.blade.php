@@ -111,6 +111,7 @@
 
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formemail">Phone  <span class="text-danger" >*</span>:</label>
+                                                    
                                                     <input type="text" class="form-control" value="{{old('mobile')}}" 
                                                     placeholder="Enter phone number"
                                                     onkeyup="myFunction2()"
@@ -124,6 +125,7 @@
                                                     function myFunction2() {
                                                         document.getElementById("phone1").style.display = "none";
                                                     }
+
                                                     </script>
                                                     @enderror
                                                 </div>
@@ -147,17 +149,22 @@
                                                     </script> -->
                                                     @enderror
                                                 </div>
-
+                                                
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formemail">Password <span class="text-danger" >*</span>:</label>
-                                                    <input type="password" class="form-control" name="password" id="password" />
+                                                    <!-- <div class="input-group"> -->
+                                                    <input type="password" class="form-control" name="password" id="password1" />
+                                                    <span class="text-danger"> 7 to 16 characters which contain only characters, numeric digits, underscore and first character must be a letter</span>
+                                                    <break><break>
+                                                    <div class="text-black"><input type="checkbox" onclick="hiddenpass()">Show Password
+                                                    </div>
                                                     @error('password')
                                                     <div class="text text-danger" >
                                                     {{$message}}
                                                     </div>
                                                     @enderror
                                                 </div>
-    
+                                                
                                                 <button type="submit" class="btn btn-primary mt-3">Submit</button>
                                             </div>
                                         </div>
@@ -204,14 +211,19 @@ const form = document.getElementById('form');
 const username = document.getElementById('username');
 const email = document.getElementById('email');
 const mobile = document.getElementById('mobile');
-const password = document.getElementById('password');
+const password = document.getElementById('password1');
 const user_role = document.getElementById('user_role');
+var lengthname = 0;
+
+var lengthpassword = 0;
 //Show input error messages
 function showError(input, message) {
     const formControl = input.parentElement;
     formControl.className = 'form-control error';
     const label = formControl.querySelector('label');
     label.style.color = "red";
+    console.log(mobile);
+    console.log(user_role);
 }
 
 //show success colour
@@ -244,16 +256,32 @@ function checkRequired(inputArr) {
         }
     });
 }
-
+function CheckPassword(input) 
+{ 
+var password=  /^[A-Za-z]\w{7,14}$/;
+    if(input.value.match(password)) 
+    { 
+        
+    return true;
+    }
+    else
+    { 
+   
+    return false;
+    }
+}
 
 //check input Length
 function checkLength(input, min ,max) {
-    if(input.value.length < min) {
+     if(input.value.length < min) {
         showError(input, `${getFieldName(input)} must be at least ${min} characters`);
+        return 0;
     }else if(input.value.length > max) {
-        showError(input, `${getFieldName(input)} must be les than ${max} characters`);
+        showError(input, `${getFieldName(input)} must be les than ${max} characters`); 
+        return 0;
     }else {
         showSucces(input);
+        return 1;
     }
 }
 
@@ -271,14 +299,27 @@ function checkPasswordMatch(input1, input2) {
 
 //Event Listeners
 form.addEventListener('submit',function(e) {
+    
     e.preventDefault();
     checkRequired([username, email, password, mobile, user_role]);
     checkLength(username,3,80);
     checkEmail(email);
-    if(username.value != ""  && email.value != "" && mobile.value != ""  && password.value!= ""  && user_role.value != ""){
+    CheckPassword(password);
+    lengthpassword = checkLength(password,6,25);
+    if(username.value != ""  && email.value != "" && mobile.value != ""  && password.value!= ""  && user_role.value != "" && password.value != "" && lengthname === 1 && lengthpassword === 1){
         form.submit()
     }
 });
+
+function hiddenpass() {
+  var x = document.getElementById("password1");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+
 
 </script>
 @endsection
