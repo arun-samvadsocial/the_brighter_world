@@ -1,12 +1,11 @@
 @extends('Frontend.layouts.main')
 @section('main-content')
-
 <section>
-    <div class="container d-flex justify-content-center mt-5">
+    <div class="container d-flex justify-content-center mt-3">
         <div class="row">
             <div class="card">
                 <div class="col-md-12">
-                    <div class="mt-4 p-2">
+                    <div class="mt-2 text-center">
                         <h2 class="text-warning"><b>Sign Up</b>
                         </h2>
                     </div>
@@ -27,25 +26,22 @@
                     <div class="card-body">
                         <form action="{{url('/register')}}" method="post">
                             @csrf
-                            <div class="border-bottom ">
+                            <div class="border-bottom">
                                 <label for="email"><b>Name:</b></label>
                                 <input type="name" class="border-0" placeholder="Enter name" value="{{old('name')}}" name="name" id="name"
                                     required>
-                                
                             </div>
-                            <div class="border-bottom ">
+                            <div class="border-bottom mt-2">
                                 <label for="email"><b>Email:</b></label>
                                 <input type="email" class="border-0" placeholder="Enter email" value="{{old('email')}}" name="email" id="email"
                                     required>
-                               
                             </div>
-                            <div class="border-bottom ">
+                            <div class="border-bottom mt-2">
                                 <label for="mobile"><b>Mobile:</b></label>
                                 <input type="text" class="border-0" placeholder="Enter mobile" value="{{old('mobile')}}" name="mobile" id="email"
                                     required>
-                               
                             </div>
-                            <div class="border-bottom mt-4">
+                            <div class="border-bottom mt-2">
                                 <label for="email"><b>Password:</b></label>
                                 <input type="password" class="border-0" placeholder="Enter Password" name="password"
                                     id="password" required>
@@ -58,12 +54,9 @@
                             </div>
                             @endif
                             <div class="mt-2">
-                                <!-- <a href="" class="text-primary1 float-right">Forgot Password</a> -->
-                            </div>
-                            <div class="mt-5">
                                 <input type="submit" name="submit" class="form-control" id="">
                             </div>
-                            <div class="mt-4">
+                            <div class="mt-2">
                                 <p class="text-center">Already registered?<a href="{{url('/login')}}" class="text-primary1">Login</a></p>
                             </div>
                         </form>
