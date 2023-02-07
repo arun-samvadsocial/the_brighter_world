@@ -25,6 +25,7 @@ class Authentication extends Controller
                     'email'=>'required|email|unique:users',
                     'mobile'=>'required|unique:users',
                     'password'=>'required',
+                    'g-recaptcha-response' => 'recaptcha',//recaptcha validation
                 ]);
                 if($validator->fails()){
                     return redirect()->back()->withErrors($validator->errors())->withInput(); 

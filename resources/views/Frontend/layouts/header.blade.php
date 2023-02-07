@@ -23,37 +23,36 @@
 
     <title>The Brighter World</title>
     <style>
-    #overlay {
-        position: fixed;
-        display: none;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 2;
-        cursor: pointer;
-    }
+        #overlay {
+            position: fixed;
+            display: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            cursor: pointer;
+        }
 
-    #overlay .search-box {
-        margin: 15% auto;
-    }
+        #overlay .search-box {
+            margin: 15% auto;
+        }
 
-    .placeholder {
-        padding: 20px;
-    }
+        .placeholder {
+            padding: 20px;
+        }
     </style>
     <script>
-    function on() {
-        document.getElementById("overlay").style.display = "block";
-    }
+        function on() {
+            document.getElementById("overlay").style.display = "block";
+        }
 
-    function off() {
-        document.getElementById("overlay").style.display = "none";
-    }
-
+        function off() {
+            document.getElementById("overlay").style.display = "none";
+        }
     </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YW9N6Y1Z7Y"></script>
@@ -64,6 +63,7 @@
 
     gtag('config', 'G-YW9N6Y1Z7Y');
     </script>
+    {!! htmlScriptTagJsApi() !!}
 </head>
 
 <body>
