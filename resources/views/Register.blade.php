@@ -49,8 +49,14 @@
                                 <label for="email"><b>Password:</b></label>
                                 <input type="password" class="border-0" placeholder="Enter Password" name="password"
                                     id="password" required>
-                               
                             </div>
+                            <!-- Google reCaptcha v2 -->
+                            {!! htmlFormSnippet() !!}
+                            @if($errors->has('g-recaptcha-response'))
+                            <div>
+                                <small class="text-danger">{{ $errors->first('g-recaptcha-response') }}</small>
+                            </div>
+                            @endif
                             <div class="mt-2">
                                 <!-- <a href="" class="text-primary1 float-right">Forgot Password</a> -->
                             </div>

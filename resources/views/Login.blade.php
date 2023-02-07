@@ -10,9 +10,18 @@
                         <h2 class="text-warning"><b>Sign In</b>
                         </h2>
                     </div>
+                   
+                     <!-- Success Message  -->
+                     @if (\Session::has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+                        {!! \Session::get('success') !!}
+                    </div>
+                    @endif
                     <!-- Error Message  -->
                     @if($errors->any())
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
                         {{$errors->first()}}
                     </div>
                     @endif
@@ -32,7 +41,7 @@
                             <div class="mt-3">
                                 <input type="submit" name="submit" class="form-control" id="">
                             </div>
-                                <a href="" class="text-primary1 float-right">Forgot Password?</a>
+                                <a href="{{url('/forget')}}" class="text-primary1 float-right">Forgot Password?</a>
                             <div class="mt-5">
                             <p class="text-center">New User?<a href="{{url('/register')}}" class="text-primary1">Sign up now</a></p>
                             </div>

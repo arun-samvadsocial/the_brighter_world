@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\PasswordReset;
 use Session;
 use Illuminate\Support\Facades\Hash;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Helper;
+use Carbon\Carbon;
 
 class Authentication extends Controller
 {
+    //User register function start here
     public function register(Request $request){
         if ($request->isMethod('post')) {
             try{
@@ -22,9 +25,10 @@ class Authentication extends Controller
                     'email'=>'required|email|unique:users',
                     'mobile'=>'required|unique:users',
                     'password'=>'required',
+                    'g-recaptcha-response' => 'recaptcha',//recaptcha validation
                 ]);
                 if($validator->fails()){
-                    return redirect()->back()->withErrors($validator->errors())->withInput(); ; 
+                    return redirect()->back()->withErrors($validator->errors())->withInput(); 
                 }else{
                     $token = Str::random(150);
                     User::create([
@@ -56,7 +60,9 @@ class Authentication extends Controller
             return view('Register');
         }
     }
+    
 
+    //Verify user email with verification code function start here
     public function verify($token=''){
         try{
             $check = User::where("email_verification_code", $token)->first();
@@ -78,6 +84,7 @@ class Authentication extends Controller
         }
     }
 
+    //User login function start here
     public function login(Request $request){
         if(Session::get('user_id')){
             return redirect('/');
@@ -106,13 +113,85 @@ class Authentication extends Controller
         }
     }
 
+    //User forget password function start here
     public function forget(Request $request){
-        return view('Forget'); 
-    }
-    public function confirmpass(Request $request){ 
+        $method = $request->method();
+        if ($request->isMethod('post')) {
+            $email = $request->email;
+            $user = User::where('email', $email)->first();                
+            try{
+                $email = $user->email;
+                if($user){
+                    $token = Str::random(150);
+                    $url = url('/');
+                    $link = $url."/confirmpass/?token=".$token;
+                    $data['link']=$link;
+                    $data['url']=$url;
+                    $data['email']=$request->email;
+                    $data['name']=$user->name;
+                    $data['title']='Password Reset';
+                    $status = Helper::sendMail($request->email,$data['title'],$data,'Mails.resetPasswordTemplate');
+                    PasswordReset::updateOrCreate(
+                        ['email'=>$email],[
+                            'email'=>$request->email,
+                            'token'=>$token,
+                        ]
+                    );
+                    return redirect('/forget')->with("success","Password reset link successfully sent to your email.");
+                }else{
+                    return redirect('/forget')->withErrors('User not found.');
+                }
+    
+            }catch(\Exception $e){
+                // return dd($e);
+                return redirect('/forget')->withErrors('Something went wrong.');
+            }
+        }else{
+            return view('Forget'); 
+        }
         
-        return view('Confirmpass'); 
     }
+
+
+    
+
+    //User password change function start here
+    public function confirmpass(Request $request){ 
+        $method = $request->method();
+        // return dd($request->all());
+        if ($request->isMethod('post')) {
+            $validator =  Validator::make($request->all(),[
+                "password"=>"required|min:3|confirmed",
+                "password_confirmation"=>"required|min:3|"
+            ]);
+            if($validator->fails()){
+                return redirect()->back()->withErrors($validator->errors())->withInput(); 
+            }
+            $check = PasswordReset::where('token',$request->token)->first();
+            $email = $check->email;
+            $update = User::where('email',$email)
+            ->update([
+                'password'=>Hash::make($request->password)
+            ]);
+            if($update > 0){
+                $token = Str::random(50);
+                PasswordReset::where('email',$email)
+                ->update([
+                    'token'=>$token
+                ]);
+                
+                return redirect('/login')->with("success","Your password successfully changed.");
+            }else{
+                return redirect('/forget')->withErrors('Somethig went wrong.');
+            }
+        }else{
+            return view('Confirmpass'); 
+        }
+        
+    }
+
+
+    //User logout function start here
     public function logout(){
         session()->forget('user_id');
         session()->forget('role');

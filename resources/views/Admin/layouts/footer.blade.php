@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                © <script>document.write(new Date().getFullYear())</script> The Brighter <span class="d-none d-sm-inline-block"> - <i class="mdi mdi-heart text-danger"></i> by SamvadSocial.</span>
+                © <script>document.write(new Date().getFullYear())</script> The Brighter World <span class="d-none d-sm-inline-block"> - <i class="mdi mdi-heart text-danger"></i> by SamvadSocial.</span>
             </div>
         </div>
     </div>

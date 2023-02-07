@@ -66,7 +66,9 @@ Route::get('/verify/{token}',[Authentication::class,'verify']);
 Route::get('/login', [Authentication::class,'login']);
 Route::post('/login', [Authentication::class,'login']);
 Route::get('/forget', [Authentication::class,'forget']);
+Route::post('/forget', [Authentication::class,'forget']);
 Route::get('/confirmpass', [Authentication::class,'confirmpass']);
+Route::post('/confirmpass', [Authentication::class,'confirmpass']);
 
 Route::get('/no-access', function(){
     echo "No access";
