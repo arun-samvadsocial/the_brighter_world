@@ -6,7 +6,7 @@
         <div class="row">
             <div class="card">
                 <div class="col-md-12">
-                    <div class="mt-4 p-2">
+                    <div class="mt-4 p-2 text-center">
                         <h2 class="text-warning"><b>Sign In</b>
                         </h2>
                     </div>
