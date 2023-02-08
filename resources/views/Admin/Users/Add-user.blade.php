@@ -93,19 +93,19 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formemail">Email <span class="text-danger" >*</span>:</label>
                                                     <input type="email" class="form-control"
-                                                    title="Please enter valid email address" 
+                                                    title="Please enter valid email address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                                                     onkeyup="myFunction1()"
                                                     value="{{old('email')}}" placeholder="Enter email" name="email" id="email"/>
                                                     @error('email')
-                                                    <div class="text text-danger" id="email1" >
+                                                    <!-- <div class="text text-danger" id="email1" > -->
                                                     {{$message}}
-                                                    </div>
+                                                    <!-- </div> -->
                                                     @enderror
-                                                    <script>
+                                                    <!-- <script>
                                                     function myFunction1() {
                                                         document.getElementById("email1").style.display = "none";
                                                     }
-                                                    </script>
+                                                    </script> -->
                                                 </div>
 
                                                 <div class="mb-3">
@@ -149,7 +149,7 @@
                                                 </div>
                                                 
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="formemail">Password <span class="text-danger" >*</span>: ( <span class="text-danger"> 6 to 25 characters.</span>) </label>
+                                                    <label class="form-label" for="formemail">Password <span class="text-danger" >*</span>: ( <span class="text-danger"> 6 to 25 characters,digits or special characters are allowed</span>) </label>
                                                     <!-- <div class="input-group"> -->
                                                     <input type="password" class="form-control" name="password" id="password1" />
                                                    
@@ -162,7 +162,6 @@
                                                     </div>
                                                     @enderror
                                                 </div>
-                                                
                                                 <button type="submit" class="btn btn-primary mt-3">Submit</button>
                                             </div>
                                         </div>
@@ -233,14 +232,14 @@ function showSucces(input) {
 }
 
 //check email is valid
-function checkEmail(input) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(re.test(input.value.trim())) {
-        showSucces(input)
-    }else {
-        showError(input,'Email is not invalid');
-    }
-}
+// function checkEmail(input) {
+//     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//     if(re.test(input.value.trim())) {
+//         showSucces(input)
+//     }else {
+//         showError(input,'Email is not invalid');
+//     }
+// }
 
 
 //checkRequired fields
@@ -275,11 +274,10 @@ function getFieldName(input) {
 
 //Event Listeners
 form.addEventListener('submit',function(e) {
-    
     e.preventDefault();
     checkRequired([username, email, password, mobile, user_role]);
     checkLength(username,3,80);
-    checkEmail(email);
+    // checkEmail(email);
     lengthpassword = checkLength(password,6,25);
     if(username.value != ""  && email.value != "" && mobile.value != ""  && password.value!= ""  && user_role.value != "" && lengthpassword === 1){
         form.submit()
@@ -294,7 +292,5 @@ function hiddenpass() {
     x.type = "password";
   }
 }
-
-
 </script>
 @endsection
