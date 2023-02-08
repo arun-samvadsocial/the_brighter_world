@@ -35,7 +35,7 @@ class Helper
     }
 
     public static function getTrendingPosts($limit = null){
-        $date = \Carbon\Carbon::today()->subDays(7);
+        $date = \Carbon\Carbon::today()->subDays(4);
         $post =  Post_model::select("post.*", "category.category_name")
         ->where("is_delete",0)
         ->limit($limit)

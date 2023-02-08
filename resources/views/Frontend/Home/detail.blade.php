@@ -119,7 +119,6 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                         @php 
                             $tags = explode(',', $post_data->hashtags);
                             $count = 0;
-
                         @endphp
                         @if($tags[0] != "")
                         <p>
@@ -127,10 +126,8 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                             @if($count >= 5)
                             @break
                             @endif
-                           
-                            <a href="{{url('/hashtag/'.urlencode($tagrow))}}" class="tags" >{{$tagrow}}</a>
+                            <a href="{{url('/hashtag/'.urlencode($tagrow))}}" class="tags">{{$tagrow}}</a>
                             @php $count++ @endphp
-                            
                             @endforeach
                         </p>
                         @endif
