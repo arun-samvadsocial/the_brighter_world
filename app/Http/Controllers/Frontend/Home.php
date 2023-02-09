@@ -126,31 +126,40 @@ class Home extends Controller
         $id = $request->id;
         $name = "";
         $email = "";
-        if(Helper::getUser()){
-            $name = Helper::getUser()->name;
-            $email = Helper::getUser()->email;
-        }
-        try{
-            $validator =  Validator::make($request->all(),[
-                "comment"=>"required"
-            ]);
-            if($validator->fails()){
-                return redirect()->back()->withErrors($validator->errors()); 
-            }else{
-                
-                Comment_model::create([
-                    "comment"=>$request->comment,
-                    "name"=>$name,
-                    "email"=>$email,
-                    "post_id"=>$id
+        if(Auth::user()){
+            
+            $name = Auth::user()->name;
+            $email = Auth::user()->email;
+            try{
+                $validator =  Validator::make($request->all(),[
+                    "comment"=>"required"
                 ]);
-                return redirect()->back()->with("success","Successfully commented");
+                if($validator->fails()){
+                    return redirect()->back()->withErrors($validator->errors()); 
+                }else{
+                    //Add new code //////////////////////
+                    $check = Post_model::where("post_id",$request->id)->first();
+                    if($check){
+                        Comment_model::create([
+                            "comment"=>$request->comment,
+                            "name"=>$name,
+                            "email"=>$email,
+                            "post_id"=>$id
+                        ]);
+                        return redirect()->back()->with("success","Successfully commented");
+                    }else{
+                        return redirect()->back()->withErrors('Post not found');
+                    }
+                    ///////////////////////////////////////////////
+                    
+                }
+            }catch(\Exception $exception){
+                // dd($exception);
+                return redirect('/')->withErrors('Somethig went wrong');
+                // echo "Error";
             }
-        }catch(\Exception $exception){
-            dd($exception);
-            // return redirect('/')->withErrors('Exception Error');
-            // echo "Error";
         }
+        
     }
 
     public function about_us(){

@@ -104,7 +104,7 @@
                 <div class="col-lg-2 col-md-6 d-flex flex-row-reverse">
                     <div class="login_btn">
 
-                        @if(session()->get("user_id"))
+                        @if(Auth::user())
                         <a href="{{url('/logout')}}" class="btn btn-danger">Logout</a>
                         @else
                         <a href="{{url('/login')}}" class="btn btn-warning ">Login</a>
@@ -124,7 +124,7 @@
                 <div class="login_btn_sm d-none">
                     <div class="row" style="margin-right: 0px !important;margin-left: 0px !important;" >
                         <span class="nav-link" onclick="on()"><i class="fa fa-search"></i></span>
-                        @if(session()->get("user_id"))
+                        @if(Auth::user())
                         <a href="{{url('/logout')}}" class="btn btn-danger">Logout</a>
                         @else
                         <a href="{{url('/login')}}" class="btn btn-warning ">Login</a>
@@ -155,7 +155,7 @@
                         <li class="nav-item {{ Route::currentRouteNamed('about') ? 'active' : '' }}">
                             <a class="nav-link" href="{{url('/').'/about-us'}}">About us</a>
                         </li>
-                        @if(session()->get("user_id") && Helper::getUser()->role != "user" )
+                        @if(Auth::user() && Auth::user()->role != "user" )
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/admin')}}">Dashboard</a>
                         </li>

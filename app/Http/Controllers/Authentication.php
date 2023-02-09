@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\PasswordReset;
 use Session;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -91,23 +92,23 @@ class Authentication extends Controller
         }
         $method = $request->method();
         if ($request->isMethod('post')) {
+            
             $user = User::where("email",$request->email)
             ->first();
             if (!$user) {
-                
                 return redirect()->back()->withErrors('Email id not found!');
              }
-             if (!Hash::check($request->password, $user->password)) {
+            if(Auth::attempt($request->only('email','password'))){
                 
+                return redirect('/');
+            }else{
                 return redirect()->back()->withErrors('Password not match!');
-             }else if($user->status == 1) {
-                session()->put('user_id',$user->id);
-                session()->put('role',$user->role);
+            }
+            if($user->status == 1) {
                 return redirect('/');
              }else{
                 return redirect()->back()->withErrors('Your account is not active');
              }
-
         }else{
             return view('Login');
         }
@@ -193,8 +194,7 @@ class Authentication extends Controller
 
     //User logout function start here
     public function logout(){
-        session()->forget('user_id');
-        session()->forget('role');
+        Auth::logout();
         return redirect('/');
     } 
 }

@@ -1,7 +1,5 @@
 @extends('Admin.layouts.main')
 @section('main-content')
-
-
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
@@ -96,7 +94,7 @@
                                                     target="_blank">{{$row->title}}</a></td>
                                             <td>{{isset($arr[0])?$arr[0]->category_name:'N/A'}}</td>
                                             <td>
-                                                @if(Helper::getUser()->role == 'admin' || Helper::getUser()->role ==
+                                                @if(auth()->user()->role == 'admin' || auth()->user()->role ==
                                                 'moderator')
                                                 @if($row->status ==1)
                                                 <a href="{{url('admin/change-post-status/'.$row->post_id)}}"

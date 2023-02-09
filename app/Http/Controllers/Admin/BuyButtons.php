@@ -36,7 +36,7 @@ class BuyButtons extends Controller
                     Buy_Buttons_model::create([
                         "buy_button_code"=>$request->buy_button_code,
                         "publish_date"=>date("Y-m-d h:i:s"),
-                        "user_id"=>session()->get("user_id")?session()->get("user_id"):"0"
+                        "user_id"=>auth()->user()->id
                     ]);
                     return redirect('admin/buy-button-list')->with("success","Buy Button Successfully Added");
                 }
@@ -63,7 +63,7 @@ class BuyButtons extends Controller
                 Buy_Buttons_model::where("id",$request->id)
                 ->update([
                     "buy_button_code"=>$request->buy_button_code,
-                    "user_id"=>session()->get("user_id")?session()->get("user_id"):"0"
+                    "user_id"=>auth()->user()->id
                 ]);
                 return redirect('admin/buy-button-list')->with('success',"Buy Button Successfully Updated");
                 }

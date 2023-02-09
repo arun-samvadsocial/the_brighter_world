@@ -53,7 +53,7 @@
                                                     @enderror
                                                 </div>
 
-                                                @if(Helper::getUser()->role == 'admin' || Helper::getUser()->role ==
+                                                @if(auth()->user()->role == 'admin' || auth()->user()->role ==
                                                 'moderator')
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formemail">Published By <span class="text-danger" >*</span> :</label>
@@ -90,7 +90,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formname">Published Date <span class="text-danger" >*</span> : {{$post_data->published_date}} </label>
-                                                    @if(Helper::getUser()->role == 'admin' || Helper::getUser()->role == 'moderator')
+                                                    @if(auth()->user()->role == 'admin' || auth()->user()->role == 'moderator')
                                                     <input type="datetime-local" name="published_date"  class="form-control" value="{{$post_data->published_date}}" id="">
                                                     @endif
                                                 </div>

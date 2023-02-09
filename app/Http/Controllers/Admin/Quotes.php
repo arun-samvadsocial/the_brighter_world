@@ -13,7 +13,7 @@ class Quotes extends Controller
     public function index(Request $request){
         $search = urldecode($request->input('search'));
         try{
-            $user = Helper::getUser();
+            $user = auth()->user();
             if($user->role == "admin" || $user->role == "moderator" ){
                 $data['quotes'] = Quotes_model::orWhere("quote", 'LIKE',"%" . $search . "%")
                 ->orWhere("quote_author", 'LIKE',"%" . $search . "%")
@@ -29,7 +29,7 @@ class Quotes extends Controller
                 ->where("is_delete",0)
                 ->orderBy('created_at', 'desc')
                 ->latest("created_at")
-                ->where("user_id",session()->get("user_id"))
+                ->where("user_id",auth()->user()->id)
                 ->paginate(10);
 
             }
@@ -76,7 +76,7 @@ class Quotes extends Controller
                         "img_data"=>$path,
                         "img_data_share"=>$path_share,
                         "quote_status"=>1,
-                        "user_id"=>session()->get("user_id")
+                        "user_id"=>auth()->user()->id
                     ]);
                     //Success Message
                     return redirect('admin/quotes-list')->with('success','Quote Successfully Created.');
@@ -126,7 +126,7 @@ class Quotes extends Controller
                         "img_data"=>$path,
                         "img_data_share"=>$path_share,
                         "quote_status"=>1,
-                        "user_id"=>session()->get("user_id")
+                        "user_id"=>auth()->user()->id
                     ]);
                     //Success Message
                     return redirect('admin/quotes-list')->with('success','Quote Successfully Updated.');

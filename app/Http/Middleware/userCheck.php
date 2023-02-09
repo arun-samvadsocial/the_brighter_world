@@ -16,7 +16,7 @@ class userCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if(session()->has("user_id")){
+        if(auth()->user()){
             return $next($request);
         }else{
             return redirect('/login');

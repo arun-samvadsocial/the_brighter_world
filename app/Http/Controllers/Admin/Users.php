@@ -22,7 +22,7 @@ class Users extends Controller
         $search = urldecode($request->input('search'));
         try{
            
-            $user = Helper::getUser();
+            $user = auth()->user();
                 $data['users'] = Users_model::select("users.*","roles.role_name")
                 ->leftJoin("roles", "users.role", "=", "roles.role")
                 ->orWhere("users.name", 'LIKE',"%" . $search . "%")
@@ -94,7 +94,7 @@ class Users extends Controller
                 if(isset($request->user_role) && $request->user_role != null){
                     $role = $request->user_role;
                 }else{
-                    $role = Helper::getUser()->role;
+                    $role = auth()->user()->role;
                 }
                 // dd($role);
 

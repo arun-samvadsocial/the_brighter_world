@@ -93,7 +93,7 @@
                                             <td>{{$row->mobile}}</td>
                                             <td>{{$row->role_name}}</td>
                                             <td>
-                                                @if($row->id == session()->get("user_id"))
+                                                @if($row->id == auth()->user()->id)
                                                 @if($row->status ==1)
                                                     <a href="#"
                                                         class="badge rounded-pill bg-success">Active</a>

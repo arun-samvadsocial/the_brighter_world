@@ -162,7 +162,7 @@
                                                     </div>
                                                     @enderror
                                                 </div>
-                                                <!-- @if(Helper::getUser()->role == 'admin' || Helper::getUser()->role == 'moderator') -->
+                                                <!-- @if(auth()->user()->role == 'admin' || auth()->user()->role == 'moderator') -->
                                                 <!-- <div class="mb-3"> -->
                                                     <!-- <label class="form-label" for="formname">Do you want to notifiy readers about this article ?Yes : </label> -->
                                                     <!-- <input class="form-check-input"  name="notify"   value="1" type="checkbox" id="gridCheck1"> -->
@@ -214,7 +214,7 @@
         data = localStorage.getItem("previous_post_data");
         var temp;
         temp = JSON.parse(data);
-        user_id = "{{Helper::getUser()->id}}";
+        user_id = "{{auth()->user()->id}}";
         data?
         temp.logged_id === user_id?
         previousPostDataPopup():'':''
@@ -272,7 +272,7 @@
         var keywords = document.getElementById("keywords").value;
         
         var post_data = {};
-        post_data['logged_id']= "{{Helper::getUser()->id}}";
+        post_data['logged_id']= "{{auth()->user()->id}}";
         post_data["post_title"]= post_title;
         post_data["category_id"]= category_id;
         post_data["published_date"]= published_date;

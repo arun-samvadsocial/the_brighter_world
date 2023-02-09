@@ -70,7 +70,7 @@
                                                     value={{$user_data->mobile?$user_data->mobile:""}}  
                                                     name="mobile" id="mobile"/>
                                                 </div>
-                                                @if(getUser()->email != $user_data->email)
+                                                @if(auth()->user()->email != $user_data->email)
                                                 <div class="mb-3">
                                                     <label class="form-label" for="forrole">User Role <spna class="text-danger" >*</span>:</label>
                                                     <select name="user_role" id="" class="form-control" required>
