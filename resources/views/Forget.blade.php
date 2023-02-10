@@ -30,6 +30,7 @@
                             <div class="border-bottom ">
                                 <label for="email"><b>Email:</b></label>
                                 <input type="email" class="border-0" placeholder="Enter email" name="email" id="email"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  title="Please enter valid email address" 
                                     required>
                             </div>
                             <div class="mt-3">
