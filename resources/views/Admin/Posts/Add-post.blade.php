@@ -212,16 +212,16 @@
 
 
 <script>
-    var a = document.getElementById('keywords');
-    a.addEventListener('keyup',addthis);
-    function addthis() {
-        b = a.value.replace('#',''); 
-        a.value = '#'+b
-        if (a.value.indexOf(' '))
-        {
-        a.value = a.value.replace(' ','#');
-        }
-    }
+    // var a = document.getElementById('keywords');
+    // a.addEventListener('keyup',addthis);
+    // function addthis() {
+    //     b = a.value.replace('#',''); 
+    //     a.value = '#'+b
+    //     if (a.value.indexOf(' '))
+    //     {
+    //     a.value = a.value.replace(' ','#');
+    //     }
+    // }
 
 // function bar() {
 //       //do stuff     
@@ -237,11 +237,12 @@
         var temp;
         temp = JSON.parse(data);
         user_id = "{{auth()->user()->id}}";
+        console.log(user_id)
         data?
         temp.logged_id === user_id?
         previousPostDataPopup():'':''
-        
     });
+    
 
     function previousPostDataPopup() {
         var data = [];
