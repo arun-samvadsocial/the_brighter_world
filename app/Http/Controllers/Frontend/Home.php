@@ -126,10 +126,10 @@ class Home extends Controller
         $id = $request->id;
         $name = "";
         $email = "";
-        if(Auth::user()){
+        if(auth()->user()){
             
-            $name = Auth::user()->name;
-            $email = Auth::user()->email;
+            $name = auth()->user()->name;
+            $email = auth()->user()->email;
             try{
                 $validator =  Validator::make($request->all(),[
                     "comment"=>"required"
