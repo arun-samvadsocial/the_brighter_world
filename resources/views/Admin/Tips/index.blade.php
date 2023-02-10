@@ -83,7 +83,7 @@
                                                         <a href="{{url('admin/change-tips-status/'.$row->tip_id)}}" class="badge rounded-pill bg-success">Approve now</a>
                                                         @endif
                                                     </td>
-                                                    <td>{{$row->created_at}}</td>
+                                                    <td>{{date('d/m/Y h:i:s a', strtotime($row->created_at));}}</td>
                                                     <td>
                                                         <a href="{{url('admin/edit-tips/'.$row->tip_id)}}" class="btn btn-primary" >Edit</a>
                                                         <!-- <a href="" class="btn btn-danger" >Delete</a> -->

@@ -19,13 +19,24 @@ class Authentication extends Controller
 {
     //User register function start here
     public function register(Request $request){
+        if(auth()->user()){
+            return redirect('/');
+        }
         if ($request->isMethod('post')) {
             try{
                 $validator =  Validator::make($request->all(),[
                     "name"=>"required",
                     'email'=>'required|email|unique:users',
                     'mobile'=>'required|unique:users',
-                    'password'=>'required',
+                    'password'=>[
+                        'required',
+                        'string',
+                        'min:8',             // must be at least 8 characters in length
+                        'regex:/[a-z]/',      // must contain at least one lowercase letter
+                        'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                        'regex:/[0-9]/',      // must contain at least one digit
+                        'regex:/[@$!%*#?&]/', // must contain a special character
+                    ],
                     'g-recaptcha-response' => 'recaptcha',//recaptcha validation
                 ]);
                 if($validator->fails()){
@@ -87,7 +98,7 @@ class Authentication extends Controller
 
     //User login function start here
     public function login(Request $request){
-        if(Session::get('user_id')){
+        if(auth()->user()){
             return redirect('/');
         }
         $method = $request->method();
@@ -98,17 +109,15 @@ class Authentication extends Controller
             if (!$user) {
                 return redirect()->back()->withErrors('Email id not found!');
              }
-            if(Auth::attempt($request->only('email','password'))){
-                
-                return redirect('/');
-            }else{
-                return redirect()->back()->withErrors('Password not match!');
-            }
             if($user->status == 1) {
-                return redirect('/');
-             }else{
+                if(Auth::attempt($request->only('email','password'))){
+                    return redirect('/');
+                }else{
+                    return redirect()->back()->withErrors('Password not match!');
+                }
+            }else{
                 return redirect()->back()->withErrors('Your account is not active');
-             }
+            }
         }else{
             return view('Login');
         }
@@ -122,6 +131,7 @@ class Authentication extends Controller
             $user = User::where('email', $email)->first();                
             try{
                 $email = $user->email;
+                dd(count($user));
                 if($user){
                     $token = Str::random(150);
                     $url = url('/');
@@ -162,8 +172,18 @@ class Authentication extends Controller
         // return dd($request->all());
         if ($request->isMethod('post')) {
             $validator =  Validator::make($request->all(),[
-                "password"=>"required|min:3|confirmed",
-                "password_confirmation"=>"required|min:3|"
+                'password'=>[
+                    'required',
+                    'string',
+                    'min:8',             // must be at least 8 characters in length
+                    'regex:/[a-z]/',      // must contain at least one lowercase letter
+                    'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                    'regex:/[0-9]/',      // must contain at least one digit
+                    'regex:/[@$!%*#?&]/', // must contain a special character
+                    'regex:/\s/', //check space
+                    'confirmed',
+                ],
+                "password_confirmation"=>"required|min:8|"
             ]);
             if($validator->fails()){
                 return redirect()->back()->withErrors($validator->errors())->withInput(); 

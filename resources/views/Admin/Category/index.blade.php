@@ -76,6 +76,7 @@
                                             <th>Category Name</th>
                                             <th>Category Keywords</th>
                                             <th>Sort Order</th>
+                                            <th>Created Date</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -90,6 +91,7 @@
                                             <td>{{$row->category_name}}</td>
                                             <td>{{$row->category_keywords}}</td>
                                             <td>{{$row->short_order_status}}</td>
+                                            <td>{{date('d/m/Y h:i:s a', strtotime($row->created_at));}}</td>
                                             <td>
                                                 @if($row->category_status ==1)
                                                 <a href="{{url('admin/change-category-status/'.$row->category_id)}}"

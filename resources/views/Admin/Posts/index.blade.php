@@ -111,7 +111,7 @@
                                                 @endif
                                                 @endif
                                             </td>
-                                            <td>{{$row->published_date}}</td>
+                                            <td>{{date('d/m/Y h:i:s a', strtotime($row->published_date));}}</td>
                                             <td>{{$row->author}}</td>
                                             <td>
                                                 <a href="{{url('admin/edit-post/'.$row->post_id)}}"
