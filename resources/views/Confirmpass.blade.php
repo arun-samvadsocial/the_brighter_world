@@ -62,7 +62,14 @@
                             <div class="mt-3 mb-2">
                                 <input type="submit" name="submit" class="form-control" id="forgetbtn" onkeyup='check();'>
                             </div>
-                            
+                            <span>Note : <strong>The password must contain</strong></span>
+                            <ul class="text-danger">
+                                    <li>At least 1 number</li>
+                                    <li>At least 1 uppercase alphabet</li>
+                                    <li>At least 1 lowercase alphabet</li>
+                                    <li>At least 1 spacial charecter</li>
+                                    <li>At least 8 minimum and more character</li>
+                            </ul>
                         </form>
                     </div>
                 </div>

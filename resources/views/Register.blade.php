@@ -67,6 +67,14 @@
                             <div class="mt-2">
                                 <input type="submit" name="submit" class="form-control" id="registerBtn">
                             </div>
+                            <span>Note : <strong>The password must contain</strong></span>
+                            <ul class="text-danger">
+                                    <li>At least 1 number</li>
+                                    <li>At least 1 uppercase alphabet</li>
+                                    <li>At least 1 lowercase alphabet</li>
+                                    <li>At least 1 spacial charecter</li>
+                                    <li>At least 8 minimum and more character</li>
+                            </ul>
                             <div class="mt-2">
                                 <p class="text-center">Already registered?<a href="{{url('/login')}}" class="text-primary1">Login</a></p>
                             </div>

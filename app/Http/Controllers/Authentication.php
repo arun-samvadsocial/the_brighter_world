@@ -103,20 +103,36 @@ class Authentication extends Controller
         }
         $method = $request->method();
         if ($request->isMethod('post')) {
-            
-            $user = User::where("email",$request->email)
-            ->first();
-            if (!$user) {
-                return redirect()->back()->withErrors('Email id not found!');
-             }
-            if($user->status == 1) {
-                if(Auth::attempt($request->only('email','password'))){
-                    return redirect('/');
-                }else{
-                    return redirect()->back()->withErrors('Password not match!');
-                }
+            $validator =  Validator::make($request->all(),[
+                'email'=>'required|email',
+                'password'=>[
+                    'required',
+                    'string',
+                    'min:8',             // must be at least 8 characters in length
+                    'regex:/[a-z]/',      // must contain at least one lowercase letter
+                    'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                    'regex:/[0-9]/',      // must contain at least one digit
+                    'regex:/[@$!%*#?&]/', // must contain a special character
+                ],
+                'g-recaptcha-response' => 'recaptcha',//recaptcha validation
+            ]);
+            if($validator->fails()){
+                return redirect()->back()->withErrors($validator->errors())->withInput(); 
             }else{
-                return redirect()->back()->withErrors('Your account is not active');
+                $user = User::where("email",$request->email)
+                ->first();
+                if (!$user) {
+                    return redirect()->back()->withErrors('Email id not found!');
+                 }
+                if($user->status == 1) {
+                    if(Auth::attempt($request->only('email','password'))){
+                        return redirect('/');
+                    }else{
+                        return redirect()->back()->withErrors('Password not match!');
+                    }
+                }else{
+                    return redirect()->back()->withErrors('Your account is not active');
+                }
             }
         }else{
             return view('Login');
