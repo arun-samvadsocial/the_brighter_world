@@ -155,7 +155,9 @@
                                                     <label>tags,</label> -->
                                                     <br/>
                                                     <label for="">Enter Hashtags :</label>
-                                                    <textarea class="form-control" rows="2" placeholder="add some #tags" oninput="setPostData()"  name="keywords"  style="width:100%" id="keywords"></textarea></p>
+                                                    <input class="form-control" rows="2" placeholder="add some #tags" 
+                                                    oninput="setPostData()"  
+                                                    name="keywords"  style="width:100%" id="keywords"/>
                                                     @error('keywords')
                                                     <div class="text text-danger" >
                                                     {{$message}}
@@ -210,6 +212,26 @@
 
 
 <script>
+    var a = document.getElementById('keywords');
+    a.addEventListener('keyup',addthis);
+    function addthis() {
+        b = a.value.replace('#',''); 
+        a.value = '#'+b
+        if (a.value.indexOf(' '))
+        {
+        a.value = a.value.replace(' ','#');
+        }
+    }
+
+// function bar() {
+//       //do stuff     
+//       var x = document.getElementById("keywords").value;
+//      // alert(x);
+//       var res = x.replace(/[ ,.]/g, "#");
+//      // alert(res);
+//       document.getElementById("keywords").value = res; 
+//  }
+
      document.addEventListener("DOMContentLoaded", function(){
         data = localStorage.getItem("previous_post_data");
         var temp;
