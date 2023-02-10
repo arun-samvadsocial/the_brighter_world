@@ -30,16 +30,24 @@
                             @csrf
                             <div class="border-bottom ">
                                 <label for="email"><b>Email:</b></label>
-                                <input type="email" class="border-0" placeholder="Enter email" name="email" id="email"
+                                <input type="email" class="border-0" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  title="Please enter valid email address"  placeholder="Enter email" name="email" id="email"
                                     required>
                             </div>
                             <div class="border-bottom mt-4">
-                                <label for="email"><b>Password:</b></label>
+                                <label for="password"><b>Password:</b></label>
                                 <input type="password" class="border-0" placeholder="Enter Password" name="password"
-                                    id="password" required>
+                                id="password"
+                                pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" title="Must contain at least one number and one uppercase and 
+                                lowercase letter, special character and at least 8 or more characters"
+                                onkeyup="checkSpace()" required>
+                                <br/>
+                                <span class="text-danger" id="password_error" ></span>
+                            </div>
+                            <div class="">
+                                <input type="checkbox" onclick="showpass()"><span>Show Password</span>
                             </div>
                             <div class="mt-3">
-                                <input type="submit" name="submit" class="form-control" id="">
+                                <input type="submit" name="submit" class="form-control" id="loginbtn">
                             </div>
                                 <a href="{{url('/forget')}}" class="text-primary1 float-right">Forgot Password?</a>
                             <div class="mt-5">
@@ -52,6 +60,41 @@
         </div>
     </div>
 </section>
+<script>
+    pasteNotAllowFunc('password')
+    function pasteNotAllowFunc(xid){
+ let myInput = document.getElementById(xid);
+     myInput.onpaste = (e) => e.preventDefault();
+}
 
+
+function showpass() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+
+
+function checkSpace(){
+    var password = document.getElementById("password").value;
+    var password_error = document.getElementById("password_error");
+    var btn = document.getElementById("loginbtn");
+    var status = hasWhiteSpace(password);
+    if(status){
+        btn.disabled = true;
+        password_error.innerHTML = "Space are not allowed";
+    }else{
+        btn.disabled = false;
+        password_error.innerHTML = "";
+    }
+    
+}
+function hasWhiteSpace(s) {
+  return s.indexOf(' ') >= 0;
+}
+</script>
 
 @endsection
