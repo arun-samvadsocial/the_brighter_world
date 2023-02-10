@@ -128,11 +128,10 @@ class Authentication extends Controller
         $method = $request->method();
         if ($request->isMethod('post')) {
             $email = $request->email;
-            $user = User::where('email', $email)->first();                
-            try{
-                $email = $user->email;
-                dd(count($user));
-                if($user){
+            $user = User::where('email', $email)->first(); 
+            if($user){             
+                try{
+                    $email = $user->email;
                     $token = Str::random(150);
                     $url = url('/');
                     $link = $url."/confirmpass/?token=".$token;
@@ -149,13 +148,12 @@ class Authentication extends Controller
                         ]
                     );
                     return redirect('/forget')->with("success","Password reset link successfully sent to your email.");
-                }else{
-                    return redirect('/forget')->withErrors('User not found.');
+                }catch(\Exception $e){
+                    // return dd($e);
+                    return redirect('/forget')->withErrors('Something went wrong.');
                 }
-    
-            }catch(\Exception $e){
-                // return dd($e);
-                return redirect('/forget')->withErrors('Something went wrong.');
+            }else{
+                return redirect('/forget')->withErrors('User not found.');
             }
         }else{
             return view('Forget'); 
@@ -180,7 +178,6 @@ class Authentication extends Controller
                     'regex:/[A-Z]/',      // must contain at least one uppercase letter
                     'regex:/[0-9]/',      // must contain at least one digit
                     'regex:/[@$!%*#?&]/', // must contain a special character
-                    'regex:/\s/', //check space
                     'confirmed',
                 ],
                 "password_confirmation"=>"required|min:8|"
