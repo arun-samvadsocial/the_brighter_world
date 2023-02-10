@@ -18,7 +18,7 @@ class Posts extends Controller
      public function index(Request $request){
         $this->search = urldecode($request->input('search'));
         try{
-            $user = Helper::getUser();
+            $user = auth()->user();
             if($user->role == "admin" || $user->role == "moderator" ){ 
                 $data['posts'] = Posts_model::select("post.*","category.category_keywords")
                 ->leftJoin("category","post.category_id","=","category.category_id")
@@ -53,7 +53,7 @@ class Posts extends Controller
                 ->with('category')
                 ->orderBy('post.published_date', 'desc')
                 ->latest("post.published_date")
-                ->where("post.user_id",session()->get("user_id"))
+                ->where("post.user_id",auth()->user()->id)
                 ->where("post.is_delete",0)
                 ->paginate(10);
 
@@ -92,7 +92,7 @@ class Posts extends Controller
                     $today_date = strtotime($today_date);
                     $published_date = strtotime($published_date);
                     
-                    if ($published_date > $today_date && Helper::getUser()->role != "author"){
+                    if ($published_date > $today_date && auth()->user()->role != "author"){
                         $post_schedule = 3;
                     }else{
                         $post_schedule = 0;
@@ -108,13 +108,13 @@ class Posts extends Controller
                     
                     $post_status = 1;
                     $under = "";
-                    if(Helper::getUser()->role == "author" || $today_date < $published_date){
+                    if(auth()->user()->role == "author" && $today_date < $published_date){
                         $post_status = 0;
                         $under = "and under review please wait for approval";
                     }
                     Posts_model::create([
                         "title"=>$request->post_title,
-                        "author"=>isset(Helper::getUser()->name)?Helper::getUser()->name:'',
+                        "author"=>isset(auth()->user()->name)?auth()->user()->name:'',
                         "synopsis"=>$request->synopsis,
                         "hashtags"=>$request->keywords,
                         "description"=>$request->editor1,
@@ -124,7 +124,7 @@ class Posts extends Controller
                         "post_url"=>$post_url!=""?$post_url:"",
                         "category_id"=>$request->category_id,
                         "status"=>$post_status,
-                        "user_id"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
+                        "user_id"=>isset(auth()->user()->id)?auth()->user()->id:'',
                         "push_send_flag"=>$request->notify==1?$request->notify:0,
                         "video_link"=>$request->video_link,
                         "published_date"=>$request->published_date,
@@ -162,10 +162,10 @@ class Posts extends Controller
                     //     $category_id .= $cat_row[$i].',';
                     // }
                    $post_data =  Helper::getPostsById($request->id);
-                    if(Helper::getUser()->role == 'admin' || Helper::getUser()->role == 'moderator'){
+                    if(auth()->user()->role == 'admin' || auth()->user()->role == 'moderator'){
                         $publisher_id = $request->published_by;
                     }else{
-                        $publisher_id = session()->get("user_id");
+                        $publisher_id = auth()->user()->id;
                     }
                     $post_url = Helper::slugify($request->post_title);  
                     $authorData = Helper::getAuthorDetails($publisher_id);
@@ -190,7 +190,7 @@ class Posts extends Controller
                                 "published_date"=>isset($request->published_date)?$request->published_date:$post_data->published_date,
                                 "push_status"=>1,
                                 "user_id"=>$authorData->id,
-                                "last_updated_by"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
+                                "last_updated_by"=>isset(auth()->user()->id)?auth()->user()->id:'',
                                 "video_link"=>$request->video_link
                         ]);
                     }else{
@@ -208,7 +208,7 @@ class Posts extends Controller
                                 "published_date"=>isset($request->published_date)?$request->published_date:$post_data->published_date,
                                 "push_status"=>1,
                                 "user_id"=>$authorData->id,
-                                "last_updated_by"=>isset(Helper::getUser()->id)?Helper::getUser()->id:'',
+                                "last_updated_by"=>isset(auth()->user()->id)?auth()->user()->id:'',
                                 "video_link"=>$request->video_link
                         ]);
                     }

@@ -16,9 +16,9 @@ class moderatorRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Helper::getUser()->role == "moderator" ){
+        if(auth()->user()->role == "moderator" ){
             return $next($request);
-        }else if(Helper::getUser()->role == "admin" ){
+        }else if(auth()->user()->role == "admin" ){
             return $next($request);
         }
         else{

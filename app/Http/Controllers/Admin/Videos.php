@@ -37,7 +37,7 @@ class Videos extends Controller
                     Videos_model::create([
                         "name"=>$request->video_title,
                         "video_url"=>$request->video_url,
-                        "user_id"=>session()->get("user_id")?session()->get("user_id"):"0"
+                        "user_id"=>auth()->user()->id
                     ]);
                     return redirect('admin/videos')->with("success","Video added");
                 }
@@ -66,7 +66,7 @@ class Videos extends Controller
                 ->update([
                     "name"=>$request->video_title,
                     "video_url"=>$request->video_url,
-                    "user_id"=>session()->get("user_id")?session()->get("user_id"):"0"
+                    "user_id"=>auth()->user()->id
                 ]);
                 return redirect('admin/videos')->with("success","Video updated");
             }

@@ -14,7 +14,7 @@ class Facts extends Controller
     public function index(Request $request){
         $search = urldecode($request->input('search'));
         try{
-            $user = Helper::getUser();
+            $user = auth()->user();
             if($user->role == "admin" || $user->role == "moderator" ){
                 $data['facts'] = Facts_model::orWhere('fact_title','LIKE',"%" . $search . "%")
                 ->orWhere("fact", 'LIKE',"%" . $search . "%")
@@ -30,7 +30,7 @@ class Facts extends Controller
                 ->orWhere("fact", 'LIKE',"%" . $search . "%")
                 ->orWhere("fact_author", 'LIKE',"%" . $search . "%")
                 ->where("is_delete",0)
-                ->where("user_id",session()->get("user_id"))
+                ->where("user_id",auth()->user()->id)
                 ->orderBy('created_at', 'desc')
                 ->latest("created_at")
                 ->paginate(10);
@@ -82,7 +82,7 @@ class Facts extends Controller
                         "img_data"=>$path,
                         "img_data_share"=>$path_share,
                         "fact_status"=>1,
-                        "user_id"=>session()->get("user_id")
+                        "user_id"=>auth()->user()->id
                     ]);
                     //Success Message
                     return redirect('admin/facts-list')->with('success','Fact Successfully Created.');

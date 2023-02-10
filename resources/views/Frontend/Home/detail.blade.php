@@ -156,8 +156,8 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                     <div class="author_detail">
                         <div class="row">
                             <div class="col-5 author_info">
-                            @if(session()->get('user_id'))
-                                @if(Helper::getUser()->role == "admin" || Helper::getUser()->role == "moderator")
+                            @if(auth()->user())
+                                @if(auth()->user()->role == "admin" || auth()->user()->role == "moderator" || auth()->user()->role == "author")
                                 <i class="fa fa-user" ></i><p class="lead mt-3">{{$post_data->author?$post_data->author:"N/A"}}</p> 
                                 @endif
                             @endif
@@ -180,26 +180,29 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                     
                         <div class="post_description pt-3">
                         <strong>{{ $post_data->synopsis?$post_data->synopsis:'' }}</strong>
+                        <br/>
                         {!! $post_data->description !!}
                         @php 
                             $tags = explode(',', $post_data->hashtags);
                             $count = 0;
                         @endphp
+                        @if($tags[0] != "")
                         <p class="text-black">
                             @foreach($tags as $tagrow)
                             @if($count >= 5)
                             @break
                             @endif
-                            <a href="{{url('/hashtag/'.urlencode($tagrow))}}" class="tags" >{{$tagrow}}</a>
+                            <a href="{{url('/hashtag/'.urlencode($tagrow))}}" class="tags">{{$tagrow}}</a>
                             @php $count++ @endphp
                             @endforeach
-                        </p> 
+                        </p>
+                        @endif
                          
                     </div>
                 </div>
                 <div class="post_footer pt-5">
-                @if(session()->get('user_id'))
-                    @if(Helper::getUser()->role == "admin" || Helper::getUser()->role == "moderator")
+                @if(auth()->user())
+                    @if(auth()->user()->role == "admin" || auth()->user()->role == "moderator" || auth()->user()->role == "author")
                         <div class="more_from_author col-md-12 p-0">
                             <div class="more_from_auhor_header row">
                                 <div class="col-12">
@@ -284,7 +287,7 @@ $link = url('detail/'.$post_data->post_url.'/'.Helper::base64url_encode($post_da
                             <textarea name="comment" class="form-control" id="comment" cols="30" rows="4" placeholder="Add a comment" ></textarea>
                             <div class="comment_form_btn d-flex flex-row-reverse pt-2 pb-2">
                                 <div class="submit">
-                                    @if(session()->get('user_id'))
+                                    @if(auth()->user())
                                         <input type="submit" class="btn btn-default" />
                                     @else
                                         <a href="{{url('/login')}}" class="btn btn-warning rounded-pill"  >Login</a>

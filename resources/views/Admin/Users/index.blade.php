@@ -77,6 +77,7 @@
                                             <th>Email</th>
                                             <th>Mobile</th>
                                             <th>Role</th>
+                                            <th>Register Date</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -92,8 +93,9 @@
                                             <td>{{$row->email}}</td>
                                             <td>{{$row->mobile}}</td>
                                             <td>{{$row->role_name}}</td>
+                                            <td>{{date('d/m/Y h:i:s a', strtotime($row->created_at));}}</td>
                                             <td>
-                                                @if($row->id == session()->get("user_id"))
+                                                @if($row->id == auth()->user()->id)
                                                 @if($row->status ==1)
                                                     <a href="#"
                                                         class="badge rounded-pill bg-success">Active</a>

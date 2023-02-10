@@ -137,7 +137,7 @@
                                                     </div>
                                                     @enderror
                                                 </div>
-                                                <!-- @if(getUser()->role == 'admin' || getUser()->role == 'moderator') -->
+                                                <!-- @if(auth()->user()->role == 'admin' || auth()->user()->role == 'moderator') -->
                                                 <!-- <div class="mb-3"> -->
                                                     <!-- <label class="form-label" for="formname">Do you want to notifiy readers about this article ?Yes : </label> -->
                                                     <!-- <input class="form-check-input"  name="notify"   value="1" type="checkbox" id="gridCheck1"> -->

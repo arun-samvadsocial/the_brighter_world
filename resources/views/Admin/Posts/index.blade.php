@@ -1,7 +1,5 @@
 @extends('Admin.layouts.main')
 @section('main-content')
-
-
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
@@ -96,7 +94,7 @@
                                                     target="_blank">{{$row->title}}</a></td>
                                             <td>{{isset($arr[0])?$arr[0]->category_name:'N/A'}}</td>
                                             <td>
-                                                @if(Helper::getUser()->role == 'admin' || Helper::getUser()->role ==
+                                                @if(auth()->user()->role == 'admin' || auth()->user()->role ==
                                                 'moderator')
                                                 @if($row->status ==1)
                                                 <a href="{{url('admin/change-post-status/'.$row->post_id)}}"
@@ -113,7 +111,7 @@
                                                 @endif
                                                 @endif
                                             </td>
-                                            <td>{{$row->published_date}}</td>
+                                            <td>{{date('d/m/Y h:i:s a', strtotime($row->published_date));}}</td>
                                             <td>{{$row->author}}</td>
                                             <td>
                                                 <a href="{{url('admin/edit-post/'.$row->post_id)}}"

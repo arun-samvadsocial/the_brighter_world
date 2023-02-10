@@ -57,11 +57,7 @@ Route::get('/logout',[Authentication::class,'logout']);
 Route::get('/register',[Authentication::class,'register']);
 Route::post('/register',[Authentication::class,'register']);
 Route::get('/verify/{token}',[Authentication::class,'verify']);
-// Route::get('/login', function(){
-//     session()->put("user_id",1);r
-//     session()->put("role",'author');
-//     return redirect('/');
-// });
+
 
 Route::get('/login', [Authentication::class,'login']);
 Route::post('/login', [Authentication::class,'login']);

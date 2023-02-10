@@ -16,7 +16,7 @@ class adminCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Helper::getUser()->role == "admin"){
+        if(auth()->user()->role == "admin"){
             return $next($request);
         }else{
             return redirect('/no-access');

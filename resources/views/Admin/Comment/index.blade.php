@@ -103,7 +103,7 @@
                                                 @endif
                                             </td>
                                             <td>{{$row->name}}</td>
-                                            <td>{{$row->created_at}}</td>
+                                            <td>{{date('d/m/Y h:i:s a', strtotime($row->created_at));}}</td>
                                         </tr>
 
                                         @endforeach

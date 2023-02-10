@@ -164,7 +164,7 @@
                                                     </div>
                                                     @enderror
                                                 </div>
-                                                <!-- @if(Helper::getUser()->role == 'admin' || Helper::getUser()->role == 'moderator') -->
+                                                <!-- @if(auth()->user()->role == 'admin' || auth()->user()->role == 'moderator') -->
                                                 <!-- <div class="mb-3"> -->
                                                     <!-- <label class="form-label" for="formname">Do you want to notifiy readers about this article ?Yes : </label> -->
                                                     <!-- <input class="form-check-input"  name="notify"   value="1" type="checkbox" id="gridCheck1"> -->
@@ -212,16 +212,16 @@
 
 
 <script>
-    var a = document.getElementById('keywords');
-    a.addEventListener('keyup',addthis);
-    function addthis() {
-        b = a.value.replace('#',''); 
-        a.value = '#'+b
-        if (a.value.indexOf(' '))
-        {
-        a.value = a.value.replace(' ','#');
-        }
-    }
+    // var a = document.getElementById('keywords');
+    // a.addEventListener('keyup',addthis);
+    // function addthis() {
+    //     b = a.value.replace('#',''); 
+    //     a.value = '#'+b
+    //     if (a.value.indexOf(' '))
+    //     {
+    //     a.value = a.value.replace(' ','#');
+    //     }
+    // }
 
 // function bar() {
 //       //do stuff     
@@ -236,12 +236,13 @@
         data = localStorage.getItem("previous_post_data");
         var temp;
         temp = JSON.parse(data);
-        user_id = "{{Helper::getUser()->id}}";
+        user_id = "{{auth()->user()->id}}";
+        console.log(user_id)
         data?
         temp.logged_id === user_id?
         previousPostDataPopup():'':''
-        
     });
+    
 
     function previousPostDataPopup() {
         var data = [];
@@ -294,7 +295,7 @@
         var keywords = document.getElementById("keywords").value;
         
         var post_data = {};
-        post_data['logged_id']= "{{Helper::getUser()->id}}";
+        post_data['logged_id']= "{{auth()->user()->id}}";
         post_data["post_title"]= post_title;
         post_data["category_id"]= category_id;
         post_data["published_date"]= published_date;

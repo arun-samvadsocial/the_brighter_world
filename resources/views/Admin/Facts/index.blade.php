@@ -97,7 +97,7 @@
                                                     class="badge rounded-pill bg-success">Approve now</a>
                                                 @endif
                                             </td>
-                                            <td>{{$row->created_at}}</td>
+                                            <td>{{date('d/m/Y h:i:s a', strtotime($row->created_at));}}</td>
                                             <td>
                                                 <a href="{{url('admin/edit-facts/'.$row->fact_id)}}"
                                                     class="btn btn-primary">Edit</a>

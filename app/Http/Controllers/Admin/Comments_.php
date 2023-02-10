@@ -13,7 +13,7 @@ class Comments_ extends Controller
         $search = urldecode($request->input('search'));
         try{
           
-            $user = Helper::getUser();
+            $user = auth()->user();
             if($user->role == "admin" || $user->role == "moderator" ){
                 $data['comment'] = Comments_m::select("comment.*","post.title")
                 ->leftJoin("post", "post.post_id", "=","comment.post_id")
@@ -37,7 +37,7 @@ class Comments_ extends Controller
                 ->where("is_delete",0)
                 ->orderBy('created_at', 'desc')
                 ->latest("created_at")
-                ->where("post.user_id",session()->get("user_id"))
+                ->where("post.user_id",auth()->user()->id)
                 ->paginate(10);
 
             }

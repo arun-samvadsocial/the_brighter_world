@@ -15,7 +15,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                @if(getUser()->role == 'admin')
+                @if(auth()->user()->role == 'admin')
                 <li class="menu-title">User Panel</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -30,7 +30,7 @@
                 </li>
                 @endif
 
-                @if(getUser()->role == 'admin' || getUser()->role == 'moderator')
+                @if(auth()->user()->role == 'admin' || auth()->user()->role == 'moderator')
 
                 <li class="menu-title">Main Menu</li>
                 <li>
@@ -56,7 +56,7 @@
                 </li> -->
                 @endif
 <!-- Posts Menu -->
-                @if(getUser()->role == 'admin' || getUser()->role == 'author' || getUser()->role == 'moderator')
+                @if(auth()->user()->role == 'admin' || auth()->user()->role == 'author' || auth()->user()->role == 'moderator')
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ti-layout-list-thumb"></i>
@@ -70,7 +70,7 @@
                 </li>
                 @endif
 <!-- Tips Menu  -->
-                @if(getUser()->role == 'admin' || getUser()->role == 'moderator')
+                @if(auth()->user()->role == 'admin' || auth()->user()->role == 'moderator')
                 <!-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ti-info-alt"></i>

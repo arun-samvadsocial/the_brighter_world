@@ -75,8 +75,8 @@
                                                 <tr>
                                                     <td>{{$i++}}</td>
                                                     <td>{{$row->subscriber_email}}</td>
-                                                    <td>{{$row->subscription_date}}</td>
-                                                    <td>{{$row->unsubscribe_date}}</td>
+                                                    <td>{{date('d/m/Y h:i:s a', strtotime($row->subscription_date));}}</td>
+                                                    <td>{{date('d/m/Y h:i:s a', strtotime($row->unsubscribe_date));}}</td>
                                                     <td>
                                                         @if($row->status ==1)
                                                         <p>Subscribed</p>
