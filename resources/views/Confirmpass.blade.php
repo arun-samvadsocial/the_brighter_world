@@ -108,7 +108,8 @@ function checkSpace(){
     var password = document.getElementById("newpassword").value;
     var password_error = document.getElementById("password_error");
     var btn = document.getElementById("forgetbtn");
-    var status = hasWhiteSpace(newpassword);
+    var status = hasWhiteSpace(password);
+    
     if(status){
         btn.disabled = true;
         password_error.innerHTML = "Space are not allowed";
@@ -119,6 +120,7 @@ function checkSpace(){
     
 }
 function hasWhiteSpace(s) {
+    console.log(s)
   return s.indexOf(' ') >= 0;
 }
 
