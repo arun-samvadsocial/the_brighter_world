@@ -93,7 +93,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formemail">Email <span class="text-danger" >*</span>:</label>
                                                     <input type="email" class="form-control"
-                                                    title="Please enter valid email address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                                    title="Please enter valid email address"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                                                     onkeyup="myFunction1()"
                                                     value="{{old('email')}}" placeholder="Enter email" name="email" id="email"/>
                                                     @error('email')
@@ -149,10 +149,11 @@
                                                 </div>
                                                 
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="formemail">Password <span class="text-danger" >*</span>: ( <span class="text-danger"> 6 to 25 characters,digits or special characters are allowed</span>) </label>
+                                                    <label class="form-label" for="formemail">Password <span class="text-danger" >*</span>: ( <span class="text-danger"> one number and one uppercase and lowercase letter, special character and at least 8 or more characters is required</span>) </label>
                                                     <!-- <div class="input-group"> -->
-                                                    <input type="password" class="form-control" name="password" id="password1" />
-                                                   
+                                                    <input type="password" class="form-control" name="password" id="password1" 
+                                                    pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" 
+                                                    title="Must contain at least one number and one uppercase and lowercase letter, special character and at least 8 or more characters" />
                                                     <break><break>
                                                     <div class="text-black"><input type="checkbox" onclick="hiddenpass()">Show Password
                                                     </div>

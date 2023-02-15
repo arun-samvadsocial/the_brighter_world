@@ -1,6 +1,18 @@
 @extends('Admin.layouts.main')
 @section('main-content')
-
+<style>
+    #output1{
+        color:red;
+        font-size:15px;
+    }
+    .required {
+    color:red;
+    border:1px solid red;
+}
+.form-control:focus {
+    border-color:red !important;
+}
+</style>
 <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
@@ -33,14 +45,15 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Enter Post Details</h4>
-                                    <form action="{{url('admin/add-new-single-post')}}" method="POST" class="outer-repeater" enctype="multipart/form-data" >
+                                    <form action="{{url('admin/add-new-single-post')}}" method="POST" class="outer-repeater" id="form" enctype="multipart/form-data" onsubmit="return do_something()">
                                         @csrf
                                         <div data-repeater-list="outer-group" class="outer">
                                             <div data-repeater-item class="outer">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formname">Post Title <span class="text-danger" >*</span> :</label>
                                                     <input type="text"
-                                                     class="form-control" value="{{old('post_title')}}" name="post_title" id="post_title" oninput="setPostData()" required placeholder="Enter post title...">
+                                                     class="form-control" value="{{old('post_title')}}" name="post_title" id="post_title" oninput="setPostData()" placeholder="Enter post title..."
+                                                     required/>
                                                     @error('post_title')
                                                     <div class="text text-danger">
                                                     {{$message}}
@@ -49,7 +62,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formemail">Category <span class="text-danger" >*</span> :</label>
-                                                    <select class=" form-control " name="category_id" style="width:100%" required onchange="setPostData()"  id="category_id"  data-placeholder="Choose category ...">
+                                                    <select class=" form-control " name="category_id" onchange="setPostData()"  id="category_id"  data-placeholder="Choose category ..." required>
                                                     <option value="" selected disabled>Select Category</option>
                                                     @foreach($category as $row)
                                                         @if(old('category_id')  == $row->category_id)
@@ -67,7 +80,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formname">Published Date <span class="text-danger" >*</span> :</label>
-                                                    <input type="datetime-local" class="form-control" value="{{old('published_date')}}" name="published_date" oninput="setPostData()" id="published_date" required placeholder="Enter published date...">
+                                                    <input type="datetime-local" class="form-control" value="{{old('published_date')}}" name="published_date" oninput="setPostData()" id="published_date" placeholder="Enter published date..." required>
                                                     @error('published_date')
                                                     <div class="text text-danger" >
                                                     {{$message}}
@@ -75,13 +88,13 @@
                                                     @enderror
                                                 </div>
                                                 <div class="mb-3">
-                                                    
                                                     <img id="output" src="{{url('no_image.png')}}" height="150px"/>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label " for="formname">Post Image <span class="text-danger" >*</span> :</label>
-                                                    <input type="file" accept="image/*" value="{{old('post_image')}}"  id="post_image" name="post_image" oninput="setPostData()" required onchange="loadFile(event)">
-                                                    <div class="text text-danger" id="local_image_error"  ></div>
+                                                    <input type="file" accept="image/*" value="{{old('post_image')}}"  id="post_image" name="post_image" oninput="setPostData()" onchange="loadFile(event)"
+                                                    required>
+                                                    <div class="text text-danger" id="local_image_error"required></div>
                                                     @error('post_image')
                                                     <div class="text text-danger" >
                                                     {{$message}}
@@ -90,9 +103,9 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label " for="formname">Source of Image <span class="text-danger" >*</span> :</label>
-                                                    <input type="text" class="form-control" value="{{old('img_source')}}" id="img_source"  name="img_source" oninput="setPostData()" placeholder="Enter source of image before upload" required >
+                                                    <input type="text" class="form-control" value="{{old('img_source')}}" id="img_source"  name="img_source" oninput="setPostData()" placeholder="Enter source of image before upload" required>
                                                     @error('img_source')
-                                                    <div class="text text-danger" >
+                                                    <div class="text text-danger" id="img_source_error_msg" >
                                                     {{$message}}
                                                     </div>
                                                     @enderror
@@ -118,27 +131,25 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="formname">Post Description <span class="text-danger" >*</span>:</label>
                                                     <grammarly-editor-plugin>
-                                                        <textarea name="editor1"  id="editor1"  required >{{old('editor1')}}</textarea>
-                                                        <textarea name="content_hidden"   id="content_hidden" class="d-none" ></textarea>
+                                                        <textarea name="editor1"  id="editor1" required>{{old('editor1')}}</textarea>
+                                                        <textarea name="content_hidden" id="content_hidden" class="d-none"></textarea>
                                                         <script>
                                                             // CKEDITOR.replace( 'editor1' );
-                                                            CKEDITOR.replace( 'editor1' ,
+                                                       var editor =  CKEDITOR.replace( 'editor1' ,
                                                             {   
                                                                 allowedContent: true,
                                                                 enterMode: CKEDITOR.ENTER_BR,
-                                                            }).on('key',
-                                                                function(e){
-                                                                    setTimeout(function(){
-                                                                        document.getElementById('content_hidden').value = e.editor.getData();
-                                                                        setPostData()
-                                                                    },10);
-                                                                }
-                                                            );
-                                                    </script>
+                                                                language: 'en',
+                                                                extraPlugins: 'notification'
+                                                            });
+                                                            // editor.on( 'required', function( evt ) {
+                                                            //     editor12.showNotification( 'This field is required.', 'warning' );
+                                                            //     evt.cancel();
+                                                            // } );
+                                                     </script>
                                                     </grammarly-editor-plugin>
-                                                    
-                                                    
                                                     </div>
+                                                    <pre id="output1"></pre>
                                                     @error('editor1')
                                                     <div class="text text-danger" id="editor2">                  
                                                     Description required.
@@ -175,10 +186,6 @@
                                                     <!-- @enderror -->
                                                 <!-- </div> -->
                                                 <!-- @endif -->
-
-                                                
-
-    
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </div>
@@ -212,6 +219,25 @@
 
 
 <script>
+
+function do_something(){
+   // Do your stuff here
+  // alert("test");
+
+   var messageLength = CKEDITOR.instances['editor1'].getData().length;
+ //  alert(messageLength);
+            if( !messageLength ) {
+                //alert( 'Please enter a message' );
+               // editor.showNotification( 'The Description is required.', 'warning' );
+                var el = document.getElementById( 'output1' );
+                el.innerText = "The Description is required.";
+                return false;
+            }else{
+                return true;
+            }
+        }
+
+
     // var a = document.getElementById('keywords');
     // a.addEventListener('keyup',addthis);
     // function addthis() {
@@ -231,6 +257,8 @@
 //      // alert(res);
 //       document.getElementById("keywords").value = res; 
 //  }
+
+
 
      document.addEventListener("DOMContentLoaded", function(){
         data = localStorage.getItem("previous_post_data");
@@ -265,8 +293,6 @@
             // alert("You canceled!");
         }
     }
-
-
     /* START - preview image before upload*/
     var loadFile = function(event) {
     var reader = new FileReader();
@@ -274,14 +300,12 @@
     var output = document.getElementById('output');
     localStorage.setItem('timg', reader.result);
     output.src = reader.result;
+    document.getElementById("local_image_error").innerHTML = "";
     };
     reader.readAsDataURL(event.target.files[0]);
     };
-
-
     //Start auto save process for add post
     function setPostData(){
-        
         var post_title = document.getElementById("post_title").value;
         var category_id = document.getElementById("category_id").value;
         var published_date = document.getElementById("published_date").value;
@@ -290,10 +314,7 @@
         var video_link = document.getElementById("video_link").value;
         var synopsis = document.getElementById("synopsis").value;
         var editor1 = document.getElementById("content_hidden").value;
-        
-
         var keywords = document.getElementById("keywords").value;
-        
         var post_data = {};
         post_data['logged_id']= "{{auth()->user()->id}}";
         post_data["post_title"]= post_title;
@@ -305,14 +326,10 @@
         post_data["synopsis"]= synopsis;
         post_data["description"]= editor1;
         post_data["keywords"]= keywords;
-
-
         localStorage.setItem("previous_post_data", JSON.stringify(post_data));
-        
-
         
     }
 
 
-
+    
 </script>
