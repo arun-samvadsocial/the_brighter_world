@@ -10,7 +10,6 @@
                         <h2 class="text-warning"><b>Sign In</b>
                         </h2>
                     </div>
-                   
                      <!-- Success Message  -->
                      @if (\Session::has('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -44,7 +43,6 @@
                                 <div class="">
                                 <input type="checkbox" onclick="showpass()"><span>Show Password</span>
                                 </div>
-                                
                                 <span class="text-danger" id="password_error" ></span>
                             </div>
                             <!-- Google reCaptcha v2 -->
@@ -54,7 +52,6 @@
                                 <small class="text-danger">{{ $errors->first('g-recaptcha-response') }}</small>
                             </div>
                             @endif
-                            
                             <div class="mt-3">
                                 <input type="submit" name="submit" class="form-control" id="loginbtn">
                             </div>
