@@ -138,7 +138,7 @@
                         <li class="nav-item {{ Route::is('home') ? 'active' : '' }}">
                             <a class="nav-link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
-                        @php $category = Helper::getCategory(4); @endphp
+                        @php $category = Helper::getCategory(5); @endphp
                         @foreach($category as $key =>$cat_row)
                         @if($cat_row->short_order_status == 0)
                         @continue
